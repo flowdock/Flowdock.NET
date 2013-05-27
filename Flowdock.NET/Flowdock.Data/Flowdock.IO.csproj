@@ -98,12 +98,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MoqaLateCommandLine\MoqaLate.exe" />
-    <Content Include="MoqaLateCommandLine\MoqaLateExcludedFiles.txt" />
-    <Content Include="MoqaLateCommandLine\Ninject.dll" />
-    <Content Include="MoqaLateCommandLine\READMEHowToEnableMockGeneration.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Flowdock.Domain\Flowdock.Domain.csproj">
       <Project>{D25273F5-F6BD-4B1F-9E7E-9B4F309640C4}</Project>
       <Name>Flowdock.Domain</Name>

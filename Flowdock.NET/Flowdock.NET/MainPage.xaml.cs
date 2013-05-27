@@ -11,47 +11,25 @@ using Flowdock.NET.Resources;
 using Flowdock.Data;
 using Flowdock.Domain;
 
-namespace Flowdock.NET
-{
-    public partial class MainPage : PhoneApplicationPage
-    {
-        // Constructor
-        public MainPage()
-        {
-            InitializeComponent();
-            // Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
-        }
+namespace Flowdock.NET {
+	public partial class MainPage : PhoneApplicationPage {
+		public MainPage() {
+			InitializeComponent();
+		}
 
 		private async void GetSomeFlows(string password) {
 			Context c = new Context("mgreer@rallydev.com", password);
 			IEnumerable<Flow> flows = await c.GetFlows();
 
 			if (flows == null) {
-				MessageBox.Show("Got null back");
+				MessageBox.Show("Got null back (wrong password?)");
 			} else {
-				MessageBox.Show("First flow: " + flows.First().Name);
+				MessageBox.Show(string.Format("First flow: {0}, url: {1}", flows.First().Name, flows.First().Url));
 			}
 		}
 
 		private void GoButton_Click(object sender, RoutedEventArgs e) {
 			GetSomeFlows(PasswordBox.Password);
 		}
-
-        // Sample code for building a localized ApplicationBar
-        //private void BuildLocalizedApplicationBar()
-        //{
-        //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
-        //    ApplicationBar = new ApplicationBar();
-
-        //    // Create a new button and set the text value to the localized string from AppResources.
-        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
-        //    appBarButton.Text = AppResources.AppBarButtonText;
-        //    ApplicationBar.Buttons.Add(appBarButton);
-
-        //    // Create a new menu item with the localized string from AppResources.
-        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
-        //}
-    }
+	}
 }
