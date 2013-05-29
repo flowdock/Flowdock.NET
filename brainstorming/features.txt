@@ -1,0 +1,49 @@
+numbered features are goals for the hackathon
+1 -> first milestone
+2 -> second milestone
+etc
+
+
+Above Flows
+==========
+1- view all the flows you are currently in 
+1- view all the flows available for joining
+
+-- create a new flow
+-- create a 1on1 chat
+
+1- get notified of a message aimed at you (@)
+
+Within Flows
+==========
+1- see who is in a flow
+1- post an unthreaded message to a flow
+
+2- post in a thread in a flow
+
+5- upload attachments
+
+1- view other's attachments
+1- see what everyone is saying
+
+2- see what message belongs to what thread
+-- see inbox notifications
+-- view everything with a specified tag
+-- invite people to flows
+-- send people emails
+-- set status message
+-- create a 1on1 chat
+
+3- tag someone with @ in a message
+	-- know when someone has seen that message
+
+4- post emojis
+4- see emojis
+
+Authorization/Authentication
+=========
+1- login
+1- logout
+
+
+
