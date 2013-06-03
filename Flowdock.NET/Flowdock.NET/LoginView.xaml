@@ -1,0 +1,54 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Flowdock.NET.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+	xmlns:fdvm="clr-namespace:Flowdock.ViewModel;assembly=Flowdock.ViewModel"
+	xmlns:localBehaviors="clr-namespace:Flowdock.NET.Behaviors"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d">
+	<UserControl.Resources>
+		<fdvm:LoginViewModel x:Key="viewModel" />
+	</UserControl.Resources>
+
+
+
+	<Grid x:Name="LayoutRoot" Background="Transparent" DataContext="{StaticResource viewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+		<Image Grid.Row="0" Source="Resources/FlowdockLogo.png" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="250"/>
+		<StackPanel Grid.Row="1">
+			<TextBlock Text="Username" />
+			<TextBox Text="{Binding Path=Username, Mode=TwoWay}">
+				<i:Interaction.Behaviors>
+					<localBehaviors:ImmediateUpdateTextBoxBehavior />
+				</i:Interaction.Behaviors>
+			</TextBox>
+		</StackPanel>
+
+		<StackPanel Grid.Row="2">
+			<TextBlock Text="Password" />
+			<PasswordBox Password="{Binding Path=Password, Mode=TwoWay}">
+				<i:Interaction.Behaviors>
+					<localBehaviors:ImmediateUpdatePasswordBoxBehavior />
+				</i:Interaction.Behaviors>
+			</PasswordBox>
+		</StackPanel>
+		<Button Grid.Row="3" Content="Log In" Command="{Binding LoginCommand}" />
+
+		<TextBlock Grid.Row="4" Text="{Binding LoginMessage}" />
+	</Grid>
+
+</phone:PhoneApplicationPage>
