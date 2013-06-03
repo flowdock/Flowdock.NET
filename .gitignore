@@ -154,3 +154,6 @@ $RECYCLE.BIN/
 # only check in the md, not any built versions
 README.html
 
+# Nunit related
+*.VisualState.xml
+
