@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock.Extensions", "Flow
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock.ViewModel", "Flowdock.ViewModel\Flowdock.ViewModel.csproj", "{04849313-5FDD-4DDC-A450-796817DFD385}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock.ViewModel.UnitTests", "Flowdock.ViewModel.UnitTests\Flowdock.ViewModel.UnitTests.csproj", "{46D065D9-4088-4B83-A56D-8BA7C422F6EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,18 @@ Global
 		{04849313-5FDD-4DDC-A450-796817DFD385}.Release|ARM.Build.0 = Release|ARM
 		{04849313-5FDD-4DDC-A450-796817DFD385}.Release|x86.ActiveCfg = Release|x86
 		{04849313-5FDD-4DDC-A450-796817DFD385}.Release|x86.Build.0 = Release|x86
+		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Debug|ARM.ActiveCfg = Debug|ARM
+		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Debug|ARM.Build.0 = Debug|ARM
+		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Debug|x86.ActiveCfg = Debug|x86
+		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Debug|x86.Build.0 = Debug|x86
+		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Release|ARM.ActiveCfg = Release|ARM
+		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Release|ARM.Build.0 = Release|ARM
+		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Release|x86.ActiveCfg = Release|x86
+		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
