@@ -106,6 +106,7 @@
     <Compile Include="ViewModels\LoginCommand.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\WrappedFlowdockContext.cs" />
     <Compile Include="Views\FlowView.xaml.cs">
       <DependentUpon>FlowView.xaml</DependentUpon>
     </Compile>

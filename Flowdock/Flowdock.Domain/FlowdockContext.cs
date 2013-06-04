@@ -28,6 +28,14 @@ namespace Flowdock.Data {
 			return tcs.Task;
 		}
 
+		public FlowdockContext(string username, string password) {
+			_username = username;
+			_password = password;
+		}
+
+		public FlowdockContext() {
+		}
+
 		public Task<IEnumerable<Flow>> GetJoinedFlows() {
 			return GetCollection<Flow>("flows");
 		}
@@ -42,11 +50,9 @@ namespace Flowdock.Data {
 			client.Authenticator = new HttpBasicAuthenticator(username, password);
 
 			var tcs = new TaskCompletionSource<string>();
-			client.ExecuteAsync<List<Flow>>(new RestRequest("flows/all"), response => {
+			client.ExecuteAsync<List<Flow>>(new RestRequest("flows"), response => {
 				if (response.Data != null && response.Data.Any()) {
 					tcs.SetResult(null);
-					_username = username;
-					_password = password;
 				} else {
 					tcs.SetResult("Failed to login");
 				}

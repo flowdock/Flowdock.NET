@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 using Flowdock.Extensions;
 using System.Collections.ObjectModel;
+using Flowdock.Data;
+using Flowdock.ViewModel.Storage;
 
 namespace Flowdock.ViewModels {
 	public class FlowsViewModel : ViewModelBase {
@@ -16,13 +18,20 @@ namespace Flowdock.ViewModels {
 
 		private async void GetFlows() {
 			IEnumerable<Flow> flows = await _context.GetJoinedFlows();
-			Flows = new ObservableCollection<Flow>(flows);
+
+			if (flows != null) {
+				Flows = new ObservableCollection<Flow>(flows.Where(f => f.Open));
+			}
 		}
 
 		public FlowsViewModel(IFlowdockContext context) {
 			_context = context.ThrowIfNull("context");
 
 			GetFlows();
+		}
+
+		public FlowsViewModel()
+			: this(new WrappedFlowdockContext()) {
 		}
 
 		public ObservableCollection<Flow> Flows {
