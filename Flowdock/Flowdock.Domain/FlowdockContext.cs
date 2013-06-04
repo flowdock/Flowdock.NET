@@ -55,6 +55,12 @@ namespace Flowdock.Data {
 			return tcs.Task;
 		}
 
+		public Task<IEnumerable<Message>> GetMessagesForFlow(string flowId, string eventType = "message") {
+			// TODO: handle eventType, for now returning everything
+			string resource = string.Format("flows/{0}/messages", flowId.Replace(":", "/"));
+			return GetCollection<Message>(resource);
+		}
+
 		public Task<string> Login(string username, string password) {
 			// temporary/spike/hack code. I currently know of a simple way to just verify 
 			// username/password are valid, so getting the user's flows. A null result usually

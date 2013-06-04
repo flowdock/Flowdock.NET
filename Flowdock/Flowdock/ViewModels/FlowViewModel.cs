@@ -14,6 +14,7 @@ namespace Flowdock.ViewModels {
 		private IFlowdockContext _context;
 
 		private ObservableCollection<User> _users;
+		private ObservableCollection<Message> _messages;
 
 		private async void GetUsers() {
 			Flow reloadedFlow = await _context.GetFlow(_flow.Id);
@@ -21,11 +22,20 @@ namespace Flowdock.ViewModels {
 			Users = new ObservableCollection<User>(_flow.Users);
 		}
 
+		private async void GetMessages() {
+			IEnumerable<Message> messages = await _context.GetMessagesForFlow(_flow.Id);
+
+			if (messages != null) {
+				Messages = new ObservableCollection<Message>(messages);
+			}
+		}
+
 		public FlowViewModel(Flow flow, IFlowdockContext context) {
 			_flow = flow.ThrowIfNull("flow");
 			_context = context.ThrowIfNull("context");
 
 			GetUsers();
+			GetMessages();
 		}
 
 		public ObservableCollection<User> Users {
@@ -35,16 +45,16 @@ namespace Flowdock.ViewModels {
 			private set {
 				_users = value;
 				OnPropertyChanged(() => Users);
-				OnPropertyChanged(() => UserCount);
 			}
 		}
 
-		public int UserCount {
+		public ObservableCollection<Message> Messages {
 			get {
-				if(_users == null) {
-					return 0;
-				}
-				return _users.Count;
+				return _messages;
+			}
+			private set {
+				_messages = value;
+				OnPropertyChanged(() => Messages);
 			}
 		}
 

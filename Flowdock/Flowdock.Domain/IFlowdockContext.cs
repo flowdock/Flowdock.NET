@@ -10,6 +10,8 @@ namespace Flowdock.Domain {
 
 		Task<IEnumerable<Flow>> GetCurrentFlows();
 		Task<Flow> GetFlow(string id);
+
+		Task<IEnumerable<Message>> GetMessagesForFlow(string id, string eventType="message");
 	}
 	
 }

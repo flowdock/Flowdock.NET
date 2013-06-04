@@ -37,7 +37,7 @@
 			<phone:Pivot.ItemTemplate>
 				<DataTemplate>
 					<ScrollViewer>
-						<ItemsControl ItemsSource="{Binding Users}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+						<ItemsControl ItemsSource="{Binding Messages}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
 									<Grid>
@@ -46,9 +46,10 @@
 											<ColumnDefinition Width="Auto" />
 											<ColumnDefinition Width="*" />
 										</Grid.ColumnDefinitions>
-										<Image Grid.Column="0" Source="{Binding Avatar}" Margin="5" Width="50" Height="50" />
-										<TextBlock Grid.Column="1" Text="{Binding Nick}" Margin="5" FontSize="{StaticResource PhoneFontSizeLarge}" />
-										<TextBlock Grid.Column="2" Text="{Binding Status}" Margin="5" />
+										<!--<Image Grid.Column="0" Source="{Binding Avatar}" Margin="5" Width="50" Height="50" />-->
+										<!--<TextBlock Grid.Column="1" Text="{Binding Nick}" Margin="5" FontSize="{StaticResource PhoneFontSizeLarge}" />-->
+										<!--<TextBlock Grid.Column="2" Text="{Binding Status}" Margin="5" />-->
+										<TextBlock Grid.Column="2" Text="{Binding Content}" />
 									</Grid>
 								</DataTemplate>
 							</ItemsControl.ItemTemplate>

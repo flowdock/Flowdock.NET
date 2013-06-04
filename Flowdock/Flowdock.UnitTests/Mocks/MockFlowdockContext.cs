@@ -19,5 +19,10 @@ namespace Flowdock.UnitTests.Mocks {
 		public Task<Flow> GetFlow(string id) {
 			throw new NotImplementedException();
 		}
+
+
+		public Task<IEnumerable<Message>> GetMessagesForFlow(string id, string eventType = "message") {
+			throw new NotImplementedException();
+		}
 	}
 }
