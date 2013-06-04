@@ -1,6 +1,6 @@
-﻿using Flowdock.NET.Resources;
+﻿using Flowdock.Resources;
 
-namespace Flowdock.NET {
+namespace Flowdock {
 	/// <summary>
 	/// Provides access to string resources.
 	/// </summary>

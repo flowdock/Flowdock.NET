@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using NUnit.Framework;
+using Flowdock.ViewModels;
 using Flowdock.ViewModel.UnitTests.Mocks;
 
 namespace Flowdock.ViewModel.UnitTests {

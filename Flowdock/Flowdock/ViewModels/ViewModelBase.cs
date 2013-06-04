@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flowdock.ViewModel {
+namespace Flowdock.ViewModels {
 	public abstract class ViewModelBase : INotifyPropertyChanged {
 
 		public event PropertyChangedEventHandler PropertyChanged;

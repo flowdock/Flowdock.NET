@@ -1,7 +1,7 @@
 ﻿<NUnitProject>
   <Settings activeconfig="Debug" />
   <Config name="Debug" binpathtype="Auto">
-    <assembly path="Flowdock.NET\Flowdock.ViewModel.UnitTests\Bin\Debug\Flowdock.ViewModel.UnitTests.dll" />
+    <assembly path="Flowdock\Flowdock.UnitTests\Bin\Debug\Flowdock.UnitTests.dll" />
   </Config>
   <Config name="Release" binpathtype="Auto" />
 </NUnitProject>

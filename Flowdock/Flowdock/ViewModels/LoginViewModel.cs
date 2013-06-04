@@ -11,7 +11,7 @@ using Flowdock.Extensions;
 using System.IO.IsolatedStorage;
 using Flowdock.ViewModel.Storage;
 
-namespace Flowdock.ViewModel {
+namespace Flowdock.ViewModels {
 	public class LoginViewModel : ViewModelBase {
 		private const string PasswordKey = "User.Password.Key";
 		private const string UsernameKey = "User.Username.Key";

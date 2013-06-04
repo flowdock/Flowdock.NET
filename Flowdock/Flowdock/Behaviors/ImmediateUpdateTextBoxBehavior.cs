@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 
-namespace Flowdock.NET.Behaviors {
+namespace Flowdock.Behaviors {
 	public class ImmediateUpdateTextBoxBehavior : Behavior<TextBox> {
 
 		private void OnAssociatedTextChanged(object sender, EventArgs e) {

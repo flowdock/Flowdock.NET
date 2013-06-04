@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Phone
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock.NET", "Flowdock.NET\Flowdock.NET.csproj", "{9E0F42A1-8954-493C-8460-14ECA8F15AEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock", "Flowdock\Flowdock.csproj", "{9E0F42A1-8954-493C-8460-14ECA8F15AEC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E6D70974-C022-47B4-9DBD-90C2F13CB8DE}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,9 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock.Domain", "Flowdock
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock.Extensions", "Flowdock.Extensions\Flowdock.Extensions.csproj", "{AF71F0D6-EED6-4606-913E-0454EA674E81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock.ViewModel", "Flowdock.ViewModel\Flowdock.ViewModel.csproj", "{04849313-5FDD-4DDC-A450-796817DFD385}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock.ViewModel.UnitTests", "Flowdock.ViewModel.UnitTests\Flowdock.ViewModel.UnitTests.csproj", "{46D065D9-4088-4B83-A56D-8BA7C422F6EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock.UnitTests", "Flowdock.UnitTests\Flowdock.UnitTests.csproj", "{46D065D9-4088-4B83-A56D-8BA7C422F6EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,18 +66,6 @@ Global
 		{AF71F0D6-EED6-4606-913E-0454EA674E81}.Release|ARM.Build.0 = Release|ARM
 		{AF71F0D6-EED6-4606-913E-0454EA674E81}.Release|x86.ActiveCfg = Release|x86
 		{AF71F0D6-EED6-4606-913E-0454EA674E81}.Release|x86.Build.0 = Release|x86
-		{04849313-5FDD-4DDC-A450-796817DFD385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04849313-5FDD-4DDC-A450-796817DFD385}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04849313-5FDD-4DDC-A450-796817DFD385}.Debug|ARM.ActiveCfg = Debug|ARM
-		{04849313-5FDD-4DDC-A450-796817DFD385}.Debug|ARM.Build.0 = Debug|ARM
-		{04849313-5FDD-4DDC-A450-796817DFD385}.Debug|x86.ActiveCfg = Debug|x86
-		{04849313-5FDD-4DDC-A450-796817DFD385}.Debug|x86.Build.0 = Debug|x86
-		{04849313-5FDD-4DDC-A450-796817DFD385}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04849313-5FDD-4DDC-A450-796817DFD385}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04849313-5FDD-4DDC-A450-796817DFD385}.Release|ARM.ActiveCfg = Release|ARM
-		{04849313-5FDD-4DDC-A450-796817DFD385}.Release|ARM.Build.0 = Release|ARM
-		{04849313-5FDD-4DDC-A450-796817DFD385}.Release|x86.ActiveCfg = Release|x86
-		{04849313-5FDD-4DDC-A450-796817DFD385}.Release|x86.Build.0 = Release|x86
 		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46D065D9-4088-4B83-A56D-8BA7C422F6EF}.Debug|ARM.ActiveCfg = Debug|ARM

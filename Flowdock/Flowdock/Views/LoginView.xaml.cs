@@ -8,7 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace Flowdock.NET {
+namespace Flowdock.Views {
 	public partial class LoginView : PhoneApplicationPage {
 		public LoginView() {
 			InitializeComponent();

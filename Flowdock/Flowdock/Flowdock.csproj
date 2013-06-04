@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Flowdock.NET</RootNamespace>
-    <AssemblyName>Flowdock.NET</AssemblyName>
+    <RootNamespace>Flowdock</RootNamespace>
+    <AssemblyName>Flowdock</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -96,7 +96,15 @@
     <Compile Include="Behaviors\ImmediateUpdatePasswordBoxBehavior.cs" />
     <Compile Include="Behaviors\ImmediateUpdateTextBoxBehavior.cs" />
     <Compile Include="LocalizedStrings.cs" />
-    <Compile Include="LoginView.xaml.cs">
+    <Compile Include="Storage\IIsolatedStorageProxy.cs" />
+    <Compile Include="Storage\IsolatedStorageProxy.cs" />
+    <Compile Include="ViewModels\LoginCommand.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\FlowView.xaml.cs">
+      <DependentUpon>FlowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,7 +119,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="LoginView.xaml">
+    <Page Include="Views\FlowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,14 +171,11 @@
       <Project>{AF71F0D6-EED6-4606-913E-0454EA674E81}</Project>
       <Name>Flowdock.Extensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Flowdock.ViewModel\Flowdock.ViewModel.csproj">
-      <Project>{04849313-5FDD-4DDC-A450-796817DFD385}</Project>
-      <Name>Flowdock.ViewModel</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

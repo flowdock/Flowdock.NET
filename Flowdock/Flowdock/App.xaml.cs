@@ -6,9 +6,9 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Flowdock.NET.Resources;
+using Flowdock.Resources;
 
-namespace Flowdock.NET
+namespace Flowdock
 {
     public partial class App : Application
     {
