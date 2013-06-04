@@ -28,7 +28,7 @@ namespace Flowdock.Data {
 			return tcs.Task;
 		}
 
-		public Task<IEnumerable<Flow>> GetFlows() {
+		public Task<IEnumerable<Flow>> GetJoinedFlows() {
 			return GetCollection<Flow>("flows");
 		}
 

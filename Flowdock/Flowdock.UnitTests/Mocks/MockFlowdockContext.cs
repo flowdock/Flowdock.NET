@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 namespace Flowdock.UnitTests.Mocks {
 	public class MockFlowdockContext : IFlowdockContext {
 		public Task<string> Login(string username, string password) {
-			throw new NotImplementedException();
+			return null;
+		}
+
+		public Task<IEnumerable<Flow>> GetJoinedFlows() {
+			return null;
 		}
 	}
 }
