@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flowdock.ViewModel.UnitTests.Mocks {
+namespace Flowdock.UnitTests.Mocks {
 	public class MockFlowdockContext : IFlowdockContext {
 		public Task<string> Login(string username, string password) {
 			throw new NotImplementedException();

@@ -7,17 +7,27 @@ using System.Threading.Tasks;
 
 namespace Flowdock.ViewModel.Storage {
 	public class IsolatedStorageProxy : IIsolatedStorageProxy {
-		private IsolatedStorageSettings _settings = IsolatedStorageSettings.ApplicationSettings;
+
+		private IsolatedStorageSettings Settings {
+			get {
+				return IsolatedStorageSettings.ApplicationSettings;
+			}
+		}
 
 		public T Get<T>(string key) {
-			if (_settings.Contains(key)) {
-				return (T)_settings[key];
+			if (!System.ComponentModel.DesignerProperties.IsInDesignTool) {
+				if (Settings.Contains(key)) {
+					return (T)Settings[key];
+				}
 			}
 			return default(T);
 		}
 
 		public void Put<T>(string key, T value) {
-			_settings[key] = value;
+			if (!System.ComponentModel.DesignerProperties.IsInDesignTool) {
+				Settings[key] = value;
+				Settings.Save();
+			}
 		}
 	}
 }

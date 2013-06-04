@@ -9,6 +9,7 @@ using Flowdock.Extensions;
 using Flowdock.Domain;
 using Flowdock.Data;
 using System.Windows;
+using Flowdock.Navigation;
 
 namespace Flowdock.ViewModels {
 	public class LoginCommand : ICommand {
@@ -16,6 +17,7 @@ namespace Flowdock.ViewModels {
 		private LoginViewModel _source;
 
 		public event EventHandler CanExecuteChanged;
+		public event EventHandler<LoggedInEventArgs> LoggedIn;
 
 		private void OnSourcePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e) {
 			if (CanExecuteChanged != null) {
@@ -23,12 +25,15 @@ namespace Flowdock.ViewModels {
 			}
 		}
 
-		public LoginCommand(LoginViewModel source) {
+		public LoginCommand(LoginViewModel source)
+			: this(source, new FlowdockContext()) {
+		}
+
+		public LoginCommand(LoginViewModel source, IFlowdockContext context) {
 			_source = source.ThrowIfNull("source");
+			_context = context.ThrowIfNull("context");
 
 			_source.PropertyChanged += OnSourcePropertyChanged;
-
-			_context = new FlowdockContext();
 		}
 
 		public bool CanExecute(object parameter) {
@@ -37,8 +42,13 @@ namespace Flowdock.ViewModels {
 		}
 
 		public async void Execute(object parameter) {
-			_source.LoginMessage = "Logging in...";
-			_source.LoginMessage = await _context.Login(_source.Username, _source.Password);
+			if (CanExecute(null)) {
+				var loginResult = await _context.Login(_source.Username, _source.Password);
+
+				if (LoggedIn != null) {
+					LoggedIn(this, new LoggedInEventArgs(loginResult));
+				}
+			}
 		}
 	}
 }

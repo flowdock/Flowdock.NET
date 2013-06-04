@@ -86,6 +86,7 @@
     <Compile Include="LoginCommandTest.cs" />
     <Compile Include="Mocks\MockFlowdockContext.cs" />
     <Compile Include="Mocks\MockIsolatedStorageProxy.cs" />
+    <Compile Include="Mocks\MockNavigationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

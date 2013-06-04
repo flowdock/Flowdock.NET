@@ -44,7 +44,7 @@ namespace Flowdock.Data {
 			var tcs = new TaskCompletionSource<string>();
 			client.ExecuteAsync<List<Flow>>(new RestRequest("flows/all"), response => {
 				if (response.Data != null && response.Data.Any()) {
-					tcs.SetResult("Logged in!");
+					tcs.SetResult(null);
 					_username = username;
 					_password = password;
 				} else {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using NUnit.Framework;
 using Flowdock.ViewModels;
-using Flowdock.ViewModel.UnitTests.Mocks;
+using Flowdock.UnitTests.Mocks;
 
 namespace Flowdock.ViewModel.UnitTests {
 	public class LoginCommandTest {
@@ -15,7 +15,7 @@ namespace Flowdock.ViewModel.UnitTests {
 
 		[SetUp]
 		public void BeforeEach() {
-			_loginViewModel = new LoginViewModel(new MockFlowdockContext(), new MockIsolatedStorageProxy());
+			_loginViewModel = new LoginViewModel(new MockFlowdockContext(), new MockIsolatedStorageProxy(), new MockNavigationManager());
 			_command = new LoginCommand(_loginViewModel);
 		}
 

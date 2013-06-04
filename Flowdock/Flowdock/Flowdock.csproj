@@ -19,9 +19,9 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>Flowdock.NET_$(Configuration)_$(Platform).xap</XapFilename>
+    <XapFilename>FlowdockDebug_AnyCPU.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>Flowdock.NET.App</SilverlightAppEntry>
+    <SilverlightAppEntry>Flowdock.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
@@ -96,8 +96,11 @@
     <Compile Include="Behaviors\ImmediateUpdatePasswordBoxBehavior.cs" />
     <Compile Include="Behaviors\ImmediateUpdateTextBoxBehavior.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Navigation\INavigationManager.cs" />
+    <Compile Include="Navigation\NavigationManager.cs" />
     <Compile Include="Storage\IIsolatedStorageProxy.cs" />
     <Compile Include="Storage\IsolatedStorageProxy.cs" />
+    <Compile Include="ViewModels\LoggedInEventArgs.cs" />
     <Compile Include="ViewModels\LoginCommand.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
