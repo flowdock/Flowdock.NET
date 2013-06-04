@@ -8,19 +8,34 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Flowdock.Extensions;
+using System.IO.IsolatedStorage;
+using Flowdock.ViewModel.Storage;
 
 namespace Flowdock.ViewModel {
 	public class LoginViewModel : ViewModelBase {
+		private const string PasswordKey = "User.Password.Key";
+		private const string UsernameKey = "User.Username.Key";
+
 		private IFlowdockContext _context;
+		private IIsolatedStorageProxy _storage;
+
 		private string _username;
 		private string _password;
 		private string _errorMessage;
 
-		public LoginViewModel(IFlowdockContext context) {
-			_context = context.ThrowIfNull("context");
+		private void InitFromIsolatedStorage() {
+			_username = _storage.Get<string>(UsernameKey);
+			_password = _storage.Get<string>(PasswordKey);
 		}
 
-		public LoginViewModel() : this(new FlowdockContext()) {
+		public LoginViewModel(IFlowdockContext context, IIsolatedStorageProxy storage) {
+			_context = context.ThrowIfNull("context");
+			_storage = storage.ThrowIfNull("storage");
+
+			InitFromIsolatedStorage();
+		}
+
+		public LoginViewModel() : this(new FlowdockContext(), new IsolatedStorageProxy()) {
 		}
 
 		public string Username {
@@ -29,6 +44,7 @@ namespace Flowdock.ViewModel {
 			}
 			set {
 				_username = value;
+				_storage.Put<string>(UsernameKey, value);
 				OnPropertyChanged(() => Username);
 			}
 		}
@@ -39,6 +55,7 @@ namespace Flowdock.ViewModel {
 			}
 			set {
 				_password = value;
+				_storage.Put<string>(PasswordKey, value);
 				OnPropertyChanged(() => Password);
 			}
 		}

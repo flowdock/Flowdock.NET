@@ -14,7 +14,7 @@ namespace Flowdock.ViewModel.UnitTests {
 
 		[SetUp]
 		public void BeforeEach() {
-			_loginViewModel = new LoginViewModel(new MockFlowdockContext());
+			_loginViewModel = new LoginViewModel(new MockFlowdockContext(), new MockIsolatedStorageProxy());
 			_command = new LoginCommand(_loginViewModel);
 		}
 

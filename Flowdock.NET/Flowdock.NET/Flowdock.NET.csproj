@@ -151,10 +151,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Flowdock.Data\Flowdock.Context.csproj">
-      <Project>{B88B42C7-9129-47DF-8B45-58CBCED98768}</Project>
-      <Name>Flowdock.Context</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Flowdock.Domain\Flowdock.Domain.csproj">
       <Project>{D25273F5-F6BD-4B1F-9E7E-9B4F309640C4}</Project>
       <Name>Flowdock.Domain</Name>

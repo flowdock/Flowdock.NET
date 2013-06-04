@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Users\matt\dev\flowdock.net\flowdock.nunit" total="4" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2013-06-03" time="16:42:28">
+<test-results name="C:\Users\matt\dev\flowdock.net\flowdock.nunit" total="4" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2013-06-04" time="08:38:28">
   <environment nunit-version="2.6.2.12296" clr-version="2.0.50727.6400" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="C:\Program Files (x86)\NUnit 2.6.2\bin" machine-name="MATTSURFACE" user="matt" user-domain="MATTSURFACE" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Project" name="C:\Users\matt\dev\flowdock.net\flowdock.nunit" executed="True" result="Success" success="True" time="0.184" asserts="0">
+  <test-suite type="Project" name="C:\Users\matt\dev\flowdock.net\flowdock.nunit" executed="True" result="Success" success="True" time="0.148" asserts="0">
     <results>
-      <test-suite type="Assembly" name="C:\Users\matt\dev\flowdock.net\Flowdock.NET\Flowdock.ViewModel.UnitTests\Bin\Debug\Flowdock.ViewModel.UnitTests.dll" executed="True" result="Success" success="True" time="0.161" asserts="0">
+      <test-suite type="Assembly" name="C:\Users\matt\dev\flowdock.net\Flowdock.NET\Flowdock.ViewModel.UnitTests\Bin\Debug\Flowdock.ViewModel.UnitTests.dll" executed="True" result="Success" success="True" time="0.125" asserts="0">
         <results>
-          <test-suite type="Namespace" name="Flowdock" executed="True" result="Success" success="True" time="0.160" asserts="0">
+          <test-suite type="Namespace" name="Flowdock" executed="True" result="Success" success="True" time="0.124" asserts="0">
             <results>
-              <test-suite type="Namespace" name="ViewModel" executed="True" result="Success" success="True" time="0.160" asserts="0">
+              <test-suite type="Namespace" name="ViewModel" executed="True" result="Success" success="True" time="0.124" asserts="0">
                 <results>
-                  <test-suite type="Namespace" name="UnitTests" executed="True" result="Success" success="True" time="0.160" asserts="0">
+                  <test-suite type="Namespace" name="UnitTests" executed="True" result="Success" success="True" time="0.124" asserts="0">
                     <results>
-                      <test-suite type="TestFixture" name="LoginCommandTest" executed="True" result="Success" success="True" time="0.157" asserts="0">
+                      <test-suite type="TestFixture" name="LoginCommandTest" executed="True" result="Success" success="True" time="0.121" asserts="0">
                         <results>
-                          <test-case name="Flowdock.ViewModel.UnitTests.LoginCommandTest.CanExecute_false_if_username_and_password_are_blank" executed="True" result="Success" success="True" time="0.123" asserts="1" />
+                          <test-case name="Flowdock.ViewModel.UnitTests.LoginCommandTest.CanExecute_false_if_username_and_password_are_blank" executed="True" result="Success" success="True" time="0.093" asserts="1" />
                           <test-case name="Flowdock.ViewModel.UnitTests.LoginCommandTest.CanExecute_false_if_username_and_password_are_null" executed="True" result="Success" success="True" time="0.001" asserts="1" />
-                          <test-case name="Flowdock.ViewModel.UnitTests.LoginCommandTest.CanExecute_false_if_username_and_password_are_whitespace" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Flowdock.ViewModel.UnitTests.LoginCommandTest.CanExecute_false_if_username_and_password_are_whitespace" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Flowdock.ViewModel.UnitTests.LoginCommandTest.CanExecute_true_if_username_and_password_are_set" executed="True" result="Success" success="True" time="0.001" asserts="1" />
                         </results>
                       </test-suite>
