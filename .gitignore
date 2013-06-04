@@ -157,3 +157,6 @@ README.html
 # Nunit related
 *.VisualState.xml
 
+# debug login info
+DebugLoginInfo.cs
+

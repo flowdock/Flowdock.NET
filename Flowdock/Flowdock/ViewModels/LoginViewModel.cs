@@ -39,6 +39,11 @@ namespace Flowdock.ViewModels {
 
 			_loginCommand = new LoginCommand(this);
 			_loginCommand.LoggedIn += OnLoggedIn;
+
+#if DEBUG
+			_storage.Put<string>(UsernameKey, DebugLoginInfo.Username);
+			_storage.Put<string>(PasswordKey, DebugLoginInfo.Password);
+#endif
 		}
 
 		public LoginViewModel() 

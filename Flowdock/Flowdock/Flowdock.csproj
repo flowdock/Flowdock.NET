@@ -100,6 +100,7 @@
     <Compile Include="Navigation\NavigationManager.cs" />
     <Compile Include="Storage\IIsolatedStorageProxy.cs" />
     <Compile Include="Storage\IsolatedStorageProxy.cs" />
+    <Compile Include="ViewModels\DebugLoginInfo.cs" />
     <Compile Include="ViewModels\FlowsViewModel.cs" />
     <Compile Include="ViewModels\LoggedInEventArgs.cs" />
     <Compile Include="ViewModels\LoginCommand.cs" />
