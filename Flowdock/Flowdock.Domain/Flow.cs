@@ -16,5 +16,6 @@ namespace Flowdock.Domain {
 		public Uri WebUrl { get; set; }
 		public Uri JoinUrl { get; set; }
 		public string AccessMode { get; set; }
+		public List<User> Users { get; set; }
 	}
 }

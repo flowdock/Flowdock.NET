@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Flowdock.Domain {
 	public class User {
-		public string UserName { get; set; }
-		public string Password { get; set; }
+		public int Id { get; set; }
+		public string Nick { get; set; }
+		public string Email { get; set; }
+		public Uri Avatar { get; set; }
+		public string Status { get; set; }
+		public bool Disabled { get; set; }
+		public long LastActivity { get; set; }
+		public long LastPing { get; set; }
 	}
 }

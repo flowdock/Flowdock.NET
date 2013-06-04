@@ -11,8 +11,13 @@ namespace Flowdock.UnitTests.Mocks {
 			return null;
 		}
 
-		public Task<IEnumerable<Flow>> GetJoinedFlows() {
+		public Task<IEnumerable<Flow>> GetCurrentFlows() {
 			return null;
+		}
+
+
+		public Task<Flow> GetFlow(string id) {
+			throw new NotImplementedException();
 		}
 	}
 }

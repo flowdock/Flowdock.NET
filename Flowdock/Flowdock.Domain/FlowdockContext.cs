@@ -36,8 +36,23 @@ namespace Flowdock.Data {
 		public FlowdockContext() {
 		}
 
-		public Task<IEnumerable<Flow>> GetJoinedFlows() {
+		public Task<IEnumerable<Flow>> GetCurrentFlows() {
 			return GetCollection<Flow>("flows");
+		}
+
+		public Task<Flow> GetFlow(string flowId) {
+			var client = new RestClient();
+			client.BaseUrl = FlowdockApiBaseUrl;
+			client.Authenticator = new HttpBasicAuthenticator(_username, _password);
+
+			string resource = string.Format("flows/{0}",flowId.Replace(":", "/"));
+
+			var tcs = new TaskCompletionSource<Flow>();
+			client.ExecuteAsync<Flow>(new RestRequest(resource), response => {
+				tcs.SetResult(response.Data);
+			});
+
+			return tcs.Task;
 		}
 
 		public Task<string> Login(string username, string password) {

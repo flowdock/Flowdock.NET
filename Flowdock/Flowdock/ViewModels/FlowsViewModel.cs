@@ -14,13 +14,13 @@ namespace Flowdock.ViewModels {
 	public class FlowsViewModel : ViewModelBase {
 		private IFlowdockContext _context;
 
-		private ObservableCollection<Flow> _flows;
+		private ObservableCollection<FlowViewModel> _flows;
 
 		private async void GetFlows() {
-			IEnumerable<Flow> flows = await _context.GetJoinedFlows();
+			IEnumerable<Flow> flows = await _context.GetCurrentFlows();
 
 			if (flows != null) {
-				Flows = new ObservableCollection<Flow>(flows.Where(f => f.Open));
+				Flows = new ObservableCollection<FlowViewModel>(flows.Where(f => f.Open).Select(f => new FlowViewModel(f, _context)));
 			}
 		}
 
@@ -34,7 +34,7 @@ namespace Flowdock.ViewModels {
 			: this(new WrappedFlowdockContext()) {
 		}
 
-		public ObservableCollection<Flow> Flows {
+		public ObservableCollection<FlowViewModel> Flows {
 			get {
 				return _flows;
 			}

@@ -8,7 +8,8 @@ namespace Flowdock.Domain {
 	public interface IFlowdockContext {
 		Task<string> Login(string username, string password);
 
-		Task<IEnumerable<Flow>> GetJoinedFlows();
+		Task<IEnumerable<Flow>> GetCurrentFlows();
+		Task<Flow> GetFlow(string id);
 	}
 	
 }

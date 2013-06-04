@@ -10,7 +10,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
@@ -36,10 +36,24 @@
 			
 			<phone:Pivot.ItemTemplate>
 				<DataTemplate>
-					<StackPanel>
-						<TextBlock Text="{Binding Organization}" />
-						<TextBlock Text="{Binding Url}" />
-					</StackPanel>
+					<ScrollViewer>
+						<ItemsControl ItemsSource="{Binding Users}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+										<Image Grid.Column="0" Source="{Binding Avatar}" Margin="5" Width="50" Height="50" />
+										<TextBlock Grid.Column="1" Text="{Binding Nick}" Margin="5" FontSize="{StaticResource PhoneFontSizeLarge}" />
+										<TextBlock Grid.Column="2" Text="{Binding Status}" Margin="5" />
+									</Grid>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</ScrollViewer>
 				</DataTemplate>
 			</phone:Pivot.ItemTemplate>
 
