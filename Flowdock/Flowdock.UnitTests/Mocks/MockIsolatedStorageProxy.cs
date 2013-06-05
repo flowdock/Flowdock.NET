@@ -1,23 +1,15 @@
-﻿using Flowdock.ViewModel.Storage;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Flowdock.Settings;
+
+
 namespace Flowdock.UnitTests.Mocks {
-	public class MockIsolatedStorageProxy : IIsolatedStorageProxy {
-		private Dictionary<string, object> _storage = new Dictionary<string, object>();
-
-		public T Get<T>(string key) {
-			if (_storage.ContainsKey(key)) {
-				return (T)_storage[key];
-			}
-			return default(T);
-		}
-
-		public void Put<T>(string key, T value) {
-			_storage[key] = value;
-		}
+	public class MockAppSettings : IAppSettings {
+		public string Username { get; set; }
+		public string Password { get; set; }
 	}
 }

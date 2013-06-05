@@ -7,7 +7,6 @@ using System.Windows.Input;
 
 using Flowdock.Extensions;
 using Flowdock.Domain;
-using Flowdock.Data;
 using System.Windows;
 using Flowdock.Navigation;
 

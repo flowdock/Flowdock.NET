@@ -1,6 +1,4 @@
-﻿using Flowdock.Data;
-using Flowdock.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +6,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Flowdock.Extensions;
-using System.IO.IsolatedStorage;
-using Flowdock.ViewModel.Storage;
 using Flowdock.Navigation;
+using Flowdock.Domain;
+using Flowdock.Settings;
 
 namespace Flowdock.ViewModels {
 	public class LoginViewModel : ViewModelBase {
-		private const string PasswordKey = "User.Password.Key";
-		private const string UsernameKey = "User.Username.Key";
-
 		private IFlowdockContext _context;
-		private IIsolatedStorageProxy _storage;
+		private IAppSettings _settings;
 		private INavigationManager _navigationManager;
 
 		private string _errorMessage;
@@ -28,46 +23,41 @@ namespace Flowdock.ViewModels {
 			LoginMessage = e.FailureMessage;
 
 			if (e.Success) {
-				Flowdock.App.Username = Username;
-				Flowdock.App.Password = Password;
+				_settings.Username = Username;
+				_settings.Password = Password;
 				_navigationManager.GoToFlows();
 			}
 		}
 
-		public LoginViewModel(IFlowdockContext context, IIsolatedStorageProxy storage, INavigationManager navigationManager) {
+		public LoginViewModel(IFlowdockContext context, IAppSettings settings, INavigationManager navigationManager) {
 			_context = context.ThrowIfNull("context");
-			_storage = storage.ThrowIfNull("storage");
+			_settings = settings.ThrowIfNull("storage");
 			_navigationManager = navigationManager.ThrowIfNull("navigationManager");
 
 			_loginCommand = new LoginCommand(this);
 			_loginCommand.LoggedIn += OnLoggedIn;
-
-#if DEBUG
-			_storage.Put<string>(UsernameKey, DebugLoginInfo.Username);
-			_storage.Put<string>(PasswordKey, DebugLoginInfo.Password);
-#endif
 		}
 
 		public LoginViewModel() 
-			: this(new FlowdockContext(), new IsolatedStorageProxy(), new NavigationManager()) {
+			: this(new FlowdockContext(), new AppSettings(), new NavigationManager()) {
 		}
 
 		public string Username {
 			get {
-				return _storage.Get<string>(UsernameKey);
+				return _settings.Username;
 			}
 			set {
-				_storage.Put<string>(UsernameKey, value);
+				_settings.Username = value;
 				OnPropertyChanged(() => Username);
 			}
 		}
 
 		public string Password {
 			get {
-				return _storage.Get<string>(PasswordKey);
+				return _settings.Password;
 			}
 			set {
-				_storage.Put<string>(PasswordKey, value);
+				_settings.Password = value;
 				OnPropertyChanged(() => Password);
 			}
 		}

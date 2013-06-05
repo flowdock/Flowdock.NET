@@ -98,16 +98,16 @@
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Navigation\INavigationManager.cs" />
     <Compile Include="Navigation\NavigationManager.cs" />
-    <Compile Include="Storage\IIsolatedStorageProxy.cs" />
-    <Compile Include="Storage\IsolatedStorageProxy.cs" />
-    <Compile Include="ViewModels\DebugLoginInfo.cs" />
+    <Compile Include="Settings\IAppSettings.cs" />
+    <Compile Include="Settings\AppSettings.cs" />
+    <Compile Include="Settings\DebugLoginInfo.cs" />
     <Compile Include="ViewModels\FlowsViewModel.cs" />
     <Compile Include="ViewModels\FlowViewModel.cs" />
     <Compile Include="ViewModels\LoggedInEventArgs.cs" />
+    <Compile Include="ViewModels\LoggedInFlowdockContext.cs" />
     <Compile Include="ViewModels\LoginCommand.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="ViewModels\WrappedFlowdockContext.cs" />
     <Compile Include="Views\FlowView.xaml.cs">
       <DependentUpon>FlowView.xaml</DependentUpon>
     </Compile>

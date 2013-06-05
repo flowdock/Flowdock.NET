@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 using Flowdock.Extensions;
 using System.Collections.ObjectModel;
-using Flowdock.Data;
-using Flowdock.ViewModel.Storage;
 
 namespace Flowdock.ViewModels {
 	public class FlowsViewModel : ViewModelBase {
@@ -31,7 +29,7 @@ namespace Flowdock.ViewModels {
 		}
 
 		public FlowsViewModel()
-			: this(new WrappedFlowdockContext()) {
+			: this(new LoggedInFlowdockContext()) {
 		}
 
 		public ObservableCollection<FlowViewModel> Flows {

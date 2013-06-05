@@ -18,9 +18,6 @@ namespace Flowdock
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
-		public static string Username { get; set; }
-		public static string Password { get; set; }
-
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>

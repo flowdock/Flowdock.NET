@@ -8,7 +8,7 @@ using Flowdock.Extensions;
 using Flowdock.Domain;
 using RestSharp;
 
-namespace Flowdock.Data {
+namespace Flowdock.Domain {
 	public class FlowdockContext : IFlowdockContext {
 		private const string FlowdockApiBaseUrl = "https://api.flowdock.com";
 
