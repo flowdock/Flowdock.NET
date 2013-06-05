@@ -23,8 +23,6 @@ namespace Flowdock.ViewModels {
 			LoginMessage = e.FailureMessage;
 
 			if (e.Success) {
-				_settings.Username = Username;
-				_settings.Password = Password;
 				_navigationManager.GoToFlows();
 			}
 		}

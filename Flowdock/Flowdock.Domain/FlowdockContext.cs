@@ -55,7 +55,7 @@ namespace Flowdock.Domain {
 			return tcs.Task;
 		}
 
-		public Task<IEnumerable<Message>> GetMessagesForFlow(string flowId, string eventType = "message") {
+		public Task<IEnumerable<Message>> GetMessagesForFlow(string flowId) {
 			// TODO: handle eventType, for now returning everything
 			string resource = string.Format("flows/{0}/messages", flowId.Replace(":", "/"));
 			return GetCollection<Message>(resource);

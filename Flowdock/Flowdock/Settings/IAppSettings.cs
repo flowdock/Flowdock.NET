@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Flowdock.Settings {
-	public interface IAppSettings {
+	public interface IAppSettings
+	{
 		string Username { get; set; }
 		string Password { get; set; }
 	}

@@ -83,11 +83,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="LoginCommandTest.cs" />
-    <Compile Include="Mocks\MockFlowdockContext.cs" />
-    <Compile Include="Mocks\MockIsolatedStorageProxy.cs" />
-    <Compile Include="Mocks\MockNavigationManager.cs" />
+    <Compile Include="ViewModels\LoginCommandTest.cs" />
+    <Compile Include="Mocks\AppSettingsMoqaLate.cs" />
+    <Compile Include="Mocks\FlowdockContextMoqaLate.cs" />
+    <Compile Include="Mocks\NavigationManagerMoqaLate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\LoginViewModelTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="nunit.framework">

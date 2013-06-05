@@ -104,9 +104,18 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="MoqaLateCommandLine\MoqaLate.exe" />
+    <Content Include="MoqaLateCommandLine\MoqaLateExcludedFiles.txt" />
+    <Content Include="MoqaLateCommandLine\Ninject.dll" />
+    <Content Include="MoqaLateCommandLine\READMEHowToEnableMockGeneration.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />
+  <PropertyGroup>
+    <PostBuildEvent>$(ProjectDir)\MoqaLateCommandLine\MoqaLate.exe "$(SolutionDir)$(ProjectName)" "$(SolutionDir)Flowdock.UnitTests\Mocks"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
