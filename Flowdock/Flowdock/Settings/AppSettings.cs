@@ -11,6 +11,19 @@ namespace Flowdock.Settings {
 		private const string PasswordKey = "User.Password.Key";
 		private const string UsernameKey = "User.Username.Key";
 
+		private void Set(string key, object value) {
+			if (!System.ComponentModel.DesignerProperties.IsInDesignTool) {
+				Settings[key] = value;
+			}
+		}
+
+		private string Get(string key) {
+			if (!System.ComponentModel.DesignerProperties.IsInDesignTool && Settings.Contains(key)) {
+				return Settings[key] as string;
+			}
+			return null;
+		}
+
 		private IsolatedStorageSettings Settings {
 			get {
 				return IsolatedStorageSettings.ApplicationSettings;
@@ -26,27 +39,19 @@ namespace Flowdock.Settings {
 
 		public string Username {
 			get {
-				if (Settings.Contains(UsernameKey)) {
-					return Settings[UsernameKey] as string;
-				}
-				return null;
+				return Get(UsernameKey);
 			}
 			set {
-				Settings[UsernameKey] = value;
-				Settings.Save();
+				Set(UsernameKey, value);
 			}
 		}
 
 		public string Password {
 			get {
-				if (Settings.Contains(PasswordKey)) {
-					return Settings[PasswordKey] as string;
-				}
-				return null;
+				return Get(PasswordKey);
 			}
 			set {
-				Settings[PasswordKey] = value;
-				Settings.Save();
+				Set(PasswordKey, value);
 			}
 		}
 	}
