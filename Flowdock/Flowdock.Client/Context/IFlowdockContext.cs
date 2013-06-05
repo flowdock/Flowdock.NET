@@ -9,8 +9,9 @@ namespace Flowdock.Client.Context {
 
 		Task<IEnumerable<Flow>> GetCurrentFlows();
 		Task<Flow> GetFlow(string id);
-
 		Task<IEnumerable<Message>> GetMessagesForFlow(string id);
+
+		void SendMessage(Flow flow, string message);
 	}
 	
 }

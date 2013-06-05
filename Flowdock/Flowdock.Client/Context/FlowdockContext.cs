@@ -77,5 +77,26 @@ namespace Flowdock.Client.Context {
 
 			return tcs.Task;		
 		}
+
+		public void SendMessage(Flow flow, string message) {
+			var client = new RestClient();
+			client.BaseUrl = FlowdockApiBaseUrl;
+			client.Authenticator = new HttpBasicAuthenticator(_username, _password);
+
+			//POST /flows/:organization/:flow/messages
+			//{
+			//  "event": "message",
+			//  "content": "Howdy-Doo @Jackie #awesome",
+			//  "tags":  ["todo", "#feedback", "@all"]
+			//}
+
+			string resource = string.Format("flows/{0}/messages", flow.Id.Replace(":", "/"));
+
+			RestRequest request = new RestRequest(resource, Method.POST);
+			request.AddParameter("event", "message");
+			request.AddParameter("content", message);
+
+			client.PostAsync(request, null);
+		}
 	}
 }

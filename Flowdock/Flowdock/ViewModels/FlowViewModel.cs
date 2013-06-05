@@ -6,6 +6,7 @@ using Flowdock.Settings;
 using Flowdock.Util;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Flowdock.ViewModels {
 	public class FlowViewModel : ViewModelBase {
@@ -14,6 +15,9 @@ namespace Flowdock.ViewModels {
 
 		private ObservableCollection<User> _users;
 		private ObservableCollection<Message> _messages;
+
+		private string _newMessage;
+		private SendMessageCommand _sendMessageCommand;
 
 		private async void GetUsers() {
 			Flow reloadedFlow = await _context.GetFlow(_flow.Id);
@@ -43,12 +47,7 @@ namespace Flowdock.ViewModels {
 		public FlowViewModel(Flow flow, IFlowdockContext context) {
 			_flow = flow.ThrowIfNull("flow");
 			_context = context.ThrowIfNull("context");
-
-			//GetUsers();
-			//GetMessages();
-
-			//var stream = new Flowdock.Client.Stream.FlowStreamingConnection();
-			//stream.Start(new Flowdock.Settings.AppSettings().Username, new Flowdock.Settings.AppSettings().Password, _flow, null);
+			_sendMessageCommand = new SendMessageCommand(this, _context, _flow);
 		}
 
 		public ObservableCollection<User> Users {
@@ -80,6 +79,22 @@ namespace Flowdock.ViewModels {
 		public string Name {
 			get {
 				return _flow.Name;
+			}
+		}
+
+		public string NewMessage {
+			get {
+				return _newMessage;
+			}
+			set {
+				_newMessage = value;
+				OnPropertyChanged(() => NewMessage);
+			}
+		}
+
+		public ICommand SendMessageCommand {
+			get {
+				return _sendMessageCommand;
 			}
 		}
 	}

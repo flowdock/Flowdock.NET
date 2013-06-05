@@ -18,7 +18,7 @@ namespace Flowdock.ViewModels {
 
 			if (flows != null) {
 				Flows = new ObservableCollection<FlowViewModel>(flows
-					.Where(f => f.Open && f.Name.Contains("of the week"))
+					.Where(f => f.Open && f.Name.Contains("Testing"))
 					.Select(f => new FlowViewModel(f, _context))
 					//.Take(1)
 				);
