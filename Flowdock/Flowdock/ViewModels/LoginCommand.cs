@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Flowdock.Extensions;
-using Flowdock.Domain;
+using Flowdock.Client;
 using System.Windows;
 using Flowdock.Navigation;
 

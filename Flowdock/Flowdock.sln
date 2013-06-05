@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E6D709
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock.Domain", "Flowdock.Domain\Flowdock.Domain.csproj", "{D25273F5-F6BD-4B1F-9E7E-9B4F309640C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock.Client", "Flowdock.Client\Flowdock.Client.csproj", "{D25273F5-F6BD-4B1F-9E7E-9B4F309640C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flowdock.Extensions", "Flowdock.Extensions\Flowdock.Extensions.csproj", "{AF71F0D6-EED6-4606-913E-0454EA674E81}"
 EndProject

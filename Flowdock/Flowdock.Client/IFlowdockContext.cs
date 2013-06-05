@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Flowdock.Client.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flowdock.Domain {
+namespace Flowdock.Client {
 	public interface IFlowdockContext
 	{
 		Task<string> Login(string username, string password);

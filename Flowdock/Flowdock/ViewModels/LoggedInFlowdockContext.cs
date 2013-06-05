@@ -1,4 +1,4 @@
-﻿using Flowdock.Domain;
+﻿using Flowdock.Client;
 using Flowdock.Settings;
 using System;
 using System.Collections.Generic;

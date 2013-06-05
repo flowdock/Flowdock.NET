@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flowdock.Domain {
+namespace Flowdock.Client.Domain {
 	public class Flow {
 		public string Id { get; set; }
 		public string Name { get; set; }

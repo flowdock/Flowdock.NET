@@ -175,9 +175,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Flowdock.Domain\Flowdock.Domain.csproj">
+    <ProjectReference Include="..\Flowdock.Client\Flowdock.Client.csproj">
       <Project>{D25273F5-F6BD-4B1F-9E7E-9B4F309640C4}</Project>
-      <Name>Flowdock.Domain</Name>
+      <Name>Flowdock.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\Flowdock.Extensions\Flowdock.Extensions.csproj">
       <Project>{AF71F0D6-EED6-4606-913E-0454EA674E81}</Project>

@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 using Flowdock.Extensions;
 using Flowdock.Navigation;
-using Flowdock.Domain;
+using Flowdock.Client;
 using Flowdock.Settings;
 
 namespace Flowdock.ViewModels {

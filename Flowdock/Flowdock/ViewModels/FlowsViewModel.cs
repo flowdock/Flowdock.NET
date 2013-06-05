@@ -1,4 +1,4 @@
-﻿using Flowdock.Domain;
+﻿using Flowdock.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Flowdock.Extensions;
 using System.Collections.ObjectModel;
+using Flowdock.Client.Domain;
 
 namespace Flowdock.ViewModels {
 	public class FlowsViewModel : ViewModelBase {

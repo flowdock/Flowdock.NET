@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Flowdock.Extensions;
-using Flowdock.Domain;
+using Flowdock.Client;
 using RestSharp;
+using Flowdock.Client.Domain;
 
-namespace Flowdock.Domain {
+namespace Flowdock.Client {
 	public class FlowdockContext : IFlowdockContext {
 		private const string FlowdockApiBaseUrl = "https://api.flowdock.com";
 
