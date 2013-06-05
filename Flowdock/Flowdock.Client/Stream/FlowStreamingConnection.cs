@@ -10,7 +10,8 @@ namespace Flowdock.Client.Stream {
 		private HttpWebResponse _response;
 		private MessageParser _messageParser;
 
-		private byte[] _buffer = new byte[10240];
+		private byte[] _buffer = new byte[1024*4];
+		private bool _stopped = false;
 
 
 		private string BuildUrl(Flow flow) {
@@ -23,9 +24,14 @@ namespace Flowdock.Client.Stream {
 			// Flowdock uses UTF8
 			string readString = System.Text.Encoding.UTF8.GetString(_buffer, 0, bytesRead);
 			_messageParser.Push(readString);
+
+			Read();
 		}
 
 		private void Read() {
+			if (_stopped) {
+				return;
+			}
 			_response.GetResponseStream().BeginRead(_buffer, 0, _buffer.Length, OnRead, null);
 		}
 
@@ -48,6 +54,7 @@ namespace Flowdock.Client.Stream {
 			if (_response != null) {
 				_response.Close();
 			}
+			_stopped = true;
 		}
 	}
 }
