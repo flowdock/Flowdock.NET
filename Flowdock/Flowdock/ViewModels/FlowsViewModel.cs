@@ -13,13 +13,16 @@ namespace Flowdock.ViewModels {
 		private IFlowdockContext _context;
 
 		private ObservableCollection<FlowViewModel> _flows;
+		private bool _isLoading;
 
 		private async void GetFlows() {
+			IsLoading = true;
 			IEnumerable<Flow> flows = await _context.GetCurrentFlows();
 
 			if (flows != null) {
 				Flows = new ObservableCollection<FlowViewModel>(flows.Where(f => f.Open).Select(f => new FlowViewModel(f, _context)));
 			}
+			IsLoading = false;
 		}
 
 		public FlowsViewModel(IFlowdockContext context) {
@@ -39,6 +42,16 @@ namespace Flowdock.ViewModels {
 			private set {
 				_flows = value;
 				OnPropertyChanged(() => Flows);
+			}
+		}
+
+		public bool IsLoading {
+			get {
+				return _isLoading;
+			}
+			set {
+				_isLoading = value;
+				OnPropertyChanged(() => IsLoading);
 			}
 		}
 	}
