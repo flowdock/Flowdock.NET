@@ -9,7 +9,7 @@ namespace Flowdock.ViewModels {
 	public class SendMessageCommand : ICommand {
 		private FlowViewModel _source;
 		private IFlowdockContext _context;
-		private Flow _flow;
+		private string _flowId;
 
 		private void OnSourcePropertyChanged(object sender, PropertyChangedEventArgs e) {
 			if (CanExecuteChanged != null) {
@@ -19,10 +19,10 @@ namespace Flowdock.ViewModels {
 
 		public event EventHandler CanExecuteChanged;
 
-		public SendMessageCommand(FlowViewModel source, IFlowdockContext context, Flow flow) {
+		public SendMessageCommand(FlowViewModel source, IFlowdockContext context, string flowId) {
 			_source = source.ThrowIfNull("source");
 			_context = context.ThrowIfNull("context");
-			_flow = flow.ThrowIfNull("flow");
+			_flowId = flowId.ThrowIfNull("flow");
 
 			_source.PropertyChanged += OnSourcePropertyChanged;
 		}
@@ -32,7 +32,7 @@ namespace Flowdock.ViewModels {
 		}
 
 		public void Execute(object parameter) {
-			_context.SendMessage(_flow, _source.NewMessage);
+			_context.SendMessage(_flowId, _source.NewMessage);
 			_source.NewMessage = "";
 		}
 	}

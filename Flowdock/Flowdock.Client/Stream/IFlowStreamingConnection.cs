@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Flowdock.Client.Stream {
 	public interface IFlowStreamingConnection
 	{
-		void Start(string username, string password, Flow flow, Action<Message> callback);
+		void Start(string username, string password, string flowId, Action<Message> callback);
 		void Stop();
 	}
 }

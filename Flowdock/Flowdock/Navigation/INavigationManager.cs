@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Flowdock.Navigation {
 	public interface INavigationManager
 	{
-		void GoToFlows();
+		void GoToLobby();
+		void GoToFlow(string id);
 	}
 }

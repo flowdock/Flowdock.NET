@@ -17,7 +17,7 @@ namespace Flowdock.ViewModels {
 			LoginMessage = e.FailureMessage;
 
 			if (e.Success) {
-				_navigationManager.GoToFlows();
+				_navigationManager.GoToLobby();
 			}
 		}
 

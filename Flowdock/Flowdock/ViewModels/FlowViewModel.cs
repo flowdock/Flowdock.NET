@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace Flowdock.ViewModels {
 	public class FlowViewModel : ViewModelBase {
-		private Flow _flow;
+		private string _flowId;
 		private IFlowdockContext _context;
 
 		private ObservableCollection<User> _users;
@@ -20,20 +20,19 @@ namespace Flowdock.ViewModels {
 		private SendMessageCommand _sendMessageCommand;
 
 		private async void GetUsers() {
-			Flow reloadedFlow = await _context.GetFlow(_flow.Id);
-			_flow = reloadedFlow;
-			Users = new ObservableCollection<User>(_flow.Users);
+			Flow flow = await _context.GetFlow(_flowId);
+			Users = new ObservableCollection<User>(flow.Users);
 		}
 
 		private async void GetMessages() {
-			IEnumerable<Message> messages = await _context.GetMessagesForFlow(_flow.Id);
+			IEnumerable<Message> messages = await _context.GetMessagesForFlow(_flowId);
 
 			if (messages != null) {
 				Messages = new ObservableCollection<Message>(messages);
 			}
 
 			var appsettings = new AppSettings();
-			new FlowStreamingConnection().Start(appsettings.Username, appsettings.Password, _flow, (msg) => {
+			new FlowStreamingConnection().Start(appsettings.Username, appsettings.Password, _flowId, (msg) => {
 				UIThread.Invoke(() => {
 					if (Messages == null) {
 						Messages = new ObservableCollection<Message>(new Message[] { msg });
@@ -44,10 +43,14 @@ namespace Flowdock.ViewModels {
 			});
 		}
 
-		public FlowViewModel(Flow flow, IFlowdockContext context) {
-			_flow = flow.ThrowIfNull("flow");
+		public FlowViewModel(string flowId, IFlowdockContext context) {
+			_flowId = flowId.ThrowIfNull("flowId");
 			_context = context.ThrowIfNull("context");
-			_sendMessageCommand = new SendMessageCommand(this, _context, _flow);
+			_sendMessageCommand = new SendMessageCommand(this, _context, _flowId);
+		}
+
+		public FlowViewModel(string flowId)
+			: this(flowId, new LoggedInFlowdockContext()) {
 		}
 
 		public ObservableCollection<User> Users {
@@ -76,11 +79,11 @@ namespace Flowdock.ViewModels {
 			}
 		}
 
-		public string Name {
-			get {
-				return _flow.Name;
-			}
-		}
+		//public string Name {
+		//	get {
+		//		return _flow.Name;
+		//	}
+		//}
 
 		public string NewMessage {
 			get {

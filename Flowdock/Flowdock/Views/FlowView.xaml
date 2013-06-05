@@ -17,72 +17,46 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
-	<UserControl.Resources>
-		<viewModels:FlowsViewModel x:Key="viewModel" />
-	</UserControl.Resources>
-
-	<shell:SystemTray.ProgressIndicator>
+	<!--<shell:SystemTray.ProgressIndicator>
 		<shell:ProgressIndicator IsIndeterminate="true" IsVisible="{Binding Path=IsLoading, Source={StaticResource viewModel}}" />
-	</shell:SystemTray.ProgressIndicator>
+	</shell:SystemTray.ProgressIndicator>-->
 
 	<!--LayoutRoot is the root grid where all page content is placed-->
-	<Grid x:Name="LayoutRoot" Background="Transparent" DataContext="{StaticResource viewModel}">
+	<Grid x:Name="LayoutRoot" Background="Transparent">
 		<Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-		<phone:Pivot Title="FLOWS" 
-					 VerticalAlignment="Stretch" 
-					 HorizontalAlignment="Stretch"
-					 ItemsSource="{Binding Flows}">
-			<phone:Pivot.HeaderTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding Name}" />
-				</DataTemplate>
-			</phone:Pivot.HeaderTemplate>
-			
-			<phone:Pivot.ItemTemplate>
-				<DataTemplate>
-					<Grid>
-						<Grid.RowDefinitions>
-							<RowDefinition Height="*" />
-							<RowDefinition Height="Auto"/>
-						</Grid.RowDefinitions>
-						<ScrollViewer Grid.Row="0" x:Name="pivotItemScrollViewer">
-							<ItemsControl ItemsSource="{Binding Messages}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-								<i:Interaction.Triggers>
-									<i:EventTrigger EventName="SizeChanged">
-										<localBehaviors:ScrollToBottomTrigger TargetName="pivotItemScrollViewer"/>
-									</i:EventTrigger>
-								</i:Interaction.Triggers>
-								<ItemsControl.ItemTemplate>
-									<DataTemplate>
-										<Grid>
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="Auto" />
-												<ColumnDefinition Width="Auto" />
-												<ColumnDefinition Width="*" />
-											</Grid.ColumnDefinitions>
-											<!--<Image Grid.Column="0" Source="{Binding Avatar}" Margin="5" Width="50" Height="50" />-->
-											<!--<TextBlock Grid.Column="1" Text="{Binding Nick}" Margin="5" FontSize="{StaticResource PhoneFontSizeLarge}" />-->
-											<!--<TextBlock Grid.Column="2" Text="{Binding Status}" Margin="5" />-->
-											<Border BorderThickness="0 0 0 1">
-												<Border.BorderBrush>
-													<SolidColorBrush Color="{StaticResource PhoneAccentColor}"/>
-												</Border.BorderBrush>
-												<TextBlock Grid.Column="2" Text="{Binding Content}" Margin="0 20 0 20" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
-											</Border>
-										</Grid>
-									</DataTemplate>
-								</ItemsControl.ItemTemplate>
-							</ItemsControl>
-						</ScrollViewer>
-						<TextBox Grid.Row="1" Text="{Binding Path=NewMessage, Mode=TwoWay}" />
-					</Grid>
-				</DataTemplate>
-			</phone:Pivot.ItemTemplate>
-
-		</phone:Pivot>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<ScrollViewer Grid.Row="0" x:Name="pivotItemScrollViewer">
+			<ItemsControl ItemsSource="{Binding Messages}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="SizeChanged">
+						<localBehaviors:ScrollToBottomTrigger TargetName="pivotItemScrollViewer"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<!--<Image Grid.Column="0" Source="{Binding Avatar}" Margin="5" Width="50" Height="50" />-->
+							<!--<TextBlock Grid.Column="1" Text="{Binding Nick}" Margin="5" FontSize="{StaticResource PhoneFontSizeLarge}" />-->
+							<!--<TextBlock Grid.Column="2" Text="{Binding Status}" Margin="5" />-->
+							<Border BorderThickness="0 0 0 1">
+								<Border.BorderBrush>
+									<SolidColorBrush Color="{StaticResource PhoneAccentColor}"/>
+								</Border.BorderBrush>
+								<TextBlock Grid.Column="2" Text="{Binding Content}" Margin="0 20 0 20" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
+							</Border>
+						</Grid>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
+		<TextBox Grid.Row="1" Text="{Binding Path=NewMessage, Mode=TwoWay}" />
 	</Grid>
 	<bindableAppBar:Bindable.ApplicationBar>
 		<bindableAppBar:BindableApplicationBar>

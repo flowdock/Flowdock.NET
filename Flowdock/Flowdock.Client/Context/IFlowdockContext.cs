@@ -11,7 +11,7 @@ namespace Flowdock.Client.Context {
 		Task<Flow> GetFlow(string id);
 		Task<IEnumerable<Message>> GetMessagesForFlow(string id);
 
-		void SendMessage(Flow flow, string message);
+		void SendMessage(string flowId, string message);
 	}
 	
 }

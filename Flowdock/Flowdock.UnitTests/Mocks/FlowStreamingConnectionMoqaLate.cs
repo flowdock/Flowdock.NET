@@ -16,7 +16,7 @@ public partial class FlowStreamingConnectionMoqaLate : IFlowStreamingConnection
 
         private int _startNumberOfTimesCalled;        
 
-        public string StartParameter_username_LastCalledWith;public string StartParameter_password_LastCalledWith;public Flow StartParameter_flow_LastCalledWith;public Action<Message> StartParameter_callback_LastCalledWith;
+        public string StartParameter_username_LastCalledWith;public string StartParameter_password_LastCalledWith;public string StartParameter_flowId_LastCalledWith;public Action<Message> StartParameter_callback_LastCalledWith;
 
         public virtual bool StartWasCalled()
 {
@@ -36,20 +36,20 @@ public virtual int StartTimesCalled()
 }
 
 
-public virtual bool StartWasCalledWith(string username, string password, Flow flow, Action<Message> callback){
+public virtual bool StartWasCalledWith(string username, string password, string flowId, Action<Message> callback){
 return (
 username.Equals(StartParameter_username_LastCalledWith)  && 
 password.Equals(StartParameter_password_LastCalledWith)  && 
-flow.Equals(StartParameter_flow_LastCalledWith)  && 
+flowId.Equals(StartParameter_flowId_LastCalledWith)  && 
 callback.Equals(StartParameter_callback_LastCalledWith) );
 }
 
 
-        public void Start(string username, string password, Flow flow, Action<Message> callback)
+        public void Start(string username, string password, string flowId, Action<Message> callback)
         {
             _startNumberOfTimesCalled++;            
 
-            StartParameter_username_LastCalledWith = username;StartParameter_password_LastCalledWith = password;StartParameter_flow_LastCalledWith = flow;StartParameter_callback_LastCalledWith = callback;
+            StartParameter_username_LastCalledWith = username;StartParameter_password_LastCalledWith = password;StartParameter_flowId_LastCalledWith = flowId;StartParameter_callback_LastCalledWith = callback;
         }
 
 

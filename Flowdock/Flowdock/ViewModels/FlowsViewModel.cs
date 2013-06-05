@@ -9,7 +9,7 @@ namespace Flowdock.ViewModels {
 	public class FlowsViewModel : ViewModelBase {
 		private IFlowdockContext _context;
 
-		private ObservableCollection<FlowViewModel> _flows;
+		private ObservableCollection<LobbyFlowViewModel> _flows;
 		private bool _isLoading;
 
 		private async void GetFlows() {
@@ -17,9 +17,9 @@ namespace Flowdock.ViewModels {
 			IEnumerable<Flow> flows = await _context.GetCurrentFlows();
 
 			if (flows != null) {
-				Flows = new ObservableCollection<FlowViewModel>(flows
-					.Where(f => f.Open && f.Name.Contains("Testing"))
-					.Select(f => new FlowViewModel(f, _context))
+				Flows = new ObservableCollection<LobbyFlowViewModel>(flows
+					.Where(f => f.Open)// && f.Name.Contains("Testing"))
+					.Select(f => new LobbyFlowViewModel(f))
 					//.Take(1)
 				);
 			}
@@ -36,7 +36,7 @@ namespace Flowdock.ViewModels {
 			: this(new LoggedInFlowdockContext()) {
 		}
 
-		public ObservableCollection<FlowViewModel> Flows {
+		public ObservableCollection<LobbyFlowViewModel> Flows {
 			get {
 				return _flows;
 			}

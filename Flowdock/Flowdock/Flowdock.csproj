@@ -106,6 +106,8 @@
     <Compile Include="Util\UIThread.cs" />
     <Compile Include="ViewModels\FlowsViewModel.cs" />
     <Compile Include="ViewModels\FlowViewModel.cs" />
+    <Compile Include="ViewModels\GoToFlowCommand.cs" />
+    <Compile Include="ViewModels\LobbyFlowViewModel.cs" />
     <Compile Include="ViewModels\LoggedInEventArgs.cs" />
     <Compile Include="ViewModels\LoggedInFlowdockContext.cs" />
     <Compile Include="ViewModels\LoginCommand.cs" />
@@ -114,6 +116,9 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\FlowView.xaml.cs">
       <DependentUpon>FlowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LobbyView.xaml.cs">
+      <DependentUpon>LobbyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -131,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="Views\FlowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LobbyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

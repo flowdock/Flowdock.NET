@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 
 namespace Flowdock.Client.Stream {
 	public class MessageParser {
-		private static int _numPublished = 0;
-
 		private Action<Message> _callback;
 
 		private List<string> _buildingMessage = new List<string>();

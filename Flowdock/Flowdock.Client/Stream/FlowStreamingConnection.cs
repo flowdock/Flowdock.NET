@@ -14,8 +14,8 @@ namespace Flowdock.Client.Stream {
 		private bool _stopped = false;
 
 
-		private string BuildUrl(Flow flow) {
-			return string.Format("{0}/flows/{1}", StreamUrl, flow.Id.Replace(":", "/"));
+		private string BuildUrl(string flowId) {
+			return string.Format("{0}/flows/{1}", StreamUrl, flowId.Replace(":", "/"));
 		}
 
 		private void OnRead(IAsyncResult result) {
@@ -41,10 +41,10 @@ namespace Flowdock.Client.Stream {
 			Read();
 		}
 
-		public void Start(string username, string password, Flow flow, Action<Message> callback) {
+		public void Start(string username, string password, string flowId, Action<Message> callback) {
 			_messageParser = new MessageParser(callback);
 
-			_request = HttpWebRequest.CreateHttp(BuildUrl(flow));
+			_request = HttpWebRequest.CreateHttp(BuildUrl(flowId));
 			_request.Credentials = new NetworkCredential(username, password);
 
 			_request.BeginGetResponse(OnGetResponse, null);

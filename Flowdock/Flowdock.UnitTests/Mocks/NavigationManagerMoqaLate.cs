@@ -10,38 +10,77 @@ public partial class NavigationManagerMoqaLate : INavigationManager
 {
 
 
-// -------------- GoToFlows ------------
+// -------------- GoToLobby ------------
 
 
-        private int _goToFlowsNumberOfTimesCalled;        
+        private int _goToLobbyNumberOfTimesCalled;        
 
         
 
-        public virtual bool GoToFlowsWasCalled()
+        public virtual bool GoToLobbyWasCalled()
 {
-   return _goToFlowsNumberOfTimesCalled > 0;
+   return _goToLobbyNumberOfTimesCalled > 0;
 }
 
 
-public virtual bool GoToFlowsWasCalled(int times)
+public virtual bool GoToLobbyWasCalled(int times)
 {
-   return _goToFlowsNumberOfTimesCalled == times;
+   return _goToLobbyNumberOfTimesCalled == times;
 }
 
 
-public virtual int GoToFlowsTimesCalled()
+public virtual int GoToLobbyTimesCalled()
 {
-   return _goToFlowsNumberOfTimesCalled;
+   return _goToLobbyNumberOfTimesCalled;
 }
 
 
 
 
-        public void GoToFlows()
+        public void GoToLobby()
         {
-            _goToFlowsNumberOfTimesCalled++;            
+            _goToLobbyNumberOfTimesCalled++;            
 
             
+        }
+
+
+// -------------- GoToFlow ------------
+
+
+        private int _goToFlowNumberOfTimesCalled;        
+
+        public string GoToFlowParameter_id_LastCalledWith;
+
+        public virtual bool GoToFlowWasCalled()
+{
+   return _goToFlowNumberOfTimesCalled > 0;
+}
+
+
+public virtual bool GoToFlowWasCalled(int times)
+{
+   return _goToFlowNumberOfTimesCalled == times;
+}
+
+
+public virtual int GoToFlowTimesCalled()
+{
+   return _goToFlowNumberOfTimesCalled;
+}
+
+
+public virtual bool GoToFlowWasCalledWith(string id){
+return (
+id.Equals(GoToFlowParameter_id_LastCalledWith) );
+}
+
+
+        public void GoToFlow(string id)
+        {
+            _goToFlowNumberOfTimesCalled++;            
+
+            GoToFlowParameter_id_LastCalledWith = id;
         }
 }
 }

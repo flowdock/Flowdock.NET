@@ -11,8 +11,12 @@ namespace Flowdock.Navigation {
 			Flowdock.App.RootFrame.Navigate(new Uri(path, UriKind.Relative));
 		}
 
-		public void GoToFlows() {
-			GoTo("/Views/FlowView.xaml");
+		public void GoToLobby() {
+			GoTo("/Views/LobbyView.xaml");
+		}
+
+		public void GoToFlow(string flowId) {
+			GoTo("/Views/FlowView.xaml?flowId=" + flowId);
 		}
 	}
 }

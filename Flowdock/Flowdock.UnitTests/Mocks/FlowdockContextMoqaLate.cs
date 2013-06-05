@@ -198,7 +198,7 @@ id.Equals(GetMessagesForFlowParameter_id_LastCalledWith) );
 
         private int _sendMessageNumberOfTimesCalled;        
 
-        public Flow SendMessageParameter_flow_LastCalledWith;public string SendMessageParameter_message_LastCalledWith;
+        public string SendMessageParameter_flowId_LastCalledWith;public string SendMessageParameter_message_LastCalledWith;
 
         public virtual bool SendMessageWasCalled()
 {
@@ -218,18 +218,18 @@ public virtual int SendMessageTimesCalled()
 }
 
 
-public virtual bool SendMessageWasCalledWith(Flow flow, string message){
+public virtual bool SendMessageWasCalledWith(string flowId, string message){
 return (
-flow.Equals(SendMessageParameter_flow_LastCalledWith)  && 
+flowId.Equals(SendMessageParameter_flowId_LastCalledWith)  && 
 message.Equals(SendMessageParameter_message_LastCalledWith) );
 }
 
 
-        public void SendMessage(Flow flow, string message)
+        public void SendMessage(string flowId, string message)
         {
             _sendMessageNumberOfTimesCalled++;            
 
-            SendMessageParameter_flow_LastCalledWith = flow;SendMessageParameter_message_LastCalledWith = message;
+            SendMessageParameter_flowId_LastCalledWith = flowId;SendMessageParameter_message_LastCalledWith = message;
         }
 }
 }
