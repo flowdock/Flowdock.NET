@@ -11,6 +11,7 @@ using System.Windows.Input;
 namespace Flowdock.ViewModels {
 	public class FlowViewModel : ViewModelBase {
 		private string _flowId;
+		private string _flowName;
 		private IFlowdockContext _context;
 
 		private ObservableCollection<User> _users;
@@ -43,14 +44,15 @@ namespace Flowdock.ViewModels {
 			});
 		}
 
-		public FlowViewModel(string flowId, IFlowdockContext context) {
+		public FlowViewModel(string flowId, string flowName, IFlowdockContext context) {
 			_flowId = flowId.ThrowIfNull("flowId");
+			_flowName = flowName.ThrowIfNull("flowName");
 			_context = context.ThrowIfNull("context");
 			_sendMessageCommand = new SendMessageCommand(this, _context, _flowId);
 		}
 
-		public FlowViewModel(string flowId)
-			: this(flowId, new LoggedInFlowdockContext()) {
+		public FlowViewModel(string flowId, string flowName)
+			: this(flowId, flowName, new LoggedInFlowdockContext()) {
 		}
 
 		public ObservableCollection<User> Users {
@@ -79,11 +81,11 @@ namespace Flowdock.ViewModels {
 			}
 		}
 
-		//public string Name {
-		//	get {
-		//		return _flow.Name;
-		//	}
-		//}
+		public string Name {
+			get {
+				return _flowName;
+			}
+		}
 
 		public string NewMessage {
 			get {

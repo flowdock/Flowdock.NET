@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flowdock.Client.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,8 +16,9 @@ namespace Flowdock.Navigation {
 			GoTo("/Views/LobbyView.xaml");
 		}
 
-		public void GoToFlow(string flowId) {
-			GoTo("/Views/FlowView.xaml?flowId=" + flowId);
+		public void GoToFlow(Flow flow) {
+			string url = string.Format("/Views/FlowView.xaml?flowId={0}&flowName={1}", flow.Id, flow.Name);
+			GoTo(url);
 		}
 	}
 }

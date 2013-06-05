@@ -96,7 +96,7 @@ namespace Flowdock.Client.Context {
 			request.AddParameter("event", "message");
 			request.AddParameter("content", message);
 
-			client.PostAsync(request, null);
+			client.PostAsync(request, (response, handle) => { });
 		}
 	}
 }

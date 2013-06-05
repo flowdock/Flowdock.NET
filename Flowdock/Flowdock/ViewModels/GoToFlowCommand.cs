@@ -28,7 +28,7 @@ namespace Flowdock.ViewModels {
 		public event EventHandler CanExecuteChanged;
 
 		public void Execute(object parameter) {
-			_navigationManager.GoToFlow(_flow.Id);
+			_navigationManager.GoToFlow(_flow);
 		}
 	}
 }

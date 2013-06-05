@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Flowdock.ViewModels;
+using BindableApplicationBar;
 
 namespace Flowdock.Views {
 	public partial class FlowView : PhoneApplicationPage {
@@ -18,8 +19,13 @@ namespace Flowdock.Views {
 		protected override void OnNavigatedTo(NavigationEventArgs e) {
 			base.OnNavigatedTo(e);
 			var flowId = NavigationContext.QueryString["flowId"];
+			var flowName = NavigationContext.QueryString["flowName"];
 
-			this.LayoutRoot.DataContext = new FlowViewModel(flowId);
+			var viewModel = new FlowViewModel(flowId, flowName);
+			this.LayoutRoot.DataContext = viewModel;
+
+			BindableApplicationBarButton button = (BindableApplicationBarButton)this.FindName("sendMessageButton");
+			button.DataContext = viewModel;
 		}
 	}
 }

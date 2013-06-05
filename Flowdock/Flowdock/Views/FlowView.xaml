@@ -21,13 +21,14 @@
 		<shell:ProgressIndicator IsIndeterminate="true" IsVisible="{Binding Path=IsLoading, Source={StaticResource viewModel}}" />
 	</shell:SystemTray.ProgressIndicator>-->
 
-	<!--LayoutRoot is the root grid where all page content is placed-->
 	<Grid x:Name="LayoutRoot" Background="Transparent">
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-		<ScrollViewer Grid.Row="0" x:Name="pivotItemScrollViewer">
+		<TextBlock Grid.Row="0" Text="{Binding Name}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+		<ScrollViewer Grid.Row="1" x:Name="pivotItemScrollViewer">
 			<ItemsControl ItemsSource="{Binding Messages}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 				<i:Interaction.Triggers>
 					<i:EventTrigger EventName="SizeChanged">
@@ -42,9 +43,6 @@
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
 							</Grid.ColumnDefinitions>
-							<!--<Image Grid.Column="0" Source="{Binding Avatar}" Margin="5" Width="50" Height="50" />-->
-							<!--<TextBlock Grid.Column="1" Text="{Binding Nick}" Margin="5" FontSize="{StaticResource PhoneFontSizeLarge}" />-->
-							<!--<TextBlock Grid.Column="2" Text="{Binding Status}" Margin="5" />-->
 							<Border BorderThickness="0 0 0 1">
 								<Border.BorderBrush>
 									<SolidColorBrush Color="{StaticResource PhoneAccentColor}"/>
@@ -56,12 +54,17 @@
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
 		</ScrollViewer>
-		<TextBox Grid.Row="1" Text="{Binding Path=NewMessage, Mode=TwoWay}" />
+		<TextBox Grid.Row="2" Text="{Binding Path=NewMessage, Mode=TwoWay}">
+			<i:Interaction.Behaviors>
+				<localBehaviors:ImmediateUpdateTextBoxBehavior />
+			</i:Interaction.Behaviors>
+		</TextBox>
 	</Grid>
 	<bindableAppBar:Bindable.ApplicationBar>
 		<bindableAppBar:BindableApplicationBar>
 			<bindableAppBar:BindableApplicationBarButton 
-				IconUri="Resources/AppBarIcons/send.text.png" 
+				x:Name="sendMessageButton"
+				IconUri="Resources/AppBarIcons/send.text.png"
 				Text="Send" 
 				Command="{Binding SendMessageCommand}" />
 		</bindableAppBar:BindableApplicationBar>

@@ -1,3 +1,4 @@
+using Flowdock.Client.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,7 +51,7 @@ public virtual int GoToLobbyTimesCalled()
 
         private int _goToFlowNumberOfTimesCalled;        
 
-        public string GoToFlowParameter_id_LastCalledWith;
+        public Flow GoToFlowParameter_flow_LastCalledWith;
 
         public virtual bool GoToFlowWasCalled()
 {
@@ -70,17 +71,17 @@ public virtual int GoToFlowTimesCalled()
 }
 
 
-public virtual bool GoToFlowWasCalledWith(string id){
+public virtual bool GoToFlowWasCalledWith(Flow flow){
 return (
-id.Equals(GoToFlowParameter_id_LastCalledWith) );
+flow.Equals(GoToFlowParameter_flow_LastCalledWith) );
 }
 
 
-        public void GoToFlow(string id)
+        public void GoToFlow(Flow flow)
         {
             _goToFlowNumberOfTimesCalled++;            
 
-            GoToFlowParameter_id_LastCalledWith = id;
+            GoToFlowParameter_flow_LastCalledWith = flow;
         }
 }
 }

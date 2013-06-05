@@ -30,22 +30,22 @@
 
 		<TextBlock Grid.Row="0" Text="FLOWS" Margin="12,17,0,28" Style="{StaticResource PhoneTextNormalStyle}"/>
 
-		<ItemsControl Grid.Row="1" ItemsSource="{Binding Flows}">
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<Button Command="{Binding GoToFlowCommand}">
-						<Button.Template>
-							<ControlTemplate TargetType="Button">
-								<ContentPresenter />
-							</ControlTemplate>
-						</Button.Template>
-						<Border BorderThickness="0 0 0 1" BorderBrush="White">
-							<TextBlock Text="{Binding Name}" Margin="5 10 5 10" FontSize="{StaticResource PhoneFontSizeLarge}"  HorizontalAlignment="Stretch"/>
-						</Border>
-					</Button>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
-    </Grid>
+		<ScrollViewer Grid.Row="1">
+			<ItemsControl ItemsSource="{Binding Flows}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Button Command="{Binding GoToFlowCommand}">
+							<Button.Template>
+								<ControlTemplate TargetType="Button">
+									<ContentPresenter />
+								</ControlTemplate>
+							</Button.Template>
+							<TextBlock Text="{Binding Name}" Padding="5 15 5 15" FontSize="{StaticResource PhoneFontSizeLarge}"  HorizontalAlignment="Stretch"/>
+						</Button>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
+	</Grid>
 
 </phone:PhoneApplicationPage>

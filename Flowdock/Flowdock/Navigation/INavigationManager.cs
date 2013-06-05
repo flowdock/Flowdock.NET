@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flowdock.Client.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Flowdock.Navigation {
 	public interface INavigationManager
 	{
 		void GoToLobby();
-		void GoToFlow(string id);
+		void GoToFlow(Flow flow);
 	}
 }
