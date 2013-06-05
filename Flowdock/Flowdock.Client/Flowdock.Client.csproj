@@ -84,17 +84,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Domain\Flow.cs" />
-    <Compile Include="FlowdockContext.cs" />
-    <Compile Include="IFlowdockContext.cs" />
+    <Compile Include="Context\FlowdockContext.cs" />
+    <Compile Include="Context\IFlowdockContext.cs" />
     <Compile Include="Domain\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\User.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Flowdock.Extensions\Flowdock.Extensions.csproj">
-      <Project>{AF71F0D6-EED6-4606-913E-0454EA674E81}</Project>
-      <Name>Flowdock.Extensions</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="RestSharp.WindowsPhone">

@@ -1,10 +1,5 @@
-﻿using Flowdock.Client;
+﻿using Flowdock.Client.Context;
 using Flowdock.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flowdock.ViewModels {
 	public class LoggedInFlowdockContext : FlowdockContext {

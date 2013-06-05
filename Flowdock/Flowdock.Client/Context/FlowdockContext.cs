@@ -1,15 +1,10 @@
-﻿using System;
+﻿using Flowdock.Client.Domain;
+using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-using Flowdock.Extensions;
-using Flowdock.Client;
-using RestSharp;
-using Flowdock.Client.Domain;
-
-namespace Flowdock.Client {
+namespace Flowdock.Client.Context {
 	public class FlowdockContext : IFlowdockContext {
 		private const string FlowdockApiBaseUrl = "https://api.flowdock.com";
 

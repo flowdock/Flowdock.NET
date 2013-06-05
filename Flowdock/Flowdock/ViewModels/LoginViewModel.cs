@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-
+﻿using Flowdock.Client.Context;
 using Flowdock.Extensions;
 using Flowdock.Navigation;
-using Flowdock.Client;
 using Flowdock.Settings;
+using System.Windows.Input;
 
 namespace Flowdock.ViewModels {
 	public class LoginViewModel : ViewModelBase {

@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Behaviors\ImmediateUpdatePasswordBoxBehavior.cs" />
     <Compile Include="Behaviors\ImmediateUpdateTextBoxBehavior.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Navigation\INavigationManager.cs" />
     <Compile Include="Navigation\NavigationManager.cs" />
@@ -178,10 +179,6 @@
     <ProjectReference Include="..\Flowdock.Client\Flowdock.Client.csproj">
       <Project>{D25273F5-F6BD-4B1F-9E7E-9B4F309640C4}</Project>
       <Name>Flowdock.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Flowdock.Extensions\Flowdock.Extensions.csproj">
-      <Project>{AF71F0D6-EED6-4606-913E-0454EA674E81}</Project>
-      <Name>Flowdock.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

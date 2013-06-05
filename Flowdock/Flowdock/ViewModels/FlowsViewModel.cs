@@ -1,13 +1,9 @@
-﻿using Flowdock.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Flowdock.Extensions;
-using System.Collections.ObjectModel;
+﻿using Flowdock.Client.Context;
 using Flowdock.Client.Domain;
+using Flowdock.Extensions;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Flowdock.ViewModels {
 	public class FlowsViewModel : ViewModelBase {
