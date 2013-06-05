@@ -7,6 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:viewModels="clr-namespace:Flowdock.ViewModels"
+	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+	xmlns:localBehaviors="clr-namespace:Flowdock.Behaviors"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -40,8 +42,13 @@
 			
 			<phone:Pivot.ItemTemplate>
 				<DataTemplate>
-					<ScrollViewer>
+					<ScrollViewer x:Name="pivotItemScrollViewer">
 						<ItemsControl ItemsSource="{Binding Messages}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="SizeChanged">
+									<localBehaviors:ScrollToBottomTrigger TargetName="pivotItemScrollViewer"/>
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
 									<Grid>
@@ -53,7 +60,12 @@
 										<!--<Image Grid.Column="0" Source="{Binding Avatar}" Margin="5" Width="50" Height="50" />-->
 										<!--<TextBlock Grid.Column="1" Text="{Binding Nick}" Margin="5" FontSize="{StaticResource PhoneFontSizeLarge}" />-->
 										<!--<TextBlock Grid.Column="2" Text="{Binding Status}" Margin="5" />-->
-										<TextBlock Grid.Column="2" Text="{Binding Content}" />
+										<Border BorderThickness="0 0 0 1">
+											<Border.BorderBrush>
+												<SolidColorBrush Color="{StaticResource PhoneAccentColor}"/>
+											</Border.BorderBrush>
+											<TextBlock Grid.Column="2" Text="{Binding Content}" Margin="0 20 0 20" />
+										</Border>
 									</Grid>
 								</DataTemplate>
 							</ItemsControl.ItemTemplate>

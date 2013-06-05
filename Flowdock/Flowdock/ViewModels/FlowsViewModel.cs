@@ -17,7 +17,11 @@ namespace Flowdock.ViewModels {
 			IEnumerable<Flow> flows = await _context.GetCurrentFlows();
 
 			if (flows != null) {
-				Flows = new ObservableCollection<FlowViewModel>(flows.Where(f => f.Open).Select(f => new FlowViewModel(f, _context)));
+				Flows = new ObservableCollection<FlowViewModel>(flows
+					.Where(f => f.Open && f.Name == "_FlowdockTesting")
+					.Select(f => new FlowViewModel(f, _context))
+					//.Take(1)
+				);
 			}
 			IsLoading = false;
 		}

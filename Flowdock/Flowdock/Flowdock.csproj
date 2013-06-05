@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Behaviors\ImmediateUpdatePasswordBoxBehavior.cs" />
     <Compile Include="Behaviors\ImmediateUpdateTextBoxBehavior.cs" />
+    <Compile Include="Behaviors\ScrollToBottomTrigger.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Navigation\INavigationManager.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Settings\IAppSettings.cs" />
     <Compile Include="Settings\AppSettings.cs" />
     <Compile Include="Settings\DebugLoginInfo.cs" />
+    <Compile Include="Util\UIThread.cs" />
     <Compile Include="ViewModels\FlowsViewModel.cs" />
     <Compile Include="ViewModels\FlowViewModel.cs" />
     <Compile Include="ViewModels\LoggedInEventArgs.cs" />

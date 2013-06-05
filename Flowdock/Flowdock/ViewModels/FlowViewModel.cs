@@ -1,6 +1,9 @@
 ﻿using Flowdock.Client.Context;
 using Flowdock.Client.Domain;
+using Flowdock.Client.Stream;
 using Flowdock.Extensions;
+using Flowdock.Settings;
+using Flowdock.Util;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -24,18 +27,35 @@ namespace Flowdock.ViewModels {
 			if (messages != null) {
 				Messages = new ObservableCollection<Message>(messages);
 			}
+
+			var appsettings = new AppSettings();
+			new FlowStreamingConnection().Start(appsettings.Username, appsettings.Password, _flow, (msg) => {
+				UIThread.Invoke(() => {
+					if (Messages == null) {
+						Messages = new ObservableCollection<Message>(new Message[] { msg });
+					} else {
+						Messages.Add(msg);
+					}
+				});
+			});
 		}
 
 		public FlowViewModel(Flow flow, IFlowdockContext context) {
 			_flow = flow.ThrowIfNull("flow");
 			_context = context.ThrowIfNull("context");
 
-			GetUsers();
-			GetMessages();
+			//GetUsers();
+			//GetMessages();
+
+			//var stream = new Flowdock.Client.Stream.FlowStreamingConnection();
+			//stream.Start(new Flowdock.Settings.AppSettings().Username, new Flowdock.Settings.AppSettings().Password, _flow, null);
 		}
 
 		public ObservableCollection<User> Users {
 			get {
+				if (_users == null) {
+					GetUsers();
+				}
 				return _users;
 			}
 			private set {
@@ -46,6 +66,9 @@ namespace Flowdock.ViewModels {
 
 		public ObservableCollection<Message> Messages {
 			get {
+				if (_messages == null) {
+					GetMessages();
+				}
 				return _messages;
 			}
 			private set {
