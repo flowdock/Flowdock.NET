@@ -11,31 +11,31 @@ using System.Linq;
 
 namespace Flowdock.ViewModels {
 	public class FlowViewModel : ViewModelBase {
+		private const int MessageLimit = 20;
+
 		private Flow _flow;
 		private IFlowdockContext _context;
 		private IAppSettings _settings;
 
 		private ObservableCollection<User> _users;
-		private bool _gettingUsers;
 		private ObservableCollection<MessageViewModel> _messages;
+
+		private FlowStreamingConnection _stream;
 
 		private string _newMessage;
 		private SendMessageCommand _sendMessageCommand;
+
+		private void TrimMessages() {
+			while (_messages.Count > MessageLimit) {
+				_messages.RemoveAt(0);
+			}
+		}
 
 		private void AssociateAvatarsToMessages() {
 			if (_messages != null) {
 				foreach (var msg in _messages) {
 					FindAvatar(msg);
 				}
-			}
-		}
-
-		private async void GetUsers() {
-			if (_users == null && !_gettingUsers) {
-				_gettingUsers = true;
-				Flow flow = await _context.GetFlow(_flow.Id);
-				Users = new ObservableCollection<User>(flow.Users);
-				AssociateAvatarsToMessages();
 			}
 		}
 
@@ -46,31 +46,45 @@ namespace Flowdock.ViewModels {
 			}
 		}
 
-		private async void GetMessages() {
+		private void OnMessageReceived(Message msg) {
+			UIThread.Invoke(() => {
+				if (msg.Displayable) {
+					var viewModel = new MessageViewModel(msg);
+					FindAvatar(viewModel);
+					Messages.Add(viewModel);
+					TrimMessages();
+				}
+			});
+		}
+
+		private void StartStream() {
+			_stream = new FlowStreamingConnection();
+			_stream.Start(_settings.Username, _settings.Password, _flow.Id, OnMessageReceived);
+		}
+
+		private void StopStream() {
+			_stream.Stop();
+		}
+
+		private async void LoadFlow() {
+			// load the flow to grab the users
+			Flow flow = await _context.GetFlow(_flow.Id);
+			Users = new ObservableCollection<User>(flow.Users);
+
+
 			IEnumerable<Message> messages = await _context.GetMessagesForFlow(_flow.Id);
 
 			if (messages != null) {
-				Messages = new ObservableCollection<MessageViewModel>(messages
-					.Where(m => m.Displayable)
-					.Select(m => new MessageViewModel(m))
+				Messages = new ObservableCollection<MessageViewModel>(
+					messages.Where(m => m.Displayable).Select(m => new MessageViewModel(m))
 				);
 			}
 
-			var appsettings = new AppSettings();
-			new FlowStreamingConnection().Start(appsettings.Username, appsettings.Password, _flow.Id, (msg) => {
-				UIThread.Invoke(() => {
-					if (msg.Displayable) {
-						var viewModel = new MessageViewModel(msg);
-						FindAvatar(viewModel);
-						if (Messages == null) {
-							Messages = new ObservableCollection<MessageViewModel>(new MessageViewModel[] { viewModel });
-						} else {
-							Messages.Add(viewModel);
-						}
-					}
-				});
-			});
-			GetUsers();
+			TrimMessages();
+
+			AssociateAvatarsToMessages();
+
+			StartStream();
 		}
 
 		public FlowViewModel(IAppSettings settings, IFlowdockContext context) {
@@ -79,15 +93,22 @@ namespace Flowdock.ViewModels {
 			_flow = _settings.CurrentFlow;
 
 			_sendMessageCommand = new SendMessageCommand(this, _context, _flow.Id);
+
+			LoadFlow();
 		}
 
 		public FlowViewModel()
 			: this(new AppSettings(), new LoggedInFlowdockContext()) {
 		}
 
+		public void Unload() {
+			StopStream();
+			Users = null;
+			Messages = null;
+		}
+
 		public ObservableCollection<User> Users {
 			get {
-				GetUsers();
 				return _users;
 			}
 			private set {
@@ -98,7 +119,6 @@ namespace Flowdock.ViewModels {
 
 		public ObservableCollection<MessageViewModel> Messages {
 			get {
-				GetMessages();
 				return _messages;
 			}
 			private set {

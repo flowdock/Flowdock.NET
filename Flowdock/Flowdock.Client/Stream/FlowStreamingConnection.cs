@@ -19,12 +19,17 @@ namespace Flowdock.Client.Stream {
 		}
 
 		private void OnRead(IAsyncResult result) {
+			if (_stopped) {
+				return;
+			}
+
 			int bytesRead = _response.GetResponseStream().EndRead(result);
 
 			// Flowdock uses UTF8
 			string readString = System.Text.Encoding.UTF8.GetString(_buffer, 0, bytesRead);
 			_messageParser.Push(readString);
 
+			// keep pulling down from the stream
 			Read();
 		}
 
