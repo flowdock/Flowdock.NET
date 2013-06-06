@@ -15,7 +15,7 @@ namespace Flowdock.MessageBoxes {
 			ResourceDictionary appResources = Application.Current.Resources["applicationResources"] as ResourceDictionary;
 
 			CustomMessageBox messageBox = new CustomMessageBox() {
-				ContentTemplate = (DataTemplate)appResources["usersPivotDataTemplate"],
+				Content = ((DataTemplate)appResources["usersPivotDataTemplate"]).LoadContent(),
 				DataContext = new UsersViewModel(users),
 				RightButtonContent = "OK",
 				IsFullScreen = true
