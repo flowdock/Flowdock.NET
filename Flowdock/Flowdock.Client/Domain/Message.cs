@@ -25,8 +25,11 @@ namespace Flowdock.Client.Domain {
 
 			if (messageContent != null) {
 				MessageContent = messageContent;
-				ExtractedBody = messageContent.Text;
-			} else {
+
+				if (Event == "message" || Event == "comment") {
+					ExtractedBody = messageContent.Text;
+				}
+			} else if(Event == "message") {
 				ExtractedBody = content;
 			}
 

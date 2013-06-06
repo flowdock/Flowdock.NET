@@ -133,6 +133,7 @@ namespace Flowdock.ViewModels {
 			private set {
 				_messages = value;
 				OnPropertyChanged(() => Messages);
+				OnPropertyChanged(() => FlowStatusMessage);
 			}
 		}
 
@@ -171,6 +172,19 @@ namespace Flowdock.ViewModels {
 			private set {
 				_isLoading = value;
 				OnPropertyChanged(() => IsLoading);
+				OnPropertyChanged(() => FlowStatusMessage);
+			}
+		}
+
+		public string FlowStatusMessage {
+			get {
+				if (IsLoading) {
+					return "loading...";
+				}
+				if (Messages != null && Messages.Count == 0) {
+					return "empty flow";
+				}
+				return "";
 			}
 		}
 	}

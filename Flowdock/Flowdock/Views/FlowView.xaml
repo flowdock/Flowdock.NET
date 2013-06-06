@@ -10,6 +10,7 @@
 	xmlns:bindableAppBar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
 	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 	xmlns:localBehaviors="clr-namespace:Flowdock.Behaviors"
+	xmlns:localConverters="clr-namespace:Flowdock.Converters"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -19,6 +20,9 @@
 
 	<UserControl.Resources>
 		<viewModels:FlowViewModel x:Key="viewModel" />
+		<localConverters:ShowHideIfEmptyConverter x:Key="visibilityConverter" />
+		<localConverters:BoolVisibilityConverter x:Key="boolVisiblityConverter" />
+		<localConverters:BoolNegateConverter x:Key="boolNegateConverter" />
 	</UserControl.Resources>
 
 	<shell:SystemTray.ProgressIndicator>
@@ -32,40 +36,46 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		<TextBlock Grid.Row="0" Text="{Binding Name}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-		<ScrollViewer Grid.Row="1" x:Name="pivotItemScrollViewer">
-			<ItemsControl ItemsSource="{Binding Messages}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-				<i:Interaction.Triggers>
-					<i:EventTrigger EventName="SizeChanged">
-						<localBehaviors:ScrollToBottomTrigger TargetName="pivotItemScrollViewer"/>
-					</i:EventTrigger>
-				</i:Interaction.Triggers>
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-							<Border BorderThickness="0 0 0 1">
-								<Border.BorderBrush>
-									<SolidColorBrush Color="White"/>
-								</Border.BorderBrush>
-								<Grid>
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="Auto" />
-										<ColumnDefinition Width="*" />
-									</Grid.ColumnDefinitions>
-									<Image Grid.Column="0" Source="{Binding Avatar}" Width="50" Margin="5 0 10 0" />
-									<TextBlock Grid.Column="1" Text="{Binding Body}" Margin="0 20 0 20" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
-								</Grid>
-							</Border>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
+		<ScrollViewer Grid.Row="1" x:Name="flowScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+			<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+				<TextBlock Text="{Binding FlowStatusMessage}" Margin="0 60 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Messages, Converter={StaticResource visibilityConverter}, ConverterParameter=Show}" />
+				<ItemsControl ItemsSource="{Binding Messages}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding Messages, Converter={StaticResource visibilityConverter}, ConverterParameter=Hide}">
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="SizeChanged">
+							<localBehaviors:ScrollToBottomTrigger TargetName="flowScrollViewer"/>
+						</i:EventTrigger>
+						<i:EventTrigger EventName="LayoutUpdated">
+							<localBehaviors:ScrollToBottomTrigger TargetName="flowScrollViewer"/>
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+								<Border BorderThickness="0 0 0 1">
+									<Border.BorderBrush>
+										<SolidColorBrush Color="White"/>
+									</Border.BorderBrush>
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+										<Image Grid.Column="0" Source="{Binding Avatar}" Width="50" Margin="5 0 10 0" />
+										<TextBlock Grid.Column="1" Text="{Binding Body}" Margin="0 20 0 20" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
+									</Grid>
+								</Border>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
 		</ScrollViewer>
-		<TextBox Grid.Row="2" Text="{Binding Path=NewMessage, Mode=TwoWay}">
+		<TextBox Grid.Row="2" Text="{Binding Path=NewMessage, Mode=TwoWay}" Visibility="{Binding IsLoading, Converter={StaticResource boolVisiblityConverter}, ConverterParameter=Hide}">
 			<i:Interaction.Behaviors>
 				<localBehaviors:ImmediateUpdateTextBoxBehavior />
 			</i:Interaction.Behaviors>
 		</TextBox>
 	</Grid>
 	<bindableAppBar:Bindable.ApplicationBar>
-		<bindableAppBar:BindableApplicationBar>
+		<bindableAppBar:BindableApplicationBar IsVisible="{Binding IsLoading, Converter={StaticResource boolNegateConverter}, Source={StaticResource viewModel}}">
 			<bindableAppBar:BindableApplicationBarButton 
 				x:Name="sendMessageButton"
 				IconUri="Assets/AppBarIcons/send.text.png"

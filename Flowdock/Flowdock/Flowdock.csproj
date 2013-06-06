@@ -96,6 +96,9 @@
     <Compile Include="Behaviors\ImmediateUpdatePasswordBoxBehavior.cs" />
     <Compile Include="Behaviors\ImmediateUpdateTextBoxBehavior.cs" />
     <Compile Include="Behaviors\ScrollToBottomTrigger.cs" />
+    <Compile Include="Converters\BoolNegateConverter.cs" />
+    <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\ShowHideIfEmptyConverter.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MessageBoxes\IMessageBoxService.cs" />
