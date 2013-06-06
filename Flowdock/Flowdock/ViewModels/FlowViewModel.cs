@@ -7,6 +7,7 @@ using Flowdock.Util;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Linq;
 
 namespace Flowdock.ViewModels {
 	public class FlowViewModel : ViewModelBase {
@@ -15,33 +16,61 @@ namespace Flowdock.ViewModels {
 		private IFlowdockContext _context;
 
 		private ObservableCollection<User> _users;
-		private ObservableCollection<Message> _messages;
+		private bool _gettingUsers;
+		private ObservableCollection<MessageViewModel> _messages;
 
 		private string _newMessage;
 		private SendMessageCommand _sendMessageCommand;
 
+		private void AssociateAvatarsToMessages() {
+			if (_messages != null) {
+				foreach (var msg in _messages) {
+					FindAvatar(msg);
+				}
+			}
+		}
+
 		private async void GetUsers() {
-			Flow flow = await _context.GetFlow(_flowId);
-			Users = new ObservableCollection<User>(flow.Users);
+			if (_users == null && !_gettingUsers) {
+				_gettingUsers = true;
+				Flow flow = await _context.GetFlow(_flowId);
+				Users = new ObservableCollection<User>(flow.Users);
+				AssociateAvatarsToMessages();
+			}
+		}
+
+		private void FindAvatar(MessageViewModel msg) {
+			var user = _users.FirstOrDefault(u => u.Id == msg.UserId);
+			if (user != null) {
+				msg.Avatar = user.Avatar;
+			}
 		}
 
 		private async void GetMessages() {
 			IEnumerable<Message> messages = await _context.GetMessagesForFlow(_flowId);
 
 			if (messages != null) {
-				Messages = new ObservableCollection<Message>(messages);
+				Messages = new ObservableCollection<MessageViewModel>(messages
+					.Where(m => m.Displayable)
+					.Select(m => new MessageViewModel(m))
+				);
 			}
 
 			var appsettings = new AppSettings();
 			new FlowStreamingConnection().Start(appsettings.Username, appsettings.Password, _flowId, (msg) => {
 				UIThread.Invoke(() => {
-					if (Messages == null) {
-						Messages = new ObservableCollection<Message>(new Message[] { msg });
-					} else {
-						Messages.Add(msg);
+					if (msg.Displayable) {
+						var viewModel = new MessageViewModel(msg);
+						FindAvatar(viewModel);
+						if (Messages == null) {
+							Messages = new ObservableCollection<MessageViewModel>(new MessageViewModel[] { viewModel });
+						} else {
+							Messages.Add(viewModel);
+						}
 					}
 				});
 			});
+			GetUsers();
 		}
 
 		public FlowViewModel(string flowId, string flowName, IFlowdockContext context) {
@@ -68,7 +97,7 @@ namespace Flowdock.ViewModels {
 			}
 		}
 
-		public ObservableCollection<Message> Messages {
+		public ObservableCollection<MessageViewModel> Messages {
 			get {
 				if (_messages == null) {
 					GetMessages();

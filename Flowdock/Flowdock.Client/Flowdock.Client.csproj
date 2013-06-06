@@ -87,6 +87,7 @@
     <Compile Include="Context\FlowdockContext.cs" />
     <Compile Include="Context\IFlowdockContext.cs" />
     <Compile Include="Domain\Message.cs" />
+    <Compile Include="Domain\MessageContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\User.cs" />
     <Compile Include="Stream\FlowStreamingConnection.cs" />

@@ -37,19 +37,19 @@
 				</i:Interaction.Triggers>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="*" />
-							</Grid.ColumnDefinitions>
 							<Border BorderThickness="0 0 0 1">
 								<Border.BorderBrush>
-									<SolidColorBrush Color="{StaticResource PhoneAccentColor}"/>
+									<SolidColorBrush Color="White"/>
 								</Border.BorderBrush>
-								<TextBlock Grid.Column="2" Text="{Binding Content}" Margin="0 20 0 20" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<Image Grid.Column="0" Source="{Binding Avatar}" Width="50" Margin="5 0 10 0" />
+									<TextBlock Grid.Column="1" Text="{Binding Body}" Margin="0 20 0 20" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
+								</Grid>
 							</Border>
-						</Grid>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
