@@ -68,9 +68,14 @@
 		<bindableAppBar:BindableApplicationBar>
 			<bindableAppBar:BindableApplicationBarButton 
 				x:Name="sendMessageButton"
-				IconUri="Resources/AppBarIcons/send.text.png"
+				IconUri="Assets/AppBarIcons/send.text.png"
 				Text="Send" 
 				Command="{Binding Path=SendMessageCommand, Source={StaticResource viewModel}}" />
+			<bindableAppBar:BindableApplicationBar.MenuItems>
+				<bindableAppBar:BindableApplicationBarMenuItem
+					Command="{Binding Path=ShowUsersCommand, Source={StaticResource viewModel}}"
+					Text="Who's Here?" />
+			</bindableAppBar:BindableApplicationBar.MenuItems>
 		</bindableAppBar:BindableApplicationBar>
 	</bindableAppBar:Bindable.ApplicationBar>
 </phone:PhoneApplicationPage>

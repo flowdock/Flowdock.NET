@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Linq;
+using Flowdock.MessageBoxes;
 
 namespace Flowdock.ViewModels {
 	public class FlowViewModel : ViewModelBase {
@@ -24,6 +25,7 @@ namespace Flowdock.ViewModels {
 
 		private string _newMessage;
 		private SendMessageCommand _sendMessageCommand;
+		private ShowUsersCommand _showUsersCommand;
 
 		private void TrimMessages() {
 			while (_messages.Count > MessageLimit) {
@@ -68,8 +70,8 @@ namespace Flowdock.ViewModels {
 
 		private async void LoadFlow() {
 			// load the flow to grab the users
-			Flow flow = await _context.GetFlow(_flow.Id);
-			Users = new ObservableCollection<User>(flow.Users);
+			_flow = await _context.GetFlow(_flow.Id);
+			Users = new ObservableCollection<User>(_flow.Users);
 
 
 			IEnumerable<Message> messages = await _context.GetMessagesForFlow(_flow.Id);
@@ -90,9 +92,11 @@ namespace Flowdock.ViewModels {
 		public FlowViewModel(IAppSettings settings, IFlowdockContext context) {
 			_settings = settings.ThrowIfNull("settings");
 			_context = context.ThrowIfNull("context");
+
 			_flow = _settings.CurrentFlow;
 
 			_sendMessageCommand = new SendMessageCommand(this, _context, _flow.Id);
+			_showUsersCommand = new ShowUsersCommand(this);
 
 			LoadFlow();
 		}
@@ -146,6 +150,12 @@ namespace Flowdock.ViewModels {
 		public ICommand SendMessageCommand {
 			get {
 				return _sendMessageCommand;
+			}
+		}
+
+		public ICommand ShowUsersCommand {
+			get {
+				return _showUsersCommand;
 			}
 		}
 	}

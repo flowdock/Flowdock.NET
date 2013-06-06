@@ -98,6 +98,8 @@
     <Compile Include="Behaviors\ScrollToBottomTrigger.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="MessageBoxes\IMessageBoxService.cs" />
+    <Compile Include="MessageBoxes\MessageBoxService.cs" />
     <Compile Include="Navigation\INavigationManager.cs" />
     <Compile Include="Navigation\NavigationManager.cs" />
     <Compile Include="Settings\IAppSettings.cs" />
@@ -114,6 +116,8 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />
     <Compile Include="ViewModels\SendMessageCommand.cs" />
+    <Compile Include="ViewModels\ShowUsersCommand.cs" />
+    <Compile Include="ViewModels\UsersViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\FlowView.xaml.cs">
       <DependentUpon>FlowView.xaml</DependentUpon>
@@ -136,6 +140,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Resources\UsersPivotResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FlowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -180,10 +188,15 @@
     <Content Include="MoqaLateCommandLine\MoqaLateExcludedFiles.txt" />
     <Content Include="MoqaLateCommandLine\Ninject.dll" />
     <Content Include="MoqaLateCommandLine\READMEHowToEnableMockGeneration.txt" />
-    <Content Include="Resources\AppBarIcons\send.text.png">
+    <Content Include="README_FIRST.txt" />
+    <Content Include="Assets\AppBarIcons\send.text.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\FlowdockLogo.png" />
+    <Content Include="Assets\FlowdockLogo.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">
@@ -200,6 +213,9 @@
   <ItemGroup>
     <Reference Include="BindableApplicationBar">
       <HintPath>..\packages\BindableApplicationBar.1.0.0\lib\sl4-windowsphone71\BindableApplicationBar.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Controls.Toolkit">
+      <HintPath>..\packages\WPtoolkit.4.2012.10.30\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
