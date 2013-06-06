@@ -14,6 +14,8 @@ namespace Flowdock.ViewModels {
 	public class FlowViewModel : ViewModelBase {
 		private const int MessageLimit = 20;
 
+		private bool _isLoading = false;
+
 		private Flow _flow;
 		private IFlowdockContext _context;
 		private IAppSettings _settings;
@@ -69,6 +71,8 @@ namespace Flowdock.ViewModels {
 		}
 
 		private async void LoadFlow() {
+			IsLoading = true;
+
 			// load the flow to grab the users
 			_flow = await _context.GetFlow(_flow.Id);
 			Users = new ObservableCollection<User>(_flow.Users);
@@ -87,6 +91,7 @@ namespace Flowdock.ViewModels {
 			AssociateAvatarsToMessages();
 
 			StartStream();
+			IsLoading = false;
 		}
 
 		public FlowViewModel(IAppSettings settings, IFlowdockContext context) {
@@ -156,6 +161,16 @@ namespace Flowdock.ViewModels {
 		public ICommand ShowUsersCommand {
 			get {
 				return _showUsersCommand;
+			}
+		}
+
+		public bool IsLoading {
+			get {
+				return _isLoading;
+			}
+			private set {
+				_isLoading = value;
+				OnPropertyChanged(() => IsLoading);
 			}
 		}
 	}
