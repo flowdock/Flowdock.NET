@@ -156,6 +156,7 @@ README.html
 
 # Nunit related
 *.VisualState.xml
+TestResult.xml
 
 # debug login info
 DebugLoginInfo.cs
