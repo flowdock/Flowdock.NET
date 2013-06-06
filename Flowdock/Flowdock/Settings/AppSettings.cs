@@ -16,13 +16,17 @@ namespace Flowdock.Settings {
 		private void Set<T>(string key, T value) {
 			if (!System.ComponentModel.DesignerProperties.IsInDesignTool) {
 				Settings[key] = value;
+				Settings.Save();
 			}
 		}
 
 		private T Get<T>(string key) {
-			if (!System.ComponentModel.DesignerProperties.IsInDesignTool && Settings.Contains(key)) {
-				return (T)Settings[key];
+			if (!System.ComponentModel.DesignerProperties.IsInDesignTool) {
+				if (Settings.Contains(key)) {
+					return (T)Settings[key];
+				}
 			}
+
 			return default(T);
 		}
 
