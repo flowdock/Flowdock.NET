@@ -104,7 +104,9 @@ namespace Flowdock.ViewModels {
 		}
 
 		private void StopStream() {
-			_stream.Stop();
+			if (_stream != null) {
+				_stream.Stop();
+			}
 		}
 
 		private async void LoadFlow() {

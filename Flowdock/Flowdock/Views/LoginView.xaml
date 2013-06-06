@@ -32,7 +32,7 @@
 		<Image Grid.Row="0" Source="../Assets/FlowdockLogo.png" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="250" Margin="0 140 0 100"/>
 		<StackPanel Grid.Row="1" Margin="30 0 30 0">
 			<TextBlock Text="Username" />
-			<TextBox Text="{Binding Path=Username, Mode=TwoWay}">
+			<TextBox InputScope="EmailUserName" Text="{Binding Path=Username, Mode=TwoWay}">
 				<i:Interaction.Behaviors>
 					<localBehaviors:ImmediateUpdateTextBoxBehavior />
 				</i:Interaction.Behaviors>

@@ -40,12 +40,9 @@
 		<ScrollViewer Grid.Row="1" x:Name="flowScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 			<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 				<TextBlock Text="{Binding FlowStatusMessage}" Margin="0 60 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Messages, Converter={StaticResource visibilityConverter}, ConverterParameter=Show}" />
-				<ItemsControl ItemsSource="{Binding Messages}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding Messages, Converter={StaticResource visibilityConverter}, ConverterParameter=Hide}">
+				<ItemsControl ItemsSource="{Binding Messages}" IsEnabled="{Binding IsLoading, Converter={StaticResource boolNegateConverter}}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 					<!--<i:Interaction.Triggers>
-						<i:EventTrigger EventName="SizeChanged">
-							<localBehaviors:ScrollToBottomTrigger TargetName="flowScrollViewer"/>
-						</i:EventTrigger>
-						<i:EventTrigger EventName="LayoutUpdated">
+						<i:EventTrigger EventName="IsEnabledChanged">
 							<localBehaviors:ScrollToBottomTrigger TargetName="flowScrollViewer"/>
 						</i:EventTrigger>
 					</i:Interaction.Triggers>-->
@@ -71,7 +68,7 @@
 				</ItemsControl>
 			</StackPanel>
 		</ScrollViewer>
-		<TextBox Grid.Row="2" Text="{Binding Path=NewMessage, Mode=TwoWay}" Visibility="{Binding IsLoading, Converter={StaticResource boolVisiblityConverter}, ConverterParameter=Hide}">
+		<TextBox Grid.Row="2" Text="{Binding Path=NewMessage, Mode=TwoWay}" InputScope="Chat" Visibility="{Binding IsLoading, Converter={StaticResource boolVisiblityConverter}, ConverterParameter=Hide}">
 			<i:Interaction.Behaviors>
 				<localBehaviors:ImmediateUpdateTextBoxBehavior />
 			</i:Interaction.Behaviors>
