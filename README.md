@@ -34,7 +34,7 @@ See [this StackOverflow answer](http://stackoverflow.com/a/11847457/194940) for 
 
 ## Add DebugLoginInfo.cs
 
-Logging into Flowdock everytime you test out the app is very painful, *especially* on the Windows Phone emulator (you have to use your mouse to click the keyboard keys! oi!). To get around this, in `DEBUG` mode, you will need `DebugLoginInfo.cs` added. This file is in `.gitignore` and so you need to add it manually on your box. Go to Flockdock > Settings and add the class
+Logging into Flowdock everytime you test out the app is very painful, *especially* on the Windows Phone emulator (you have to use your mouse to click the keyboard keys! oi!). To get around this, in `DEBUG` mode, you will need `DebugLoginInfo.cs` added. This file is in `.gitignore` and so you need to add it manually on your box. Go to Flockdock/Settings and add the class
 
 ````
 #if DEBUG
@@ -120,3 +120,6 @@ That means **interfaces must be written in the first style** Look at any interfa
 
 Since Rally generally prefers the other style (and I do too!), interfaces are the only files that look like this.
 
+## Running the Tests
+
+You will need to install NUnit, you can get it [here](http://nunit.org/?p=download), I recommend just grabbing the MSI. This will install the NUnit runner app on your box. Launch that, then load up the `flowdock.nunit` file at the root of the repo. Make sure the solution is built, and from there running the tests should be straightforward.
