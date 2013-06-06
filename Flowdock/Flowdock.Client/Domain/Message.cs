@@ -63,7 +63,7 @@ namespace Flowdock.Client.Domain {
 		}
 
 		public MessageContent MessageContent { get; private set; }
-		public string ExtractedBody { get; private set; }
+		public string ExtractedBody { get; set; }
 		public bool Displayable { get; private set; }
 		public DateTime TimeStamp { get; private set; }
 	}

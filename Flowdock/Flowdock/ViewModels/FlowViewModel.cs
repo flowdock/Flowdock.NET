@@ -84,6 +84,19 @@ namespace Flowdock.ViewModels {
 			}
 		}
 
+		private void EditMessage(Message msg) {
+			if (_messages == null) {
+				return;
+			}
+
+			var existingMsg = _messages.FirstOrDefault(m => m.Id == msg.MessageContent.Message);
+
+			if (existingMsg != null) {
+				existingMsg.Body = msg.MessageContent.UpdatedContent;
+				existingMsg.WasEdited = true;
+			}
+		}
+
 		private void OnMessageReceived(Message msg) {
 			UIThread.Invoke(() => {
 				if (msg.Displayable) {
@@ -94,6 +107,8 @@ namespace Flowdock.ViewModels {
 
 					// TODO: this is very inefficient
 					AssignThreadStartersTheirColor();
+				} else if (msg.Event == "message-edit") {
+					EditMessage(msg);
 				}
 			});
 		}

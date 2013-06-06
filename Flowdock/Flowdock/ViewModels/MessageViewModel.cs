@@ -13,15 +13,36 @@ namespace Flowdock.ViewModels {
 		private Message _message;
 		private Uri _avatar;
 		private Color? _threadColor;
+		private bool _wasEdited;
 
 		public MessageViewModel(Message message, Color? threadColor) {
 			_message = message.ThrowIfNull("message");
 			_threadColor = threadColor;
 		}
 
+		public bool WasEdited {
+			get {
+				return _wasEdited;
+			}
+			set {
+				_wasEdited = value;
+				OnPropertyChanged(() => WasEdited);
+			}
+		}
+
 		public string Body {
 			get {
 				return _message.ExtractedBody;
+			}
+			set {
+				_message.ExtractedBody = value;
+				OnPropertyChanged(() => Body);
+			}
+		}
+
+		public int Id {
+			get {
+				return _message.Id;
 			}
 		}
 
