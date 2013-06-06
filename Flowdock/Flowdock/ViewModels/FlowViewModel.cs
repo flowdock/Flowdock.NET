@@ -9,9 +9,13 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Linq;
 using Flowdock.MessageBoxes;
+using System.Windows.Media;
+using System;
 
 namespace Flowdock.ViewModels {
 	public class FlowViewModel : ViewModelBase {
+		private static readonly Random rand = new Random();
+
 		private const int MessageLimit = 20;
 
 		private bool _isLoading = false;
@@ -28,6 +32,36 @@ namespace Flowdock.ViewModels {
 		private string _newMessage;
 		private SendMessageCommand _sendMessageCommand;
 		private ShowUsersCommand _showUsersCommand;
+
+		private Dictionary<string, Color> _threadColors = new Dictionary<string, Color>();
+
+		private void AssignThreadStartersTheirColor() {
+			if (_messages == null) {
+				return;
+			}
+
+			foreach (var title in _threadColors.Keys) {
+				MessageViewModel msg = _messages.FirstOrDefault(m => m.Body == title);
+
+				if (msg != null) {
+					msg.ThreadColor = _threadColors[title];
+				}
+			}
+		}
+
+		private Color? GetThreadColor(Message msg) {
+			if(msg.MessageContent == null || msg.MessageContent.Title == null) {
+				return null;
+			}
+
+			if (!_threadColors.ContainsKey(msg.MessageContent.Title)) {
+				Color newColor = Color.FromArgb(255, (byte)rand.Next(5, 256), (byte)rand.Next(5, 256), (byte)rand.Next(5, 256));
+				_threadColors[msg.MessageContent.Title] = newColor;
+			}
+
+			var color = _threadColors[msg.MessageContent.Title];
+			return color;
+		}
 
 		private void TrimMessages() {
 			while (_messages.Count > MessageLimit) {
@@ -53,10 +87,13 @@ namespace Flowdock.ViewModels {
 		private void OnMessageReceived(Message msg) {
 			UIThread.Invoke(() => {
 				if (msg.Displayable) {
-					var viewModel = new MessageViewModel(msg);
+					var viewModel = new MessageViewModel(msg, GetThreadColor(msg));
 					FindAvatar(viewModel);
 					Messages.Add(viewModel);
 					TrimMessages();
+
+					// TODO: this is very inefficient
+					AssignThreadStartersTheirColor();
 				}
 			});
 		}
@@ -82,13 +119,14 @@ namespace Flowdock.ViewModels {
 
 			if (messages != null) {
 				Messages = new ObservableCollection<MessageViewModel>(
-					messages.Where(m => m.Displayable).Select(m => new MessageViewModel(m))
+					messages.Where(m => m.Displayable).Select(m => new MessageViewModel(m, GetThreadColor(m)))
 				);
 			}
 
 			TrimMessages();
 
 			AssociateAvatarsToMessages();
+			AssignThreadStartersTheirColor();
 
 			StartStream();
 			IsLoading = false;

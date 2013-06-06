@@ -98,6 +98,7 @@
     <Compile Include="Behaviors\ScrollToBottomTrigger.cs" />
     <Compile Include="Converters\BoolNegateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\ShowHideIfEmptyConverter.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />

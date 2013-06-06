@@ -10,7 +10,7 @@ namespace Flowdock.Client.Domain {
 	public class Message {
 		private string _content;
 
-		private void Extract(string content) {
+		private void OnContentReceived(string content) {
 			JsonDeserializer deserializer = new JsonDeserializer();
 
 			var response = new RestResponse();
@@ -51,7 +51,7 @@ namespace Flowdock.Client.Domain {
 			}
 			set {
 				_content = value;
-				Extract(value);
+				OnContentReceived(value);
 			}
 		}
 
