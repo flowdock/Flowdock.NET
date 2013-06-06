@@ -10,6 +10,11 @@ namespace Flowdock.Client.Domain {
 	public class Message {
 		private string _content;
 
+		private DateTime UnixTimeToLocal(long unixTimestamp) {
+			DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+			return epoch.AddMilliseconds((double)unixTimestamp).ToLocalTime();
+		}
+
 		private void OnContentReceived(string content) {
 			JsonDeserializer deserializer = new JsonDeserializer();
 
@@ -34,6 +39,8 @@ namespace Flowdock.Client.Domain {
 			}
 
 			Displayable = ExtractedBody != null;
+
+			TimeStamp = UnixTimeToLocal(Sent);
 		}
 
 		public int Id { get; set; }
@@ -58,5 +65,6 @@ namespace Flowdock.Client.Domain {
 		public MessageContent MessageContent { get; private set; }
 		public string ExtractedBody { get; private set; }
 		public bool Displayable { get; private set; }
+		public DateTime TimeStamp { get; private set; }
 	}
 }

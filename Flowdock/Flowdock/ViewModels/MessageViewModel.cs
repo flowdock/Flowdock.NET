@@ -50,5 +50,11 @@ namespace Flowdock.ViewModels {
 				OnPropertyChanged(() => ThreadColor);
 			}
 		}
+
+		public DateTime TimeStamp {
+			get {
+				return _message.TimeStamp;
+			}
+		}
 	}
 }
