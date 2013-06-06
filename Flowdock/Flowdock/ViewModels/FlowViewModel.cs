@@ -11,9 +11,9 @@ using System.Linq;
 
 namespace Flowdock.ViewModels {
 	public class FlowViewModel : ViewModelBase {
-		private string _flowId;
-		private string _flowName;
+		private Flow _flow;
 		private IFlowdockContext _context;
+		private IAppSettings _settings;
 
 		private ObservableCollection<User> _users;
 		private bool _gettingUsers;
@@ -33,7 +33,7 @@ namespace Flowdock.ViewModels {
 		private async void GetUsers() {
 			if (_users == null && !_gettingUsers) {
 				_gettingUsers = true;
-				Flow flow = await _context.GetFlow(_flowId);
+				Flow flow = await _context.GetFlow(_flow.Id);
 				Users = new ObservableCollection<User>(flow.Users);
 				AssociateAvatarsToMessages();
 			}
@@ -47,7 +47,7 @@ namespace Flowdock.ViewModels {
 		}
 
 		private async void GetMessages() {
-			IEnumerable<Message> messages = await _context.GetMessagesForFlow(_flowId);
+			IEnumerable<Message> messages = await _context.GetMessagesForFlow(_flow.Id);
 
 			if (messages != null) {
 				Messages = new ObservableCollection<MessageViewModel>(messages
@@ -57,7 +57,7 @@ namespace Flowdock.ViewModels {
 			}
 
 			var appsettings = new AppSettings();
-			new FlowStreamingConnection().Start(appsettings.Username, appsettings.Password, _flowId, (msg) => {
+			new FlowStreamingConnection().Start(appsettings.Username, appsettings.Password, _flow.Id, (msg) => {
 				UIThread.Invoke(() => {
 					if (msg.Displayable) {
 						var viewModel = new MessageViewModel(msg);
@@ -73,22 +73,21 @@ namespace Flowdock.ViewModels {
 			GetUsers();
 		}
 
-		public FlowViewModel(string flowId, string flowName, IFlowdockContext context) {
-			_flowId = flowId.ThrowIfNull("flowId");
-			_flowName = flowName.ThrowIfNull("flowName");
+		public FlowViewModel(IAppSettings settings, IFlowdockContext context) {
+			_settings = settings.ThrowIfNull("settings");
 			_context = context.ThrowIfNull("context");
-			_sendMessageCommand = new SendMessageCommand(this, _context, _flowId);
+			_flow = _settings.CurrentFlow;
+
+			_sendMessageCommand = new SendMessageCommand(this, _context, _flow.Id);
 		}
 
-		public FlowViewModel(string flowId, string flowName)
-			: this(flowId, flowName, new LoggedInFlowdockContext()) {
+		public FlowViewModel()
+			: this(new AppSettings(), new LoggedInFlowdockContext()) {
 		}
 
 		public ObservableCollection<User> Users {
 			get {
-				if (_users == null) {
-					GetUsers();
-				}
+				GetUsers();
 				return _users;
 			}
 			private set {
@@ -99,9 +98,7 @@ namespace Flowdock.ViewModels {
 
 		public ObservableCollection<MessageViewModel> Messages {
 			get {
-				if (_messages == null) {
-					GetMessages();
-				}
+				GetMessages();
 				return _messages;
 			}
 			private set {
@@ -112,7 +109,7 @@ namespace Flowdock.ViewModels {
 
 		public string Name {
 			get {
-				return _flowName;
+				return _flow.Name;
 			}
 		}
 

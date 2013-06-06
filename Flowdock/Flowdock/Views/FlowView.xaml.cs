@@ -15,17 +15,5 @@ namespace Flowdock.Views {
 		public FlowView() {
 			InitializeComponent();
 		}
-
-		protected override void OnNavigatedTo(NavigationEventArgs e) {
-			base.OnNavigatedTo(e);
-			var flowId = NavigationContext.QueryString["flowId"];
-			var flowName = NavigationContext.QueryString["flowName"];
-
-			var viewModel = new FlowViewModel(flowId, flowName);
-			this.LayoutRoot.DataContext = viewModel;
-
-			BindableApplicationBarButton button = (BindableApplicationBarButton)this.FindName("sendMessageButton");
-			button.DataContext = viewModel;
-		}
 	}
 }

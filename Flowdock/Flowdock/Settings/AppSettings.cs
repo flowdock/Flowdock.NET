@@ -1,4 +1,5 @@
-﻿using Flowdock.ViewModels;
+﻿using Flowdock.Client.Domain;
+using Flowdock.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
@@ -10,18 +11,19 @@ namespace Flowdock.Settings {
 	public class AppSettings : IAppSettings {
 		private const string PasswordKey = "User.Password.Key";
 		private const string UsernameKey = "User.Username.Key";
+		private const string CurrentFlowKey = "Flow.Current.Key";
 
-		private void Set(string key, object value) {
+		private void Set<T>(string key, T value) {
 			if (!System.ComponentModel.DesignerProperties.IsInDesignTool) {
 				Settings[key] = value;
 			}
 		}
 
-		private string Get(string key) {
+		private T Get<T>(string key) {
 			if (!System.ComponentModel.DesignerProperties.IsInDesignTool && Settings.Contains(key)) {
-				return Settings[key] as string;
+				return (T)Settings[key];
 			}
-			return null;
+			return default(T);
 		}
 
 		private IsolatedStorageSettings Settings {
@@ -39,7 +41,7 @@ namespace Flowdock.Settings {
 
 		public string Username {
 			get {
-				return Get(UsernameKey);
+				return Get<string>(UsernameKey);
 			}
 			set {
 				Set(UsernameKey, value);
@@ -48,10 +50,19 @@ namespace Flowdock.Settings {
 
 		public string Password {
 			get {
-				return Get(PasswordKey);
+				return Get<string>(PasswordKey);
 			}
 			set {
 				Set(PasswordKey, value);
+			}
+		}
+
+		public Flow CurrentFlow {
+			get {
+				return Get<Flow>(CurrentFlowKey);
+			}
+			set {
+				Set(CurrentFlowKey, value);
 			}
 		}
 	}

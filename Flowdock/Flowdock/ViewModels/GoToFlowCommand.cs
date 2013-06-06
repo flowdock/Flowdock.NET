@@ -1,5 +1,6 @@
 ﻿using Flowdock.Client.Domain;
 using Flowdock.Navigation;
+using Flowdock.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +12,16 @@ namespace Flowdock.ViewModels {
 	public class GoToFlowCommand : ICommand {
 		private Flow _flow;
 		private INavigationManager _navigationManager;
+		private IAppSettings _appSettings;
 
-		public GoToFlowCommand(Flow flow, INavigationManager navigationManager) {
+		public GoToFlowCommand(Flow flow, INavigationManager navigationManager, IAppSettings settings) {
 			_flow = flow;
 			_navigationManager = navigationManager;
+			_appSettings = settings;
 		}
 
 		public GoToFlowCommand(Flow flow)
-			: this(flow, new NavigationManager()) {
+			: this(flow, new NavigationManager(), new AppSettings()) {
 		}
 
 		public bool CanExecute(object parameter) {
@@ -28,6 +31,7 @@ namespace Flowdock.ViewModels {
 		public event EventHandler CanExecuteChanged;
 
 		public void Execute(object parameter) {
+			_appSettings.CurrentFlow = _flow;
 			_navigationManager.GoToFlow(_flow);
 		}
 	}

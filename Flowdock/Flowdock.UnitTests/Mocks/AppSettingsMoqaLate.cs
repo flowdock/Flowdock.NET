@@ -1,3 +1,4 @@
+using Flowdock.Client.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,17 @@ set { _Password = value; }
 public virtual void __SetPassword(string val)
 {
    _Password = val;
+}
+// ------------ Property CurrentFlow
+private Flow _CurrentFlow;
+public virtual Flow CurrentFlow
+{
+get { return _CurrentFlow; }
+set { _CurrentFlow = value; }
+}
+public virtual void __SetCurrentFlow(Flow val)
+{
+   _CurrentFlow = val;
 }
 }
 }
