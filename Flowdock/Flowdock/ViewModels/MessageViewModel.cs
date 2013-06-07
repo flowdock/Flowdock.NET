@@ -18,23 +18,9 @@ namespace Flowdock.ViewModels {
 			_threadColor = threadColor;
 		}
 
-		public bool WasEdited {
+		public DateTime TimeStamp {
 			get {
-				return _wasEdited;
-			}
-			set {
-				_wasEdited = value;
-				NotifyOfPropertyChange(() => WasEdited);
-			}
-		}
-
-		public string Body {
-			get {
-				return _message.ExtractedBody;
-			}
-			set {
-				_message.ExtractedBody = value;
-				NotifyOfPropertyChange(() => Body);
+				return _message.TimeStamp;
 			}
 		}
 
@@ -70,9 +56,23 @@ namespace Flowdock.ViewModels {
 			}
 		}
 
-		public DateTime TimeStamp {
+		public bool WasEdited {
 			get {
-				return _message.TimeStamp;
+				return _wasEdited;
+			}
+			set {
+				_wasEdited = value;
+				NotifyOfPropertyChange(() => WasEdited);
+			}
+		}
+
+		public string Body {
+			get {
+				return _message.ExtractedBody;
+			}
+			set {
+				_message.ExtractedBody = value;
+				NotifyOfPropertyChange(() => Body);
 			}
 		}
 	}

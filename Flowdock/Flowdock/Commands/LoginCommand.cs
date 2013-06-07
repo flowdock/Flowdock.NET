@@ -1,9 +1,10 @@
 ﻿using Flowdock.Client.Context;
 using Flowdock.Extensions;
+using Flowdock.ViewModels;
 using System;
 using System.Windows.Input;
 
-namespace Flowdock.ViewModels {
+namespace Flowdock.Commands {
 	public class LoginCommand : ICommand {
 		private IFlowdockContext _context;
 		private LoginViewModel _source;

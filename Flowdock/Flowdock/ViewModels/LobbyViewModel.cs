@@ -13,7 +13,6 @@ namespace Flowdock.ViewModels {
 	public class LobbyViewModel : PropertyChangedBase, IActivate {
 		private IFlowdockContext _context;
 		private INavigationManager _navigationManager;
-		private IAppSettings _appSettings;
 		private IProgressService _progressService;
 
 		private ObservableCollection<LobbyFlowViewModel> _flows;
@@ -26,7 +25,7 @@ namespace Flowdock.ViewModels {
 				if (flows != null) {
 					Flows = new ObservableCollection<LobbyFlowViewModel>(flows
 						.Where(f => f.Open)// && f.Name.Contains("Testing"))
-						.Select(f => new LobbyFlowViewModel(f, _navigationManager, _appSettings))
+						.Select(f => new LobbyFlowViewModel(f, _navigationManager))
 						//.Take(1)
 					);
 				}
@@ -35,10 +34,9 @@ namespace Flowdock.ViewModels {
 			}
 		}
 
-		public LobbyViewModel(IFlowdockContext context, INavigationManager navigationManager, IAppSettings appSettings, IProgressService progressService) {
+		public LobbyViewModel(IFlowdockContext context, INavigationManager navigationManager, IProgressService progressService) {
 			_context = context.ThrowIfNull("context");
 			_navigationManager = navigationManager.ThrowIfNull("navigationManager");
-			_appSettings = appSettings.ThrowIfNull("appSettings");
 			_progressService = progressService.ThrowIfNull("progressService");
 		}
 

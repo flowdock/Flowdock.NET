@@ -73,11 +73,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\GoToFlowCommandTest.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\LoginCommandTest.cs" />
+    <Compile Include="Commands\LoginCommandTest.cs" />
     <Compile Include="ViewModels\LoginViewModelTest.cs" />
     <Compile Include="ViewModels\MessageViewModelTest.cs" />
     <Compile Include="Mocks\AppSettingsMoqaLate.cs" />

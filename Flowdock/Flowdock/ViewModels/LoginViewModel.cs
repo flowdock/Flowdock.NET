@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Flowdock.Client.Context;
+using Flowdock.Commands;
 using Flowdock.Extensions;
 using Flowdock.Services.Navigation;
 using Flowdock.Settings;

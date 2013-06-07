@@ -115,11 +115,11 @@
     <Compile Include="Services\Util\UIThread.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />
     <Compile Include="ViewModels\FlowViewModel.cs" />
-    <Compile Include="ViewModels\GoToFlowCommand.cs" />
+    <Compile Include="Commands\GoToFlowCommand.cs" />
     <Compile Include="ViewModels\LobbyFlowViewModel.cs" />
     <Compile Include="ViewModels\LoggedInEventArgs.cs" />
     <Compile Include="ViewModels\LoggedInFlowdockContext.cs" />
-    <Compile Include="ViewModels\LoginCommand.cs" />
+    <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
