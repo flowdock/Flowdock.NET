@@ -1,13 +1,7 @@
-﻿using Flowdock.Client.Domain;
+﻿using Flowdock.Extensions;
 using Flowdock.MessageBoxes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-
-using Flowdock.Extensions;
 
 namespace Flowdock.ViewModels {
 	public class ShowUsersCommand : ICommand {

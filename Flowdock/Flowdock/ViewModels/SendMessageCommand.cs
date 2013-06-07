@@ -1,5 +1,4 @@
 ﻿using Flowdock.Client.Context;
-using Flowdock.Client.Domain;
 using Flowdock.Extensions;
 using System;
 using System.ComponentModel;

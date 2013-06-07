@@ -38,12 +38,6 @@ Logging into Flowdock everytime you test out the app is very painful, *especiall
 
 ````
 #if DEBUG
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Flowdock.Settings {
 	public static class DebugLoginInfo {
 		public static string Username {

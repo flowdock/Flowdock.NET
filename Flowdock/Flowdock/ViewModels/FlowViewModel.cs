@@ -4,13 +4,12 @@ using Flowdock.Client.Stream;
 using Flowdock.Extensions;
 using Flowdock.Settings;
 using Flowdock.Util;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using System.Linq;
-using Flowdock.MessageBoxes;
+using System.Windows.Input;
 using System.Windows.Media;
-using System;
 
 namespace Flowdock.ViewModels {
 	public class FlowViewModel : ViewModelBase {

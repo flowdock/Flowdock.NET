@@ -1,10 +1,5 @@
 ﻿using Flowdock.Client.Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Flowdock.Navigation {
 	public class NavigationManager : INavigationManager {
