@@ -1,5 +1,7 @@
 # Flowdock.NET
 
+readme last updated: June 7, 2013
+
 A Flowdock client for Windows Phone 8
 
 **Note:** This is a Rally employee hackathon project, no promises anything will ever come of this just yet!
@@ -26,11 +28,10 @@ The nuget packages are not checking into git. There are a few steps needed to ge
 
 See [this StackOverflow answer](http://stackoverflow.com/a/11847457/194940) for more details and screenshots. Once all set, you should have these nuget packages installed (as of time of this writing):
 
-* BindableApplicationBar
+* Caliburn.Micro
 * MoqaLate
-* NUnit.Runners
-* NUnit
 * RestSharp
+* Windows Phone Toolkit
 
 ## Add DebugLoginInfo.cs
 
