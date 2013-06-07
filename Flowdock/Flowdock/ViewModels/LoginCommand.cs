@@ -17,10 +17,6 @@ namespace Flowdock.ViewModels {
 			}
 		}
 
-		public LoginCommand(LoginViewModel source)
-			: this(source, new FlowdockContext()) {
-		}
-
 		public LoginCommand(LoginViewModel source, IFlowdockContext context) {
 			_source = source.ThrowIfNull("source");
 			_context = context.ThrowIfNull("context");

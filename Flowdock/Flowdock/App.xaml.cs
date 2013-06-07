@@ -23,6 +23,8 @@ namespace Flowdock {
 			// Standard XAML initialization
 			InitializeComponent();
 
+			UnhandledException += Application_UnhandledException;
+
 			// Show graphics profiling information while debugging.
 			if (Debugger.IsAttached) {
 				// Display the current frame rate counters.
@@ -42,6 +44,13 @@ namespace Flowdock {
 				PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
 			}
 
+		}
+
+		private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e) {
+			if (Debugger.IsAttached) {
+				// An unhandled exception has occurred; break into the debugger
+				Debugger.Break();
+			}
 		}
 	}
 }

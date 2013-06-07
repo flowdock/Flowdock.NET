@@ -1,7 +1,6 @@
 ﻿using Caliburn.Micro;
 using Flowdock.Client.Context;
 using Flowdock.Extensions;
-using Flowdock.Navigation;
 using Flowdock.Settings;
 using System.Windows.Input;
 
@@ -9,7 +8,7 @@ namespace Flowdock.ViewModels {
 	public class LoginViewModel : PropertyChangedBase {
 		private IFlowdockContext _context;
 		private IAppSettings _settings;
-		private INavigationManager _navigationManager;
+		private INavigationService _navigationService;
 
 		private string _errorMessage;
 		private LoginCommand _loginCommand;
@@ -18,16 +17,16 @@ namespace Flowdock.ViewModels {
 			LoginMessage = e.FailureMessage;
 
 			if (e.Success) {
-				_navigationManager.GoToLobby();
+				_navigationService.UriFor<LobbyViewModel>().Navigate();
 			}
 		}
 
-		public LoginViewModel(IFlowdockContext context, IAppSettings settings, INavigationManager navigationManager) {
+		public LoginViewModel(IFlowdockContext context, IAppSettings settings, INavigationService navigationService) {
 			_context = context.ThrowIfNull("context");
 			_settings = settings.ThrowIfNull("storage");
-			_navigationManager = navigationManager.ThrowIfNull("navigationManager");
+			_navigationService = navigationService.ThrowIfNull("navigationService");
 
-			_loginCommand = new LoginCommand(this);
+			_loginCommand = new LoginCommand(this, context);
 			_loginCommand.LoggedIn += OnLoggedIn;
 		}
 

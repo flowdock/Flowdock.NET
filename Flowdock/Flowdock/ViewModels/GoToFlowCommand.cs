@@ -1,5 +1,5 @@
-﻿using Flowdock.Client.Domain;
-using Flowdock.Navigation;
+﻿using Caliburn.Micro;
+using Flowdock.Client.Domain;
 using Flowdock.Settings;
 using System;
 using System.Windows.Input;
@@ -7,17 +7,13 @@ using System.Windows.Input;
 namespace Flowdock.ViewModels {
 	public class GoToFlowCommand : ICommand {
 		private Flow _flow;
-		private INavigationManager _navigationManager;
+		private INavigationService _navigationService;
 		private IAppSettings _appSettings;
 
-		public GoToFlowCommand(Flow flow, INavigationManager navigationManager, IAppSettings settings) {
+		public GoToFlowCommand(Flow flow, INavigationService navigationService, IAppSettings settings) {
 			_flow = flow;
-			_navigationManager = navigationManager;
+			_navigationService = navigationService;
 			_appSettings = settings;
-		}
-
-		public GoToFlowCommand(Flow flow)
-			: this(flow, new NavigationManager(), new AppSettings()) {
 		}
 
 		public bool CanExecute(object parameter) {
@@ -28,7 +24,7 @@ namespace Flowdock.ViewModels {
 
 		public void Execute(object parameter) {
 			_appSettings.CurrentFlow = _flow;
-			_navigationManager.GoToFlow(_flow);
+			_navigationService.UriFor<FlowViewModel>().Navigate();
 		}
 	}
 }

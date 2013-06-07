@@ -10,6 +10,8 @@ using System.Linq;
 namespace Flowdock.ViewModels {
 	public class LobbyViewModel : PropertyChangedBase {
 		private IFlowdockContext _context;
+		private INavigationService _navigationService;
+		private IAppSettings _appSettings;
 
 		private ObservableCollection<LobbyFlowViewModel> _flows;
 		private bool _isLoading;
@@ -21,15 +23,17 @@ namespace Flowdock.ViewModels {
 			if (flows != null) {
 				Flows = new ObservableCollection<LobbyFlowViewModel>(flows
 					.Where(f => f.Open)// && f.Name.Contains("Testing"))
-					.Select(f => new LobbyFlowViewModel(f))
+					.Select(f => new LobbyFlowViewModel(f, _navigationService, _appSettings))
 					//.Take(1)
 				);
 			}
 			IsLoading = false;
 		}
 
-		public LobbyViewModel(IFlowdockContext context) {
+		public LobbyViewModel(IFlowdockContext context, INavigationService navigationService, IAppSettings appSettings) {
 			_context = context.ThrowIfNull("context");
+			_navigationService = navigationService.ThrowIfNull("navigationService");
+			_appSettings = appSettings.ThrowIfNull("appSettings");
 
 			GetFlows();
 		}

@@ -11,7 +11,7 @@ namespace Flowdock.UnitTests.ViewModels {
 		[SetUp]
 		protected void BeforeEach() {
 			_appSettings = new AppSettingsMoqaLate();
-			_viewModel = new LoginViewModel(new FlowdockContextMoqaLate(), _appSettings, new NavigationManagerMoqaLate());
+			_viewModel = new LoginViewModel(new FlowdockContextMoqaLate(), _appSettings, null);
 		}
 
 		[Test]

@@ -8,13 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// TODO user Caliburn's navigation service
-using INavigationService = Flowdock.Navigation.INavigationManager;
-using NavigationService = Flowdock.Navigation.NavigationManager;
-
 namespace Flowdock.Caliburn {
-	public class Bootstrapper : PhoneBootstrapper {
-		PhoneContainer container;
+	public class FlowdockBootstrapper : PhoneBootstrapper {
+		private PhoneContainer container;
 
 		protected override void Configure() {
 			container = new PhoneContainer(RootFrame);
@@ -24,10 +20,10 @@ namespace Flowdock.Caliburn {
 			// services
 			container.RegisterSingleton(typeof(IAppSettings), "AppSettings", typeof(AppSettings));
 			container.PerRequest<IFlowdockContext, LoggedInFlowdockContext>();
-			container.RegisterSingleton(typeof(INavigationService), "NavigationService", typeof(NavigationService));
 
 			// viewmodels
 			container.PerRequest<LoginViewModel>();
+			container.PerRequest<LobbyViewModel>();
 		}
 
 		protected override object GetInstance(Type service, string key) {

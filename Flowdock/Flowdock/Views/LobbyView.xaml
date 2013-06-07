@@ -6,7 +6,6 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:viewModels="clr-namespace:Flowdock.ViewModels"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -14,15 +13,11 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
-	<UserControl.Resources>
-		<viewModels:LobbyViewModel x:Key="viewModel" />
-	</UserControl.Resources>
-
-	<shell:SystemTray.ProgressIndicator>
+	<!--<shell:SystemTray.ProgressIndicator>
 		<shell:ProgressIndicator IsIndeterminate="true" IsVisible="{Binding Path=IsLoading, Source={StaticResource viewModel}}" />
-	</shell:SystemTray.ProgressIndicator>
+	</shell:SystemTray.ProgressIndicator>-->
 
-	<Grid x:Name="LayoutRoot" Background="Transparent" DataContext="{StaticResource viewModel}">
+	<Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

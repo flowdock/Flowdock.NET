@@ -96,7 +96,7 @@
     <Compile Include="Behaviors\ImmediateUpdatePasswordBoxBehavior.cs" />
     <Compile Include="Behaviors\ImmediateUpdateTextBoxBehavior.cs" />
     <Compile Include="Behaviors\ScrollToBottomTrigger.cs" />
-    <Compile Include="Caliburn\Bootstrapper.cs" />
+    <Compile Include="Caliburn\FlowdockBootstrapper.cs" />
     <Compile Include="Converters\BoolNegateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
@@ -105,8 +105,6 @@
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MessageBoxes\IMessageBoxService.cs" />
     <Compile Include="MessageBoxes\MessageBoxService.cs" />
-    <Compile Include="Navigation\INavigationManager.cs" />
-    <Compile Include="Navigation\NavigationManager.cs" />
     <Compile Include="Settings\IAppSettings.cs" />
     <Compile Include="Settings\AppSettings.cs" />
     <Compile Include="Settings\DebugLoginInfo.cs" />
