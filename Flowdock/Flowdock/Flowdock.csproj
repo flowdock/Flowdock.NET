@@ -120,8 +120,6 @@
     <Compile Include="ViewModels\LoginCommand.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />
-    <Compile Include="ViewModels\SendMessageCommand.cs" />
-    <Compile Include="ViewModels\ShowUsersCommand.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
     <Compile Include="Views\FlowView.xaml.cs">
       <DependentUpon>FlowView.xaml</DependentUpon>

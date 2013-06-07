@@ -10,6 +10,7 @@
 	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 	xmlns:localBehaviors="clr-namespace:Flowdock.Behaviors"
 	xmlns:localConverters="clr-namespace:Flowdock.Converters"
+	xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -92,4 +93,17 @@
 			</bindableAppBar:BindableApplicationBar.MenuItems>
 		</bindableAppBar:BindableApplicationBar>
 	</bindableAppBar:Bindable.ApplicationBar>-->
+	<phone:PhoneApplicationPage.ApplicationBar>
+		<shell:ApplicationBar IsVisible="True">
+			<shell:ApplicationBar.Buttons>
+				<cal:AppBarButton IconUri="Assets/AppBarIcons/send.text.png"
+				                  Text="Send"
+				                  Message="SendMessageToFlow" />
+			</shell:ApplicationBar.Buttons>
+			<shell:ApplicationBar.MenuItems>
+				<cal:AppBarMenuItem Text="who's here?"
+									Message="ShowUsers" />
+			</shell:ApplicationBar.MenuItems>
+		</shell:ApplicationBar>
+	</phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

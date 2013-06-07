@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
 using System.Windows.Media;
 using Message = Flowdock.Client.Domain.Message;
 
@@ -30,8 +29,6 @@ namespace Flowdock.ViewModels {
 		private FlowStreamingConnection _stream;
 
 		private string _newMessage;
-		private SendMessageCommand _sendMessageCommand;
-		private ShowUsersCommand _showUsersCommand;
 
 		private Dictionary<string, Color> _threadColors = new Dictionary<string, Color>();
 
@@ -149,6 +146,7 @@ namespace Flowdock.ViewModels {
 				StartStream();
 			} finally {
 				_progressService.Hide();
+				NotifyOfPropertyChange(() => CanSendMessageToFlow);
 			}
 		}
 
@@ -174,6 +172,7 @@ namespace Flowdock.ViewModels {
 			private set {
 				_users = value;
 				NotifyOfPropertyChange(() => Users);
+				NotifyOfPropertyChange(() => CanShowUsers);
 			}
 		}
 
@@ -204,15 +203,24 @@ namespace Flowdock.ViewModels {
 			}
 		}
 
-		public ICommand SendMessageCommand {
+		public void SendMessageToFlow() {
+			_context.SendMessage(FlowId, NewMessage);
+			NewMessage = "";
+		}
+
+		public bool CanSendMessageToFlow {
 			get {
-				return _sendMessageCommand;
+				return !_progressService.IsVisible;
 			}
 		}
 
-		public ICommand ShowUsersCommand {
+		public void ShowUsers() {
+			System.Windows.MessageBox.Show("Show Users");
+		}
+
+		public bool CanShowUsers {
 			get {
-				return _showUsersCommand;
+				return Users != null;
 			}
 		}
 
@@ -229,16 +237,15 @@ namespace Flowdock.ViewModels {
 		}
 
 		public void Activate() {
-			_sendMessageCommand = new SendMessageCommand(this, _context, FlowId);
-			_showUsersCommand = new ShowUsersCommand(this);
-
 			LoadFlow();
 		}
 
 		public event EventHandler<ActivationEventArgs> Activated;
 
 		public bool IsActive {
-			get { return true; }
+			get { 
+				return Messages != null && Users != null; 
+			}
 		}
 	}
 }
