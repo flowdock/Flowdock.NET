@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Flowdock.ViewModels {
-	public class LobbyViewModel : PropertyChangedBase {
+	public class LobbyViewModel : PropertyChangedBase, IActivate {
 		private IFlowdockContext _context;
 		private INavigationManager _navigationManager;
 		private IAppSettings _appSettings;
@@ -40,8 +40,6 @@ namespace Flowdock.ViewModels {
 			_navigationManager = navigationManager.ThrowIfNull("navigationManager");
 			_appSettings = appSettings.ThrowIfNull("appSettings");
 			_progressService = progressService.ThrowIfNull("progressService");
-
-			GetFlows();
 		}
 
 		public ObservableCollection<LobbyFlowViewModel> Flows {
@@ -51,6 +49,18 @@ namespace Flowdock.ViewModels {
 			private set {
 				_flows = value;
 				NotifyOfPropertyChange(() => Flows);
+			}
+		}
+
+		public void Activate() {
+			GetFlows();
+		}
+
+		public event System.EventHandler<ActivationEventArgs> Activated;
+
+		public bool IsActive {
+			get {
+				return Flows != null;
 			}
 		}
 	}
