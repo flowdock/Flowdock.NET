@@ -3,6 +3,7 @@ using Flowdock.Client.Context;
 using Flowdock.Client.Domain;
 using Flowdock.Client.Stream;
 using Flowdock.Extensions;
+using Flowdock.MessageBoxes;
 using Flowdock.Services.Progress;
 using Flowdock.Settings;
 using Flowdock.Util;
@@ -22,6 +23,7 @@ namespace Flowdock.ViewModels {
 		private IFlowdockContext _context;
 		private IAppSettings _settings;
 		private IProgressService _progressService;
+		private IMessageBoxService _messageBoxService;
 
 		private ObservableCollection<User> _users;
 		private ObservableCollection<MessageViewModel> _messages;
@@ -153,10 +155,11 @@ namespace Flowdock.ViewModels {
 		public string FlowId { get; set; }
 		public string FlowName { get; set; }
 
-		public FlowViewModel(IAppSettings settings, IFlowdockContext context, IProgressService progressService) {
+		public FlowViewModel(IAppSettings settings, IFlowdockContext context, IProgressService progressService, IMessageBoxService messageBoxService) {
 			_settings = settings.ThrowIfNull("settings");
 			_context = context.ThrowIfNull("context");
 			_progressService = progressService.ThrowIfNull("progressService");
+			_messageBoxService = messageBoxService.ThrowIfNull("messageBoxService");
 		}
 
 		public void Unload() {
@@ -215,7 +218,7 @@ namespace Flowdock.ViewModels {
 		}
 
 		public void ShowUsers() {
-			System.Windows.MessageBox.Show("Show Users");
+			_messageBoxService.ShowUsersMessageBox(Users);
 		}
 
 		public bool CanShowUsers {
