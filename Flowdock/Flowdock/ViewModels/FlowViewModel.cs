@@ -1,4 +1,5 @@
-﻿using Flowdock.Client.Context;
+﻿using Caliburn.Micro;
+using Flowdock.Client.Context;
 using Flowdock.Client.Domain;
 using Flowdock.Client.Stream;
 using Flowdock.Extensions;
@@ -11,8 +12,10 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
 
+using Message = Flowdock.Client.Domain.Message;
+
 namespace Flowdock.ViewModels {
-	public class FlowViewModel : ViewModelBase {
+	public class FlowViewModel : PropertyChangedBase {
 		private static readonly Random rand = new Random();
 
 		private const int MessageLimit = 20;
@@ -176,7 +179,7 @@ namespace Flowdock.ViewModels {
 			}
 			private set {
 				_users = value;
-				OnPropertyChanged(() => Users);
+				NotifyOfPropertyChange(() => Users);
 			}
 		}
 
@@ -186,8 +189,8 @@ namespace Flowdock.ViewModels {
 			}
 			private set {
 				_messages = value;
-				OnPropertyChanged(() => Messages);
-				OnPropertyChanged(() => FlowStatusMessage);
+				NotifyOfPropertyChange(() => Messages);
+				NotifyOfPropertyChange(() => FlowStatusMessage);
 			}
 		}
 
@@ -203,7 +206,7 @@ namespace Flowdock.ViewModels {
 			}
 			set {
 				_newMessage = value;
-				OnPropertyChanged(() => NewMessage);
+				NotifyOfPropertyChange(() => NewMessage);
 			}
 		}
 
@@ -225,8 +228,8 @@ namespace Flowdock.ViewModels {
 			}
 			private set {
 				_isLoading = value;
-				OnPropertyChanged(() => IsLoading);
-				OnPropertyChanged(() => FlowStatusMessage);
+				NotifyOfPropertyChange(() => IsLoading);
+				NotifyOfPropertyChange(() => FlowStatusMessage);
 			}
 		}
 

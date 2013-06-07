@@ -1,9 +1,10 @@
-﻿using Flowdock.Client.Domain;
+﻿using Caliburn.Micro;
+using Flowdock.Client.Domain;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Flowdock.ViewModels {
-	public class UsersViewModel : ViewModelBase {
+	public class UsersViewModel : PropertyChangedBase {
 
 		private ObservableCollection<User> _onlineUsers;
 		private ObservableCollection<User> _offlineUsers;
@@ -18,7 +19,7 @@ namespace Flowdock.ViewModels {
 			}
 			private set {
 				_onlineUsers = value;
-				OnPropertyChanged(() => OnlineUsers);
+				NotifyOfPropertyChange(() => OnlineUsers);
 			}
 		}
 
@@ -28,7 +29,7 @@ namespace Flowdock.ViewModels {
 			}
 			private set {
 				_offlineUsers = value;
-				OnPropertyChanged(() => OfflineUsers);
+				NotifyOfPropertyChange(() => OfflineUsers);
 			}
 		}
 	}

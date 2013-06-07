@@ -1,10 +1,13 @@
-﻿using Flowdock.Client.Domain;
+﻿using Caliburn.Micro;
+using Flowdock.Client.Domain;
 using Flowdock.Extensions;
 using System;
 using System.Windows.Media;
 
+using Message = Flowdock.Client.Domain.Message;
+
 namespace Flowdock.ViewModels {
-	public class MessageViewModel :ViewModelBase {
+	public class MessageViewModel : PropertyChangedBase {
 		private Message _message;
 		private Uri _avatar;
 		private Color? _threadColor;
@@ -21,7 +24,7 @@ namespace Flowdock.ViewModels {
 			}
 			set {
 				_wasEdited = value;
-				OnPropertyChanged(() => WasEdited);
+				NotifyOfPropertyChange(() => WasEdited);
 			}
 		}
 
@@ -31,7 +34,7 @@ namespace Flowdock.ViewModels {
 			}
 			set {
 				_message.ExtractedBody = value;
-				OnPropertyChanged(() => Body);
+				NotifyOfPropertyChange(() => Body);
 			}
 		}
 
@@ -53,7 +56,7 @@ namespace Flowdock.ViewModels {
 			}
 			set {
 				_avatar = value;
-				OnPropertyChanged(() => Avatar);
+				NotifyOfPropertyChange(() => Avatar);
 			}
 		}
 
@@ -63,7 +66,7 @@ namespace Flowdock.ViewModels {
 			}
 			set {
 				_threadColor = value;
-				OnPropertyChanged(() => ThreadColor);
+				NotifyOfPropertyChange(() => ThreadColor);
 			}
 		}
 

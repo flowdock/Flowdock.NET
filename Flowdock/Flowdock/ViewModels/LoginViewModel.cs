@@ -1,11 +1,12 @@
-﻿using Flowdock.Client.Context;
+﻿using Caliburn.Micro;
+using Flowdock.Client.Context;
 using Flowdock.Extensions;
 using Flowdock.Navigation;
 using Flowdock.Settings;
 using System.Windows.Input;
 
 namespace Flowdock.ViewModels {
-	public class LoginViewModel : ViewModelBase {
+	public class LoginViewModel : PropertyChangedBase {
 		private IFlowdockContext _context;
 		private IAppSettings _settings;
 		private INavigationManager _navigationManager;
@@ -40,7 +41,7 @@ namespace Flowdock.ViewModels {
 			}
 			set {
 				_settings.Username = value;
-				OnPropertyChanged(() => Username);
+				NotifyOfPropertyChange(() => Username);
 			}
 		}
 
@@ -50,7 +51,7 @@ namespace Flowdock.ViewModels {
 			}
 			set {
 				_settings.Password = value;
-				OnPropertyChanged(() => Password);
+				NotifyOfPropertyChange(() => Password);
 			}
 		}
 
@@ -60,7 +61,7 @@ namespace Flowdock.ViewModels {
 			}
 			private set {
 				_errorMessage = value;
-				OnPropertyChanged(() => LoginMessage);
+				NotifyOfPropertyChange(() => LoginMessage);
 			}
 		}
 

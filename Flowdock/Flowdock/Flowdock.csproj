@@ -110,7 +110,7 @@
     <Compile Include="Settings\AppSettings.cs" />
     <Compile Include="Settings\DebugLoginInfo.cs" />
     <Compile Include="Util\UIThread.cs" />
-    <Compile Include="ViewModels\FlowsViewModel.cs" />
+    <Compile Include="ViewModels\LobbyViewModel.cs" />
     <Compile Include="ViewModels\FlowViewModel.cs" />
     <Compile Include="ViewModels\GoToFlowCommand.cs" />
     <Compile Include="ViewModels\LobbyFlowViewModel.cs" />
@@ -122,7 +122,6 @@
     <Compile Include="ViewModels\SendMessageCommand.cs" />
     <Compile Include="ViewModels\ShowUsersCommand.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\FlowView.xaml.cs">
       <DependentUpon>FlowView.xaml</DependentUpon>
     </Compile>
@@ -218,10 +217,18 @@
     <Reference Include="BindableApplicationBar">
       <HintPath>..\packages\BindableApplicationBar.1.0.0\lib\sl4-windowsphone71\BindableApplicationBar.dll</HintPath>
     </Reference>
+    <Reference Include="Caliburn.Micro">
+      <HintPath>..\packages\Caliburn.Micro.1.5.1\lib\wp8\Caliburn.Micro.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Extensions">
+      <HintPath>..\packages\Caliburn.Micro.1.5.1\lib\wp8\Caliburn.Micro.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2012.10.30\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.1.5.1\lib\wp8\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

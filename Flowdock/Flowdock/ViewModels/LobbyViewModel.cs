@@ -1,4 +1,5 @@
-﻿using Flowdock.Client.Context;
+﻿using Caliburn.Micro;
+using Flowdock.Client.Context;
 using Flowdock.Client.Domain;
 using Flowdock.Extensions;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Flowdock.ViewModels {
-	public class FlowsViewModel : ViewModelBase {
+	public class LobbyViewModel : PropertyChangedBase {
 		private IFlowdockContext _context;
 
 		private ObservableCollection<LobbyFlowViewModel> _flows;
@@ -26,13 +27,13 @@ namespace Flowdock.ViewModels {
 			IsLoading = false;
 		}
 
-		public FlowsViewModel(IFlowdockContext context) {
+		public LobbyViewModel(IFlowdockContext context) {
 			_context = context.ThrowIfNull("context");
 
 			GetFlows();
 		}
 
-		public FlowsViewModel()
+		public LobbyViewModel()
 			: this(new LoggedInFlowdockContext()) {
 		}
 
@@ -42,7 +43,7 @@ namespace Flowdock.ViewModels {
 			}
 			private set {
 				_flows = value;
-				OnPropertyChanged(() => Flows);
+				NotifyOfPropertyChange(() => Flows);
 			}
 		}
 
@@ -52,7 +53,7 @@ namespace Flowdock.ViewModels {
 			}
 			set {
 				_isLoading = value;
-				OnPropertyChanged(() => IsLoading);
+				NotifyOfPropertyChange(() => IsLoading);
 			}
 		}
 	}

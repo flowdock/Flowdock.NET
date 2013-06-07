@@ -1,8 +1,9 @@
-﻿using Flowdock.Client.Domain;
+﻿using Caliburn.Micro;
+using Flowdock.Client.Domain;
 using System.Windows.Input;
 
 namespace Flowdock.ViewModels {
-	public class LobbyFlowViewModel : ViewModelBase {
+	public class LobbyFlowViewModel : PropertyChangedBase {
 		private Flow _flow;
 		private GoToFlowCommand _goToFlowCommand;
 
