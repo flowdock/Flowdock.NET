@@ -2,6 +2,7 @@
 using Flowdock.Client.Context;
 using Flowdock.Client.Domain;
 using Flowdock.Extensions;
+using Flowdock.Services.Progress;
 using Flowdock.Settings;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,28 +13,33 @@ namespace Flowdock.ViewModels {
 		private IFlowdockContext _context;
 		private INavigationService _navigationService;
 		private IAppSettings _appSettings;
+		private IProgressService _progressService;
 
 		private ObservableCollection<LobbyFlowViewModel> _flows;
 		private bool _isLoading;
 
 		private async void GetFlows() {
-			IsLoading = true;
-			IEnumerable<Flow> flows = await _context.GetCurrentFlows();
+			_progressService.Show();
+			try {
+				IEnumerable<Flow> flows = await _context.GetCurrentFlows();
 
-			if (flows != null) {
-				Flows = new ObservableCollection<LobbyFlowViewModel>(flows
-					.Where(f => f.Open)// && f.Name.Contains("Testing"))
-					.Select(f => new LobbyFlowViewModel(f, _navigationService, _appSettings))
-					//.Take(1)
-				);
+				if (flows != null) {
+					Flows = new ObservableCollection<LobbyFlowViewModel>(flows
+						.Where(f => f.Open)// && f.Name.Contains("Testing"))
+						.Select(f => new LobbyFlowViewModel(f, _navigationService, _appSettings))
+						//.Take(1)
+					);
+				}
+			} finally {
+				_progressService.Hide();
 			}
-			IsLoading = false;
 		}
 
-		public LobbyViewModel(IFlowdockContext context, INavigationService navigationService, IAppSettings appSettings) {
+		public LobbyViewModel(IFlowdockContext context, INavigationService navigationService, IAppSettings appSettings, IProgressService progressService) {
 			_context = context.ThrowIfNull("context");
 			_navigationService = navigationService.ThrowIfNull("navigationService");
 			_appSettings = appSettings.ThrowIfNull("appSettings");
+			_progressService = progressService.ThrowIfNull("progressService");
 
 			GetFlows();
 		}
@@ -45,16 +51,6 @@ namespace Flowdock.ViewModels {
 			private set {
 				_flows = value;
 				NotifyOfPropertyChange(() => Flows);
-			}
-		}
-
-		public bool IsLoading {
-			get {
-				return _isLoading;
-			}
-			set {
-				_isLoading = value;
-				NotifyOfPropertyChange(() => IsLoading);
 			}
 		}
 	}

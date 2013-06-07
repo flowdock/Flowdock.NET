@@ -3,6 +3,7 @@ using Flowdock.Client.Context;
 using Flowdock.Client.Domain;
 using Flowdock.Client.Stream;
 using Flowdock.Extensions;
+using Flowdock.Services.Progress;
 using Flowdock.Settings;
 using Flowdock.Util;
 using System;
@@ -11,7 +12,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
-
 using Message = Flowdock.Client.Domain.Message;
 
 namespace Flowdock.ViewModels {
@@ -20,10 +20,9 @@ namespace Flowdock.ViewModels {
 
 		private const int MessageLimit = 20;
 
-		private bool _isLoading = false;
-
 		private IFlowdockContext _context;
 		private IAppSettings _settings;
+		private IProgressService _progressService;
 
 		private ObservableCollection<User> _users;
 		private ObservableCollection<MessageViewModel> _messages;
@@ -126,36 +125,40 @@ namespace Flowdock.ViewModels {
 		}
 
 		private async void LoadFlow() {
-			IsLoading = true;
+			_progressService.Show();
 
-			// load the flow to grab the users
-			Flow flow = await _context.GetFlow(FlowId);
-			Users = new ObservableCollection<User>(flow.Users);
+			try {
+				// load the flow to grab the users
+				Flow flow = await _context.GetFlow(FlowId);
+				Users = new ObservableCollection<User>(flow.Users);
 
 
-			IEnumerable<Message> messages = await _context.GetMessagesForFlow(FlowId);
+				IEnumerable<Message> messages = await _context.GetMessagesForFlow(FlowId);
 
-			if (messages != null) {
-				Messages = new ObservableCollection<MessageViewModel>(
-					messages.Where(m => m.Displayable).Select(m => new MessageViewModel(m, GetThreadColor(m)))
-				);
+				if (messages != null) {
+					Messages = new ObservableCollection<MessageViewModel>(
+						messages.Where(m => m.Displayable).Select(m => new MessageViewModel(m, GetThreadColor(m)))
+					);
+				}
+
+				TrimMessages();
+
+				AssociateAvatarsToMessages();
+				AssignThreadStartersTheirColor();
+
+				StartStream();
+			} finally {
+				_progressService.Hide();
 			}
-
-			TrimMessages();
-
-			AssociateAvatarsToMessages();
-			AssignThreadStartersTheirColor();
-
-			StartStream();
-			IsLoading = false;
 		}
 
 		public string FlowId { get; set; }
 		public string FlowName { get; set; }
 
-		public FlowViewModel(IAppSettings settings, IFlowdockContext context) {
+		public FlowViewModel(IAppSettings settings, IFlowdockContext context, IProgressService progressService) {
 			_settings = settings.ThrowIfNull("settings");
 			_context = context.ThrowIfNull("context");
+			_progressService = progressService.ThrowIfNull("progressService");
 		}
 
 		public void Unload() {
@@ -213,20 +216,9 @@ namespace Flowdock.ViewModels {
 			}
 		}
 
-		public bool IsLoading {
-			get {
-				return _isLoading;
-			}
-			private set {
-				_isLoading = value;
-				NotifyOfPropertyChange(() => IsLoading);
-				NotifyOfPropertyChange(() => FlowStatusMessage);
-			}
-		}
-
 		public string FlowStatusMessage {
 			get {
-				if (IsLoading) {
+				if (_progressService.IsVisible) {
 					return "loading...";
 				}
 				if (Messages != null && Messages.Count == 0) {

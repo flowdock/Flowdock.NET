@@ -103,12 +103,14 @@
     <Compile Include="Converters\ShowHideIfEmptyConverter.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
-    <Compile Include="MessageBoxes\IMessageBoxService.cs" />
-    <Compile Include="MessageBoxes\MessageBoxService.cs" />
+    <Compile Include="Services\MessageBoxes\IMessageBoxService.cs" />
+    <Compile Include="Services\MessageBoxes\MessageBoxService.cs" />
+    <Compile Include="Services\Progress\IProgressService.cs" />
+    <Compile Include="Services\Progress\ProgressService.cs" />
     <Compile Include="Settings\IAppSettings.cs" />
     <Compile Include="Settings\AppSettings.cs" />
     <Compile Include="Settings\DebugLoginInfo.cs" />
-    <Compile Include="Util\UIThread.cs" />
+    <Compile Include="Services\Util\UIThread.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />
     <Compile Include="ViewModels\FlowViewModel.cs" />
     <Compile Include="ViewModels\GoToFlowCommand.cs" />
