@@ -15,7 +15,11 @@ using System.Windows.Media;
 using Message = Flowdock.Client.Domain.Message;
 
 namespace Flowdock.ViewModels {
-	public class FlowViewModel : PropertyChangedBase, IActivate {
+	public class FlowViewModel : PropertyChangedBase, IActivate, IDeactivate {
+		public event EventHandler<ActivationEventArgs> Activated;
+		public event EventHandler<DeactivationEventArgs> AttemptingDeactivation;
+		public event EventHandler<DeactivationEventArgs> Deactivated;
+
 		private static readonly Random rand = new Random();
 
 		private const int MessageLimit = 20;
@@ -117,12 +121,6 @@ namespace Flowdock.ViewModels {
 			_stream.Start(_settings.Username, _settings.Password, FlowId, OnMessageReceived);
 		}
 
-		private void StopStream() {
-			if (_stream != null) {
-				_stream.Stop();
-			}
-		}
-
 		private async void LoadFlow() {
 			_progressService.Show("");
 
@@ -160,12 +158,6 @@ namespace Flowdock.ViewModels {
 			_context = context.ThrowIfNull("context");
 			_progressService = progressService.ThrowIfNull("progressService");
 			_messageBoxService = messageBoxService.ThrowIfNull("messageBoxService");
-		}
-
-		public void Unload() {
-			StopStream();
-			Users = null;
-			Messages = null;
 		}
 
 		public ObservableCollection<User> Users {
@@ -243,12 +235,20 @@ namespace Flowdock.ViewModels {
 			LoadFlow();
 		}
 
-		public event EventHandler<ActivationEventArgs> Activated;
-
 		public bool IsActive {
 			get { 
 				return Messages != null && Users != null; 
 			}
+		}
+
+		public void Deactivate(bool close) {
+			if (_stream != null) {
+				_stream.Stop();
+			}
+
+			_stream = null;
+			Users = null;
+			Messages = null;
 		}
 	}
 }

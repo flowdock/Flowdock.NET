@@ -7,15 +7,5 @@ namespace Flowdock.Views {
 		public FlowView() {
 			InitializeComponent();
 		}
-
-		// TODO: find a better way to do this
-		protected override void OnNavigatedFrom(NavigationEventArgs e) {
-			base.OnNavigatedFrom(e);
-			FlowViewModel viewModel = LayoutRoot.DataContext as FlowViewModel;
-
-			if (viewModel != null) {
-				viewModel.Unload();
-			}
-		}
 	}
 }
