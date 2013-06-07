@@ -105,6 +105,8 @@
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Services\MessageBoxes\IMessageBoxService.cs" />
     <Compile Include="Services\MessageBoxes\MessageBoxService.cs" />
+    <Compile Include="Services\Navigation\INavigationManager.cs" />
+    <Compile Include="Services\Navigation\NavigationManager.cs" />
     <Compile Include="Services\Progress\IProgressService.cs" />
     <Compile Include="Services\Progress\ProgressService.cs" />
     <Compile Include="Settings\IAppSettings.cs" />

@@ -83,6 +83,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Mocks\FlowStreamingConnectionMoqaLate.cs" />
+    <Compile Include="Mocks\MessageBoxServiceMoqaLate.cs" />
+    <Compile Include="Mocks\NavigationManagerMoqaLate.cs" />
+    <Compile Include="Mocks\ProgressServiceMoqaLate.cs" />
     <Compile Include="ViewModels\LoginCommandTest.cs" />
     <Compile Include="Mocks\AppSettingsMoqaLate.cs" />
     <Compile Include="Mocks\FlowdockContextMoqaLate.cs" />

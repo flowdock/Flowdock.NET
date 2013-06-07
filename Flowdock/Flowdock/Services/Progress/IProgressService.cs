@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Flowdock.Services.Progress {
-	public interface IProgressService {
-		void Show();
+	public interface IProgressService
+	{
 		void Show(string text);
 		void Hide();
 

@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using Flowdock.Caliburn;
 using Flowdock.Client.Domain;
+using Flowdock.Services.Navigation;
 using Flowdock.Settings;
 using System.Windows.Input;
 
@@ -9,10 +10,10 @@ namespace Flowdock.ViewModels {
 		private Flow _flow;
 		private GoToFlowCommand _goToFlowCommand;
 
-		public LobbyFlowViewModel(Flow flow, INavigationService navigationService, IAppSettings appSettings) {
+		public LobbyFlowViewModel(Flow flow, INavigationManager navigationManager, IAppSettings appSettings) {
 			_flow = flow;
 
-			_goToFlowCommand = new GoToFlowCommand(flow, navigationService, appSettings);
+			_goToFlowCommand = new GoToFlowCommand(flow, navigationManager, appSettings);
 		}
 
 		public string Name {

@@ -32,10 +32,6 @@ namespace Flowdock.Services.Progress {
 			}
 		}
 
-		public void Show() {
-			Show(string.Empty);
-		}
-
 		public void Show(string text) {
 			progressIndicator.Text = text;
 			progressIndicator.IsIndeterminate = true;

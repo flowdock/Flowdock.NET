@@ -124,7 +124,7 @@ namespace Flowdock.ViewModels {
 		}
 
 		private async void LoadFlow() {
-			_progressService.Show();
+			_progressService.Show("");
 
 			try {
 				// load the flow to grab the users
