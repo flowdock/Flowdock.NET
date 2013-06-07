@@ -10,6 +10,8 @@ namespace Flowdock.ViewModels {
 		private INavigationService _navigationService;
 		private IAppSettings _appSettings;
 
+		public event EventHandler CanExecuteChanged;
+
 		public GoToFlowCommand(Flow flow, INavigationService navigationService, IAppSettings settings) {
 			_flow = flow;
 			_navigationService = navigationService;
@@ -20,11 +22,11 @@ namespace Flowdock.ViewModels {
 			return true;
 		}
 
-		public event EventHandler CanExecuteChanged;
-
 		public void Execute(object parameter) {
-			_appSettings.CurrentFlow = _flow;
-			_navigationService.UriFor<FlowViewModel>().Navigate();
+			_navigationService.UriFor<FlowViewModel>()
+				.WithParam<string>(fvm => fvm.FlowId, _flow.Id)
+				.WithParam<string>(fvm => fvm.FlowName, _flow.Name)
+				.Navigate();
 		}
 	}
 }

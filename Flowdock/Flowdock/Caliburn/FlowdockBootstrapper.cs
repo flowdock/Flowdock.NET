@@ -24,6 +24,7 @@ namespace Flowdock.Caliburn {
 			// viewmodels
 			container.PerRequest<LoginViewModel>();
 			container.PerRequest<LobbyViewModel>();
+			container.PerRequest<FlowViewModel>();
 		}
 
 		protected override object GetInstance(Type service, string key) {

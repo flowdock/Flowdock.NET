@@ -15,14 +15,13 @@ using System.Windows.Media;
 using Message = Flowdock.Client.Domain.Message;
 
 namespace Flowdock.ViewModels {
-	public class FlowViewModel : PropertyChangedBase {
+	public class FlowViewModel : PropertyChangedBase, IActivate {
 		private static readonly Random rand = new Random();
 
 		private const int MessageLimit = 20;
 
 		private bool _isLoading = false;
 
-		private Flow _flow;
 		private IFlowdockContext _context;
 		private IAppSettings _settings;
 
@@ -117,7 +116,7 @@ namespace Flowdock.ViewModels {
 
 		private void StartStream() {
 			_stream = new FlowStreamingConnection();
-			_stream.Start(_settings.Username, _settings.Password, _flow.Id, OnMessageReceived);
+			_stream.Start(_settings.Username, _settings.Password, FlowId, OnMessageReceived);
 		}
 
 		private void StopStream() {
@@ -130,11 +129,11 @@ namespace Flowdock.ViewModels {
 			IsLoading = true;
 
 			// load the flow to grab the users
-			_flow = await _context.GetFlow(_flow.Id);
-			Users = new ObservableCollection<User>(_flow.Users);
+			Flow flow = await _context.GetFlow(FlowId);
+			Users = new ObservableCollection<User>(flow.Users);
 
 
-			IEnumerable<Message> messages = await _context.GetMessagesForFlow(_flow.Id);
+			IEnumerable<Message> messages = await _context.GetMessagesForFlow(FlowId);
 
 			if (messages != null) {
 				Messages = new ObservableCollection<MessageViewModel>(
@@ -151,16 +150,12 @@ namespace Flowdock.ViewModels {
 			IsLoading = false;
 		}
 
+		public string FlowId { get; set; }
+		public string FlowName { get; set; }
+
 		public FlowViewModel(IAppSettings settings, IFlowdockContext context) {
 			_settings = settings.ThrowIfNull("settings");
 			_context = context.ThrowIfNull("context");
-
-			_flow = _settings.CurrentFlow;
-
-			_sendMessageCommand = new SendMessageCommand(this, _context, _flow.Id);
-			_showUsersCommand = new ShowUsersCommand(this);
-
-			LoadFlow();
 		}
 
 		public void Unload() {
@@ -192,7 +187,7 @@ namespace Flowdock.ViewModels {
 
 		public string Name {
 			get {
-				return _flow.Name;
+				return FlowName;
 			}
 		}
 
@@ -239,6 +234,19 @@ namespace Flowdock.ViewModels {
 				}
 				return "";
 			}
+		}
+
+		public void Activate() {
+			_sendMessageCommand = new SendMessageCommand(this, _context, FlowId);
+			_showUsersCommand = new ShowUsersCommand(this);
+
+			LoadFlow();
+		}
+
+		public event EventHandler<ActivationEventArgs> Activated;
+
+		public bool IsActive {
+			get { return true; }
 		}
 	}
 }

@@ -6,7 +6,6 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:viewModels="clr-namespace:Flowdock.ViewModels"
 	xmlns:bindableAppBar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
 	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 	xmlns:localBehaviors="clr-namespace:Flowdock.Behaviors"
@@ -19,18 +18,17 @@
     shell:SystemTray.IsVisible="True">
 
 	<UserControl.Resources>
-		<viewModels:FlowViewModel x:Key="viewModel" />
 		<localConverters:ShowHideIfEmptyConverter x:Key="visibilityConverter" />
 		<localConverters:BoolVisibilityConverter x:Key="boolVisiblityConverter" />
 		<localConverters:BoolNegateConverter x:Key="boolNegateConverter" />
 		<localConverters:ColorToBrushConverter x:Key="colorToBrushConverter" />
 	</UserControl.Resources>
 
-	<shell:SystemTray.ProgressIndicator>
+	<!--<shell:SystemTray.ProgressIndicator>
 		<shell:ProgressIndicator IsIndeterminate="true" IsVisible="{Binding Path=IsLoading, Source={StaticResource viewModel}}" />
-	</shell:SystemTray.ProgressIndicator>
+	</shell:SystemTray.ProgressIndicator>-->
 
-	<Grid x:Name="LayoutRoot" Background="Transparent" DataContext="{StaticResource viewModel}">
+	<Grid x:Name="LayoutRoot" Background="Transparent">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*" />
@@ -80,7 +78,7 @@
 			</i:Interaction.Behaviors>
 		</TextBox>
 	</Grid>
-	<bindableAppBar:Bindable.ApplicationBar>
+	<!--<bindableAppBar:Bindable.ApplicationBar>
 		<bindableAppBar:BindableApplicationBar IsVisible="{Binding IsLoading, Converter={StaticResource boolNegateConverter}, Source={StaticResource viewModel}}">
 			<bindableAppBar:BindableApplicationBarButton 
 				x:Name="sendMessageButton"
@@ -93,5 +91,5 @@
 					Text="Who's Here?" />
 			</bindableAppBar:BindableApplicationBar.MenuItems>
 		</bindableAppBar:BindableApplicationBar>
-	</bindableAppBar:Bindable.ApplicationBar>
+	</bindableAppBar:Bindable.ApplicationBar>-->
 </phone:PhoneApplicationPage>

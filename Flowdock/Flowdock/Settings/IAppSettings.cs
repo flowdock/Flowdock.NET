@@ -5,6 +5,5 @@ namespace Flowdock.Settings {
 	{
 		string Username { get; set; }
 		string Password { get; set; }
-		Flow CurrentFlow { get; set; }
 	}
 }

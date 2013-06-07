@@ -13,9 +13,10 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
-	<!--<shell:SystemTray.ProgressIndicator>
-		<shell:ProgressIndicator IsIndeterminate="true" IsVisible="{Binding Path=IsLoading, Source={StaticResource viewModel}}" />
-	</shell:SystemTray.ProgressIndicator>-->
+	<!-- TODO: figure out how to bind this to the vm with Caliburn -->
+	<shell:SystemTray.ProgressIndicator>
+		<shell:ProgressIndicator IsIndeterminate="true" IsVisible="{Binding ElementName=LayoutRoot, Path=DataContext.IsLoading}" />
+	</shell:SystemTray.ProgressIndicator>
 
 	<Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>

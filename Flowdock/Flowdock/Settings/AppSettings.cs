@@ -54,14 +54,5 @@ namespace Flowdock.Settings {
 				Set(PasswordKey, value);
 			}
 		}
-
-		public Flow CurrentFlow {
-			get {
-				return Get<Flow>(CurrentFlowKey);
-			}
-			set {
-				Set(CurrentFlowKey, value);
-			}
-		}
 	}
 }
