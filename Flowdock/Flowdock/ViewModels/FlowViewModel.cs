@@ -163,10 +163,6 @@ namespace Flowdock.ViewModels {
 			LoadFlow();
 		}
 
-		public FlowViewModel()
-			: this(new AppSettings(), new LoggedInFlowdockContext()) {
-		}
-
 		public void Unload() {
 			StopStream();
 			Users = null;

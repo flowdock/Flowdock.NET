@@ -7,21 +7,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-	xmlns:viewModels="clr-namespace:Flowdock.ViewModels"
 	xmlns:localBehaviors="clr-namespace:Flowdock.Behaviors"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d">
-	
-	<UserControl.Resources>
-		<viewModels:LoginViewModel x:Key="viewModel" />
-	</UserControl.Resources>
 
-
-
-	<Grid x:Name="LayoutRoot" Background="Transparent" DataContext="{StaticResource viewModel}">
+	<Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
@@ -32,7 +25,7 @@
 		<Image Grid.Row="0" Source="../Assets/FlowdockLogo.png" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="250" Margin="0 140 0 100"/>
 		<StackPanel Grid.Row="1" Margin="30 0 30 0">
 			<TextBlock Text="Username" />
-			<TextBox InputScope="EmailUserName" Text="{Binding Path=Username, Mode=TwoWay}">
+			<TextBox InputScope="EmailUserName" x:Name="Username">
 				<i:Interaction.Behaviors>
 					<localBehaviors:ImmediateUpdateTextBoxBehavior />
 				</i:Interaction.Behaviors>
@@ -41,7 +34,7 @@
 
 		<StackPanel Grid.Row="2" Margin="30 20 30 0">
 			<TextBlock Text="Password" />
-			<PasswordBox Password="{Binding Path=Password, Mode=TwoWay}">
+			<PasswordBox x:Name="Password">
 				<i:Interaction.Behaviors>
 					<localBehaviors:ImmediateUpdatePasswordBoxBehavior />
 				</i:Interaction.Behaviors>

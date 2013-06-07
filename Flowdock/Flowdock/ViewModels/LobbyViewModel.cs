@@ -2,6 +2,7 @@
 using Flowdock.Client.Context;
 using Flowdock.Client.Domain;
 using Flowdock.Extensions;
+using Flowdock.Settings;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -31,10 +32,6 @@ namespace Flowdock.ViewModels {
 			_context = context.ThrowIfNull("context");
 
 			GetFlows();
-		}
-
-		public LobbyViewModel()
-			: this(new LoggedInFlowdockContext()) {
 		}
 
 		public ObservableCollection<LobbyFlowViewModel> Flows {

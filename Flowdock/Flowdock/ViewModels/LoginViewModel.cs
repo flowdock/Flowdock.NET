@@ -31,10 +31,6 @@ namespace Flowdock.ViewModels {
 			_loginCommand.LoggedIn += OnLoggedIn;
 		}
 
-		public LoginViewModel() 
-			: this(new FlowdockContext(), new AppSettings(), new NavigationManager()) {
-		}
-
 		public string Username {
 			get {
 				return _settings.Username;
