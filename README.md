@@ -1,6 +1,6 @@
 # Flowdock.NET
 
-readme last updated: June 7, 2013
+readme last updated: June 8, 2013
 
 A Flowdock client for Windows Phone 8
 
@@ -117,4 +117,5 @@ Since Rally generally prefers the other style (and I do too!), interfaces are th
 
 ## Running the Tests
 
-You will need to install NUnit, you can get it [here](http://nunit.org/?p=download), I recommend just grabbing the MSI. This will install the NUnit runner app on your box. Launch that, then load up the `flowdock.nunit` file at the root of the repo. Make sure the solution is built, and from there running the tests should be straightforward.
+Unfortunately MSTest (the test framework built into Visual Studio) is the only framework that I know of that works for
+Windows Phone. To run the tests, just build the solution, then Tests > Test Explorer and launch them from there.
