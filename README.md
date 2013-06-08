@@ -75,7 +75,7 @@ The simulator can be pretty flaky at obtaining a network connection. If you fail
 
 The version of the .NET runtime that is used with Windows Phone 8 does not have `System.Reflection.Emit`. This is the magic that makes most mocking libraries like Rhino Mocks or Moq work. This is a major blow to testing phone apps, as there are no mainstream, mature mocking frameworks available.
 
-Jason Roberts created [MoqaLate](http://moqalate.codeplex.com/) as a solution to this problem. It's a bit primative, but it does work and is very helpful for testing (thanks Jason!). Here is [his blog post](http://dontcodetired.com/blog/post/Mocking-Framework-for-Windows-Store-apps-(and-Windows-Phone).aspx) going over how to use MoqaLate.  
+Jason Roberts created [MoqaLate](http://moqalate.codeplex.com/) as a solution to this problem. It's a bit primative, but it does work and is very helpful for testing (thanks Jason!). Here is [his blog post](http://dontcodetired.com/blog/post/Mocking-Framework-for-Windows-Store-apps-(and-Windows-Phone\).aspx) going over how to use MoqaLate.  
   
  Also, here is a quick rundown on it:
 
