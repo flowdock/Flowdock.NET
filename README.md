@@ -1,6 +1,6 @@
 # Flowdock.NET
 
-readme last updated: June 7, 2013
+readme last updated: June 8, 2013
 
 A Flowdock client for Windows Phone 8
 
@@ -75,7 +75,7 @@ The simulator can be pretty flaky at obtaining a network connection. If you fail
 
 The version of the .NET runtime that is used with Windows Phone 8 does not have `System.Reflection.Emit`. This is the magic that makes most mocking libraries like Rhino Mocks or Moq work. This is a major blow to testing phone apps, as there are no mainstream, mature mocking frameworks available.
 
-Jason Roberts created [MoqaLate](http://moqalate.codeplex.com/) as a solution to this problem. It's a bit primative, but it does work and is very helpful for testing (thanks Jason!). Here is [his blog post](http://dontcodetired.com/blog/post/Mocking-Framework-for-Windows-Store-apps-(and-Windows-Phone).aspx) going over how to use MoqaLate.  
+Jason Roberts created [MoqaLate](http://moqalate.codeplex.com/) as a solution to this problem. It's a bit primative, but it does work and is very helpful for testing (thanks Jason!). Here is [his blog post](http://dontcodetired.com/blog/post/Mocking-Framework-for-Windows-Store-apps-(and-Windows-Phone\).aspx) going over how to use MoqaLate.  
   
  Also, here is a quick rundown on it:
 
@@ -117,4 +117,5 @@ Since Rally generally prefers the other style (and I do too!), interfaces are th
 
 ## Running the Tests
 
-You will need to install NUnit, you can get it [here](http://nunit.org/?p=download), I recommend just grabbing the MSI. This will install the NUnit runner app on your box. Launch that, then load up the `flowdock.nunit` file at the root of the repo. Make sure the solution is built, and from there running the tests should be straightforward.
+Unfortunately MSTest (the test framework built into Visual Studio) is the only framework that I know of that works for
+Windows Phone. To run the tests, just build the solution, then Tests > Test Explorer and launch them from there.
