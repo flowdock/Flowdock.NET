@@ -26,6 +26,8 @@
     <ValidateXaml>false</ValidateXaml>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -79,6 +81,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\LoginCommandTest.cs" />
+    <Compile Include="ViewModels\FlowViewModelTest.cs" />
     <Compile Include="ViewModels\LoginViewModelTest.cs" />
     <Compile Include="ViewModels\MessageViewModelTest.cs" />
     <Compile Include="Mocks\AppSettingsMoqaLate.cs" />
@@ -166,4 +169,5 @@
   </Target>
   -->
   <ProjectExtensions />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>

@@ -36,7 +36,7 @@ namespace Flowdock.Client.Context {
 			return GetCollection<Flow>("flows");
 		}
 
-		public Task<Flow> GetFlow(string flowId) {
+		public virtual Task<Flow> GetFlow(string flowId) {
 			var client = new RestClient();
 			client.BaseUrl = FlowdockApiBaseUrl;
 			client.Authenticator = new HttpBasicAuthenticator(_username, _password);
@@ -51,7 +51,7 @@ namespace Flowdock.Client.Context {
 			return tcs.Task;
 		}
 
-		public Task<IEnumerable<Message>> GetMessagesForFlow(string flowId) {
+		public virtual Task<IEnumerable<Message>> GetMessagesForFlow(string flowId) {
 			// TODO: handle eventType, for now returning everything
 			string resource = string.Format("flows/{0}/messages", flowId.Replace(":", "/"));
 			return GetCollection<Message>(resource);

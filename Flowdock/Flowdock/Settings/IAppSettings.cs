@@ -2,7 +2,7 @@
 
 namespace Flowdock.Settings {
 	public interface IAppSettings
-	{
+    {
 		string Username { get; set; }
 		string Password { get; set; }
 	}

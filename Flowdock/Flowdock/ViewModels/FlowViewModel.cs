@@ -28,11 +28,10 @@ namespace Flowdock.ViewModels {
 		private IAppSettings _settings;
 		private IProgressService _progressService;
 		private INavigationManager _navigationManager;
+        private IFlowStreamingConnection _streamingConnection;
 
 		private ObservableCollection<User> _users;
 		private ObservableCollection<MessageViewModel> _messages;
-
-		private FlowStreamingConnection _stream;
 
 		private string _newMessage;
 
@@ -117,8 +116,7 @@ namespace Flowdock.ViewModels {
 		}
 
 		private void StartStream() {
-			_stream = new FlowStreamingConnection();
-			_stream.Start(_settings.Username, _settings.Password, FlowId, OnMessageReceived);
+			_streamingConnection.Start(_settings.Username, _settings.Password, FlowId, OnMessageReceived);
 		}
 
 		private async void LoadFlow() {
@@ -128,7 +126,6 @@ namespace Flowdock.ViewModels {
 				// load the flow to grab the users
 				Flow flow = await _context.GetFlow(FlowId);
 				Users = new ObservableCollection<User>(flow.Users);
-
 
 				IEnumerable<Message> messages = await _context.GetMessagesForFlow(FlowId);
 
@@ -153,11 +150,12 @@ namespace Flowdock.ViewModels {
 		public string FlowId { get; set; }
 		public string FlowName { get; set; }
 
-		public FlowViewModel(IAppSettings settings, IFlowdockContext context, IProgressService progressService, INavigationManager navigationManager) {
+		public FlowViewModel(IAppSettings settings, IFlowdockContext context, IProgressService progressService, INavigationManager navigationManager, IFlowStreamingConnection streamingConnection) {
 			_settings = settings.ThrowIfNull("settings");
 			_context = context.ThrowIfNull("context");
 			_progressService = progressService.ThrowIfNull("progressService");
 			_navigationManager = navigationManager.ThrowIfNull("navigationManager");
+            _streamingConnection = streamingConnection.ThrowIfNull("streamingConnection");
 		}
 
 		public ObservableCollection<User> Users {
@@ -242,11 +240,11 @@ namespace Flowdock.ViewModels {
 		}
 
 		public void Deactivate(bool close) {
-			if (_stream != null) {
-				_stream.Stop();
+			if (_streamingConnection != null) {
+                _streamingConnection.Stop();
 			}
 
-			_stream = null;
+            _streamingConnection = null;
 			Users = null;
 			Messages = null;
 		}
