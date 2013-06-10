@@ -84,7 +84,6 @@
     <Compile Include="Mocks\AppSettingsMoqaLate.cs" />
     <Compile Include="Mocks\FlowdockContextMoqaLate.cs" />
     <Compile Include="Mocks\FlowStreamingConnectionMoqaLate.cs" />
-    <Compile Include="Mocks\MessageBoxServiceMoqaLate.cs" />
     <Compile Include="Mocks\NavigationManagerMoqaLate.cs" />
     <Compile Include="Mocks\ProgressServiceMoqaLate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

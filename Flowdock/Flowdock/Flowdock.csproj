@@ -103,8 +103,6 @@
     <Compile Include="Converters\ShowHideIfEmptyConverter.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
-    <Compile Include="Services\MessageBoxes\IMessageBoxService.cs" />
-    <Compile Include="Services\MessageBoxes\MessageBoxService.cs" />
     <Compile Include="Services\Navigation\INavigationManager.cs" />
     <Compile Include="Services\Navigation\NavigationManager.cs" />
     <Compile Include="Services\Progress\IProgressService.cs" />
@@ -138,16 +136,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="Resources\UsersPivotResourceDictionary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\FlowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UsersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -240,6 +241,6 @@
   -->
   <ProjectExtensions />
   <PropertyGroup>
-    <PostBuildEvent>$(ProjectDir)\MoqaLateCommandLine\MoqaLate.exe "$(SolutionDir)$(ProjectName)" "$(SolutionDir)Flowdock.UnitTests\Mocks"</PostBuildEvent>
+    <PostBuildEvent>$(ProjectDir)\MoqaLateCommandLine\MoqaLate.exe "$(SolutionDir)$(ProjectName)" "$(SolutionDir)Flowdock.VSUnitTests\Mocks"</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -1,6 +1,5 @@
 ﻿using Caliburn.Micro;
 using Flowdock.Client.Context;
-using Flowdock.MessageBoxes;
 using Flowdock.Services.Navigation;
 using Flowdock.Services.Progress;
 using Flowdock.Settings;
@@ -22,7 +21,6 @@ namespace Flowdock.Caliburn {
 
 			// services
 			container.RegisterSingleton(typeof(IAppSettings), "AppSettings", typeof(AppSettings));
-			container.RegisterSingleton(typeof(IMessageBoxService), "MessageBoxService", typeof(MessageBoxService));
 			container.RegisterSingleton(typeof(INavigationManager), "NavigationManager", typeof(NavigationManager));
 
 			container.Instance<IProgressService>(new ProgressService(RootFrame));
@@ -33,6 +31,7 @@ namespace Flowdock.Caliburn {
 			container.PerRequest<LoginViewModel>();
 			container.PerRequest<LobbyViewModel>();
 			container.PerRequest<FlowViewModel>();
+			container.PerRequest<UsersViewModel>();
 		}
 
 		protected override object GetInstance(Type service, string key) {

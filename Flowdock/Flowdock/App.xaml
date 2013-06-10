@@ -8,14 +8,8 @@
 
     <!--Application Resources-->
     <Application.Resources>
-		<caliburn:FlowdockBootstrapper x:Key="bootstrapper" />
-		
+		<caliburn:FlowdockBootstrapper x:Key="bootstrapper" />	
         <local:LocalizedStrings xmlns:local="clr-namespace:Flowdock" x:Key="LocalizedStrings"/>
-		<ResourceDictionary x:Key="applicationResources">
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="Resources/UsersPivotResourceDictionary.xaml"/>
-			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
 	</Application.Resources>
 
 </Application>

@@ -28,5 +28,11 @@ namespace Flowdock.Services.Navigation {
 				.WithParam<string>(fvm => fvm.FlowName, flow.Name)
 				.Navigate();
 		}
+
+		public void GoToUsers(string flowId) {
+			_navigationService.UriFor<UsersViewModel>()
+				.WithParam<string>(uvm => uvm.FlowId, flowId)
+				.Navigate();
+		}
 	}
 }

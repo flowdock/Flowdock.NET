@@ -83,5 +83,44 @@ flow.Equals(GoToFlowParameter_flow_LastCalledWith) );
 
             GoToFlowParameter_flow_LastCalledWith = flow;
         }
+
+
+// -------------- GoToUsers ------------
+
+
+        private int _goToUsersNumberOfTimesCalled;        
+
+        public string GoToUsersParameter_flowId_LastCalledWith;
+
+        public virtual bool GoToUsersWasCalled()
+{
+   return _goToUsersNumberOfTimesCalled > 0;
+}
+
+
+public virtual bool GoToUsersWasCalled(int times)
+{
+   return _goToUsersNumberOfTimesCalled == times;
+}
+
+
+public virtual int GoToUsersTimesCalled()
+{
+   return _goToUsersNumberOfTimesCalled;
+}
+
+
+public virtual bool GoToUsersWasCalledWith(string flowId){
+return (
+flowId.Equals(GoToUsersParameter_flowId_LastCalledWith) );
+}
+
+
+        public void GoToUsers(string flowId)
+        {
+            _goToUsersNumberOfTimesCalled++;            
+
+            GoToUsersParameter_flowId_LastCalledWith = flowId;
+        }
 }
 }
