@@ -99,6 +99,7 @@
     <Compile Include="Behaviors\ImmediateUpdateTextBoxBehavior.cs" />
     <Compile Include="Behaviors\ScrollToBottomTrigger.cs" />
     <Compile Include="Caliburn\FlowdockBootstrapper.cs" />
+    <Compile Include="Commands\GoToMessageThreadCommand.cs" />
     <Compile Include="Converters\BoolNegateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="ViewModels\LoggedInFlowdockContext.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MessageThreadViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
     <Compile Include="Views\FlowView.xaml.cs">
@@ -139,6 +141,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessageThreadView.xaml.cs">
+      <DependentUpon>MessageThreadView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UsersView.xaml.cs">
       <DependentUpon>UsersView.xaml</DependentUpon>
@@ -158,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MessageThreadView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

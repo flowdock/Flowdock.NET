@@ -106,7 +106,7 @@ namespace Flowdock.ViewModels {
 		private void OnMessageReceived(Message msg) {
 			UIThread.Invoke(() => {
 				if (msg.Displayable) {
-					var viewModel = new MessageViewModel(msg, GetThreadColor(msg));
+					var viewModel = new MessageViewModel(msg, FlowId, GetThreadColor(msg), _navigationManager);
 					FindAvatar(viewModel);
 					Messages.Add(viewModel);
 					TrimMessages();
@@ -140,7 +140,7 @@ namespace Flowdock.ViewModels {
 
 				if (messages != null) {
 					Messages = new ObservableCollection<MessageViewModel>(
-						messages.Where(m => m.Displayable).Select(m => new MessageViewModel(m, GetThreadColor(m)))
+						messages.Where(m => m.Displayable).Select(m => new MessageViewModel(m, FlowId, GetThreadColor(m), _navigationManager))
 					);
 				}
 
@@ -271,7 +271,6 @@ namespace Flowdock.ViewModels {
                 _streamingConnection.Stop();
 			}
 
-            _streamingConnection = null;
 			Users = null;
 			Messages = null;
 		}

@@ -12,17 +12,21 @@ namespace Flowdock.Client.Context {
 		private string _password;
 
 		private Task<IEnumerable<T>> GetCollection<T>(string resource) {
-			var client = new RestClient();
-			client.BaseUrl = FlowdockApiBaseUrl;
-			client.Authenticator = new HttpBasicAuthenticator(_username, _password);
-
 			var tcs = new TaskCompletionSource<IEnumerable<T>>();
-			client.ExecuteAsync<List<T>>(new RestRequest(resource), response => {
+			GetClient().ExecuteAsync<List<T>>(new RestRequest(resource), response => {
 				tcs.SetResult(response.Data);
 			});
 
 			return tcs.Task;
 		}
+
+        private RestClient GetClient() {
+            var client = new RestClient();
+            client.BaseUrl = FlowdockApiBaseUrl;
+            client.Authenticator = new HttpBasicAuthenticator(_username, _password);
+
+            return client;
+        }
 
 		public FlowdockContext(string username, string password) {
 			_username = username;
@@ -37,19 +41,20 @@ namespace Flowdock.Client.Context {
 		}
 
 		public virtual Task<Flow> GetFlow(string flowId) {
-			var client = new RestClient();
-			client.BaseUrl = FlowdockApiBaseUrl;
-			client.Authenticator = new HttpBasicAuthenticator(_username, _password);
-
 			string resource = string.Format("flows/{0}",flowId.Replace(":", "/"));
 
 			var tcs = new TaskCompletionSource<Flow>();
-			client.ExecuteAsync<Flow>(new RestRequest(resource), response => {
+			GetClient().ExecuteAsync<Flow>(new RestRequest(resource), response => {
 				tcs.SetResult(response.Data);
 			});
 
 			return tcs.Task;
 		}
+
+        public Task<IEnumerable<Message>> GetMessagesForThread(string flowId, int threadId) {
+            string resource = string.Format("flows/{0}/messages?tags=influx:{1}", flowId.Replace(":", "/"), threadId);
+            return GetCollection<Message>(resource);
+        }
 
 		public virtual Task<IEnumerable<Message>> GetMessagesForFlow(string flowId) {
 			// TODO: handle eventType, for now returning everything
@@ -62,12 +67,8 @@ namespace Flowdock.Client.Context {
 			// username/password are valid, so getting the user's flows. A null result usually
 			// means failed to login
 
-			var client = new RestClient();
-			client.BaseUrl = FlowdockApiBaseUrl;
-			client.Authenticator = new HttpBasicAuthenticator(username, password);
-
 			var tcs = new TaskCompletionSource<string>();
-			client.ExecuteAsync<List<Flow>>(new RestRequest("flows"), response => {
+			GetClient().ExecuteAsync<List<Flow>>(new RestRequest("flows"), response => {
 				if (response.Data != null && response.Data.Any()) {
 					tcs.SetResult(null);
 				} else {
@@ -79,10 +80,6 @@ namespace Flowdock.Client.Context {
 		}
 
 		public void SendMessage(string flowId, string message) {
-			var client = new RestClient();
-			client.BaseUrl = FlowdockApiBaseUrl;
-			client.Authenticator = new HttpBasicAuthenticator(_username, _password);
-
 			//POST /flows/:organization/:flow/messages
 			//{
 			//  "event": "message",
@@ -96,7 +93,7 @@ namespace Flowdock.Client.Context {
 			request.AddParameter("event", "message");
 			request.AddParameter("content", message);
 
-			client.PostAsync(request, (response, handle) => { });
+			GetClient().PostAsync(request, (response, handle) => { });
 		}
 	}
 }

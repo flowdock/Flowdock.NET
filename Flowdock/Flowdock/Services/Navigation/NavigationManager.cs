@@ -34,5 +34,12 @@ namespace Flowdock.Services.Navigation {
 				.WithParam<string>(uvm => uvm.FlowId, flowId)
 				.Navigate();
 		}
+
+        public void GoToMessageThread(string flowId, int threadId) {
+            _navigationService.UriFor<MessageThreadViewModel>()
+                .WithParam<string>(mtvm => mtvm.FlowId, flowId)
+                .WithParam<int>(mtvm => mtvm.ThreadId, threadId)
+                .Navigate();
+        }
 	}
 }

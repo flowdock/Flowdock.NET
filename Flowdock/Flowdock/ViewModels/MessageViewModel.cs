@@ -1,10 +1,13 @@
 ﻿using Caliburn.Micro;
 using Flowdock.Client.Domain;
+using Flowdock.Commands;
 using Flowdock.Extensions;
 using System;
+using System.Windows.Input;
 using System.Windows.Media;
-
 using Message = Flowdock.Client.Domain.Message;
+using System.Linq;
+using Flowdock.Services.Navigation;
 
 namespace Flowdock.ViewModels {
 	public class MessageViewModel : PropertyChangedBase {
@@ -12,10 +15,12 @@ namespace Flowdock.ViewModels {
 		private Uri _avatar;
 		private Color? _threadColor;
 		private bool _wasEdited;
+        private GoToMessageThreadCommand _goToMessageThreadCommand;
 
-		public MessageViewModel(Message message, Color? threadColor) {
+		public MessageViewModel(Message message, string flowId, Color? threadColor, INavigationManager navigationManager) {
 			_message = message.ThrowIfNull("message");
 			_threadColor = threadColor;
+            _goToMessageThreadCommand = new GoToMessageThreadCommand(flowId, navigationManager);
 		}
 
 		public DateTime TimeStamp {
@@ -75,5 +80,23 @@ namespace Flowdock.ViewModels {
 				NotifyOfPropertyChange(() => Body);
 			}
 		}
+
+        public ICommand GoToMessageThreadCommand {
+            get {
+                return _goToMessageThreadCommand;
+            }
+        }
+
+        public int? MessageThreadId {
+            get {
+                var threadTag = _message.Tags.FirstOrDefault(t => t.StartsWith("influx"));
+
+                if (threadTag == null) {
+                    return null;
+                }
+
+                return int.Parse(threadTag.Replace("influx:", ""));
+            }
+        }
 	}
 }

@@ -11,5 +11,6 @@ namespace Flowdock.Services.Navigation {
 		void GoToLobby();
 		void GoToFlow(Flow flow);
 		void GoToUsers(string flowId);
+        void GoToMessageThread(string flowId, int threadId);
 	}
 }

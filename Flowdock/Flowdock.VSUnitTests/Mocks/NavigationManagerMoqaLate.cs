@@ -122,5 +122,45 @@ flowId.Equals(GoToUsersParameter_flowId_LastCalledWith) );
 
             GoToUsersParameter_flowId_LastCalledWith = flowId;
         }
+
+
+// -------------- GoToMessageThread ------------
+
+
+        private int _goToMessageThreadNumberOfTimesCalled;        
+
+        public string GoToMessageThreadParameter_flowId_LastCalledWith;public int GoToMessageThreadParameter_threadId_LastCalledWith;
+
+        public virtual bool GoToMessageThreadWasCalled()
+{
+   return _goToMessageThreadNumberOfTimesCalled > 0;
+}
+
+
+public virtual bool GoToMessageThreadWasCalled(int times)
+{
+   return _goToMessageThreadNumberOfTimesCalled == times;
+}
+
+
+public virtual int GoToMessageThreadTimesCalled()
+{
+   return _goToMessageThreadNumberOfTimesCalled;
+}
+
+
+public virtual bool GoToMessageThreadWasCalledWith(string flowId, int threadId){
+return (
+flowId.Equals(GoToMessageThreadParameter_flowId_LastCalledWith)  && 
+threadId.Equals(GoToMessageThreadParameter_threadId_LastCalledWith) );
+}
+
+
+        public void GoToMessageThread(string flowId, int threadId)
+        {
+            _goToMessageThreadNumberOfTimesCalled++;            
+
+            GoToMessageThreadParameter_flowId_LastCalledWith = flowId;GoToMessageThreadParameter_threadId_LastCalledWith = threadId;
+        }
 }
 }
