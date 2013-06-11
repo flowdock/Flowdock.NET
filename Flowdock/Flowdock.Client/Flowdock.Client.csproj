@@ -95,6 +95,7 @@
     <Compile Include="Stream\FlowStreamingConnection.cs" />
     <Compile Include="Stream\IFlowStreamingConnection.cs" />
     <Compile Include="Stream\MessageParser.cs" />
+    <Compile Include="Stream\StreamNetworkErrorEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="RestSharp.WindowsPhone">
@@ -114,7 +115,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />
   <PropertyGroup>
-    <PostBuildEvent>$(ProjectDir)\MoqaLateCommandLine\MoqaLate.exe "$(SolutionDir)$(ProjectName)" "$(SolutionDir)Flowdock.UnitTests\Mocks"</PostBuildEvent>
+    <PostBuildEvent>echo "$(ProjectDir)\MoqaLateCommandLine\MoqaLate.exe "$(SolutionDir)$(ProjectName)" "$(SolutionDir)Flowdock.UnitTests\Mocks""</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

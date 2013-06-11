@@ -82,5 +82,8 @@ public virtual int StopTimesCalled()
 
             
         }
+
+
+		public event EventHandler<StreamNetworkErrorEventArgs> NetworkError;
 }
 }

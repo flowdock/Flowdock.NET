@@ -4,6 +4,8 @@ using System.Net;
 
 namespace Flowdock.Client.Stream {
 	public class FlowStreamingConnection : IFlowStreamingConnection, IDisposable {
+		public event EventHandler<StreamNetworkErrorEventArgs> NetworkError;
+
 		private const string StreamUrl = "https://stream.flowdock.com";
 
 		private HttpWebRequest _request;

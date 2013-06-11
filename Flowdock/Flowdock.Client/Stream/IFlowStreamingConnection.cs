@@ -6,5 +6,7 @@ namespace Flowdock.Client.Stream {
 	{
 		void Start(string username, string password, string flowId, Action<Message> callback);
 		void Stop();
+
+		event EventHandler<StreamNetworkErrorEventArgs> NetworkError;
 	}
 }
