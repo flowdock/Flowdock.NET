@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Flowdock.Client.Context;
+using Flowdock.Client.Stream;
 using Flowdock.Services.Navigation;
 using Flowdock.Services.Progress;
 using Flowdock.Settings;
@@ -25,6 +26,7 @@ namespace Flowdock.Caliburn {
 
 			container.Instance<IProgressService>(new ProgressService(RootFrame));
 			container.PerRequest<IFlowdockContext, LoggedInFlowdockContext>();
+            container.PerRequest<IFlowStreamingConnection, FlowStreamingConnection>();
 			
 
 			// viewmodels

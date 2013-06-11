@@ -6,7 +6,6 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:bindableAppBar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
 	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 	xmlns:localBehaviors="clr-namespace:Flowdock.Behaviors"
 	xmlns:localConverters="clr-namespace:Flowdock.Converters"
@@ -20,65 +19,69 @@
 
 	<UserControl.Resources>
 		<localConverters:ShowHideIfEmptyConverter x:Key="visibilityConverter" />
-		<localConverters:BoolVisibilityConverter x:Key="boolVisiblityConverter" />
+		<localConverters:BoolVisibilityConverter x:Key="boolVisibilityConverter" />
 		<localConverters:BoolNegateConverter x:Key="boolNegateConverter" />
 		<localConverters:ColorToBrushConverter x:Key="colorToBrushConverter" />
 	</UserControl.Resources>
-
-	<!--<shell:SystemTray.ProgressIndicator>
-		<shell:ProgressIndicator IsIndeterminate="true" IsVisible="{Binding Path=IsLoading, Source={StaticResource viewModel}}" />
-	</shell:SystemTray.ProgressIndicator>-->
-
+    
 	<Grid x:Name="LayoutRoot" Background="Transparent">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*" />
-			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		<TextBlock Grid.Row="0" Text="{Binding Name}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-		<ScrollViewer Grid.Row="1" x:Name="flowScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-			<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-				<TextBlock Text="{Binding FlowStatusMessage}" Margin="0 60 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Messages, Converter={StaticResource visibilityConverter}, ConverterParameter=Show}" />
-				<ItemsControl ItemsSource="{Binding Messages}" IsEnabled="{Binding IsLoading, Converter={StaticResource boolNegateConverter}}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-					<!--<i:Interaction.Triggers>
-						<i:EventTrigger EventName="IsEnabledChanged">
-							<localBehaviors:ScrollToBottomTrigger TargetName="flowScrollViewer"/>
-						</i:EventTrigger>
-					</i:Interaction.Triggers>-->
-					<ItemsControl.ItemTemplate>
-						<DataTemplate>
-								<Border BorderThickness="0 0 0 1">
-									<Border.BorderBrush>
-										<SolidColorBrush Color="{StaticResource PhoneForegroundColor}"/>
-									</Border.BorderBrush>
-									<Grid>
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" />
-											<ColumnDefinition Width="Auto" />
-											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="Auto" /> 
-										</Grid.ColumnDefinitions>
-										<Rectangle Grid.Column="0" Fill="{Binding ThreadColor, Converter={StaticResource colorToBrushConverter}}" Width="10" VerticalAlignment="Stretch" />
-										<Image Grid.Column="1" Source="{Binding Avatar}" Width="50" Margin="10 0 10 0" />
-										<TextBlock Grid.Column="2" Text="{Binding Body}" Margin="0 20 0 20" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
-										<TextBlock Grid.Column="3" Text="Edited" 
-												   FontStyle="Italic"
-												   Margin="0 5 10 5"
-												   FontSize="{StaticResource PhoneFontSizeSmall}"
-												   Visibility="{Binding WasEdited, Converter={StaticResource boolVisiblityConverter}, ConverterParameter=Show}" />
-									</Grid>
-								</Border>
-						</DataTemplate>
-					</ItemsControl.ItemTemplate>
-				</ItemsControl>
-			</StackPanel>
-		</ScrollViewer>
-		<TextBox Grid.Row="2" Text="{Binding Path=NewMessage, Mode=TwoWay}" InputScope="Chat" Visibility="{Binding IsLoading, Converter={StaticResource boolVisiblityConverter}, ConverterParameter=Hide}">
-			<i:Interaction.Behaviors>
-				<localBehaviors:ImmediateUpdateTextBoxBehavior />
-			</i:Interaction.Behaviors>
-		</TextBox>
-	</Grid>
+        
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="0 30 0 0" Text="{Binding NetworkErrorMessage}" Visibility="{Binding IsNetworkError, Converter={StaticResource boolVisibilityConverter}, ConverterParameter=Show}" />
+            <Grid Grid.Row="1" Visibility="{Binding IsNetworkError, Converter={StaticResource boolVisibilityConverter}, ConverterParameter=Hide}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+		        <ScrollViewer Grid.Row="0" x:Name="flowScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+			        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+				        <TextBlock Text="{Binding FlowStatusMessage}" Margin="0 60 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Messages, Converter={StaticResource visibilityConverter}, ConverterParameter=Show}" />
+				        <ItemsControl ItemsSource="{Binding Messages}" IsEnabled="{Binding IsLoading, Converter={StaticResource boolNegateConverter}}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+					        <ItemsControl.ItemTemplate>
+						        <DataTemplate>
+								        <Border BorderThickness="0 0 0 1">
+									        <Border.BorderBrush>
+										        <SolidColorBrush Color="{StaticResource PhoneForegroundColor}"/>
+									        </Border.BorderBrush>
+									        <Grid>
+										        <Grid.ColumnDefinitions>
+											        <ColumnDefinition Width="Auto" />
+											        <ColumnDefinition Width="Auto" />
+											        <ColumnDefinition Width="*" />
+											        <ColumnDefinition Width="Auto" /> 
+										        </Grid.ColumnDefinitions>
+										        <Rectangle Grid.Column="0" Fill="{Binding ThreadColor, Converter={StaticResource colorToBrushConverter}}" Width="10" VerticalAlignment="Stretch" />
+										        <Image Grid.Column="1" Source="{Binding Avatar}" Width="50" Margin="10 0 10 0" />
+										        <TextBlock Grid.Column="2" Text="{Binding Body}" Margin="0 20 0 20" HorizontalAlignment="Stretch" TextWrapping="Wrap" />
+										        <TextBlock Grid.Column="3" Text="Edited" 
+												            FontStyle="Italic"
+												            Margin="0 5 10 5"
+												            FontSize="{StaticResource PhoneFontSizeSmall}"
+												            Visibility="{Binding WasEdited, Converter={StaticResource boolVisibilityConverter}, ConverterParameter=Show}" />
+									        </Grid>
+								        </Border>
+						        </DataTemplate>
+					        </ItemsControl.ItemTemplate>
+				        </ItemsControl>
+			        </StackPanel>
+		        </ScrollViewer>
+		        <TextBox Grid.Row="1" Text="{Binding Path=NewMessage, Mode=TwoWay}" InputScope="Chat" Visibility="{Binding IsLoading, Converter={StaticResource boolVisibilityConverter}, ConverterParameter=Hide}">
+			        <i:Interaction.Behaviors>
+				        <localBehaviors:ImmediateUpdateTextBoxBehavior />
+			        </i:Interaction.Behaviors>
+		        </TextBox>
+            </Grid>
+        </Grid>
+    </Grid>
 	<phone:PhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar IsVisible="True">
 			<shell:ApplicationBar.Buttons>

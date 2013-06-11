@@ -33,6 +33,8 @@ namespace Flowdock.ViewModels {
 		private ObservableCollection<User> _users;
 		private ObservableCollection<MessageViewModel> _messages;
 
+        private string _networkErrorMessage;
+
 		private string _newMessage;
 
 		private Dictionary<string, Color> _threadColors = new Dictionary<string, Color>();
@@ -115,7 +117,12 @@ namespace Flowdock.ViewModels {
 			});
 		}
 
+        private void OnStreamError(object sender, StreamNetworkErrorEventArgs e) {
+            NetworkErrorMessage = e.ErrorMessage;
+        }
+
 		private void StartStream() {
+            _streamingConnection.NetworkError += OnStreamError;
 			_streamingConnection.Start(_settings.Username, _settings.Password, FlowId, OnMessageReceived);
 		}
 
@@ -157,6 +164,23 @@ namespace Flowdock.ViewModels {
 			_navigationManager = navigationManager.ThrowIfNull("navigationManager");
             _streamingConnection = streamingConnection.ThrowIfNull("streamingConnection");
 		}
+
+        public bool IsNetworkError {
+            get {
+                return NetworkErrorMessage != null;
+            }
+        }
+
+        public string NetworkErrorMessage {
+            get {
+                return _networkErrorMessage;
+            }
+            private set {
+                _networkErrorMessage = value;
+                NotifyOfPropertyChange(() => NetworkErrorMessage);
+                NotifyOfPropertyChange(() => IsNetworkError);
+            }
+        }
 
 		public ObservableCollection<User> Users {
 			get {

@@ -17,6 +17,11 @@ namespace Flowdock.Client.Stream {
 
 		private bool _disposed;
 
+        private void HandleError(Exception e) {
+            if(NetworkError != null) {
+                NetworkError(this, new StreamNetworkErrorEventArgs(e.Message));
+            }
+        }
 
 		private string BuildUrl(string flowId) {
 			return string.Format("{0}/flows/{1}", StreamUrl, flowId.Replace(":", "/"));
@@ -27,27 +32,38 @@ namespace Flowdock.Client.Stream {
 				return;
 			}
 
-			int bytesRead = _response.GetResponseStream().EndRead(result);
+            try {
+                int bytesRead = _response.GetResponseStream().EndRead(result);
 
-			// Flowdock uses UTF8
-			string readString = System.Text.Encoding.UTF8.GetString(_buffer, 0, bytesRead);
-			_messageParser.Push(readString);
+                // Flowdock uses UTF8
+                string readString = System.Text.Encoding.UTF8.GetString(_buffer, 0, bytesRead);
+                _messageParser.Push(readString);
 
-			// keep pulling down from the stream
-			Read();
+                // keep pulling down from the stream
+                Read();
+            } catch (Exception e) {
+                HandleError(e);
+            }
 		}
 
 		private void Read() {
 			if (_stopped) {
 				return;
 			}
-			_response.GetResponseStream().BeginRead(_buffer, 0, _buffer.Length, OnRead, null);
+            try {
+                _response.GetResponseStream().BeginRead(_buffer, 0, _buffer.Length, OnRead, null);
+            } catch (Exception e) {
+                HandleError(e);
+            }
 		}
 
 		private void OnGetResponse(IAsyncResult result) {
-			_response = (HttpWebResponse)_request.EndGetResponse(result);
-
-			Read();
+            try {
+                _response = (HttpWebResponse)_request.EndGetResponse(result);
+                Read();
+            } catch (Exception e) {
+                HandleError(e);
+            }
 		}
 
 		protected virtual void Dispose(bool disposing) {
@@ -68,10 +84,14 @@ namespace Flowdock.Client.Stream {
 		public void Start(string username, string password, string flowId, Action<Message> callback) {
 			_messageParser = new MessageParser(callback);
 
-			_request = HttpWebRequest.CreateHttp(BuildUrl(flowId));
-			_request.Credentials = new NetworkCredential(username, password);
+            try {
+                _request = HttpWebRequest.CreateHttp(BuildUrl(flowId));
+                _request.Credentials = new NetworkCredential(username, password);
 
-			_request.BeginGetResponse(OnGetResponse, null);
+                _request.BeginGetResponse(OnGetResponse, null);
+            } catch (Exception e) {
+                HandleError(e);
+            }
 		}
 
 		public void Stop() {
