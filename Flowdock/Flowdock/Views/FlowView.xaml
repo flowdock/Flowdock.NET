@@ -33,11 +33,9 @@
         
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="0 30 0 0" Text="{Binding NetworkErrorMessage}" Visibility="{Binding IsNetworkError, Converter={StaticResource boolVisibilityConverter}, ConverterParameter=Show}" />
-            <Grid Grid.Row="1" Visibility="{Binding IsNetworkError, Converter={StaticResource boolVisibilityConverter}, ConverterParameter=Hide}">
+            <Grid Grid.Row="0" Visibility="{Binding IsNetworkError, Converter={StaticResource boolVisibilityConverter}, ConverterParameter=Hide}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto" />

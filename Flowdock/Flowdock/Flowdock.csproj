@@ -105,6 +105,8 @@
     <Compile Include="Converters\ShowHideIfEmptyConverter.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Services\Message\IMessageService.cs" />
+    <Compile Include="Services\Message\MessageService.cs" />
     <Compile Include="Services\Navigation\INavigationManager.cs" />
     <Compile Include="Services\Navigation\NavigationManager.cs" />
     <Compile Include="Services\Progress\IProgressService.cs" />

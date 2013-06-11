@@ -3,6 +3,7 @@ using Flowdock.Client.Context;
 using Flowdock.Client.Domain;
 using Flowdock.Client.Stream;
 using Flowdock.Extensions;
+using Flowdock.Services.Message;
 using Flowdock.Services.Navigation;
 using Flowdock.Services.Progress;
 using Flowdock.Settings;
@@ -29,6 +30,7 @@ namespace Flowdock.ViewModels {
 		private IProgressService _progressService;
 		private INavigationManager _navigationManager;
         private IFlowStreamingConnection _streamingConnection;
+        private IMessageService _messageService;
 
 		private ObservableCollection<User> _users;
 		private ObservableCollection<MessageViewModel> _messages;
@@ -118,12 +120,12 @@ namespace Flowdock.ViewModels {
 		}
 
         private void OnStreamError(object sender, StreamNetworkErrorEventArgs e) {
-            NetworkErrorMessage = e.ErrorMessage;
+            _messageService.ShowError(e.Exception);
         }
 
 		private void StartStream() {
             _streamingConnection.NetworkError += OnStreamError;
-			_streamingConnection.Start(_settings.Username, _settings.Password, FlowId, OnMessageReceived);
+            _streamingConnection.Start(_settings.Username, _settings.Password, FlowId, OnMessageReceived);
 		}
 
 		private async void LoadFlow() {
@@ -157,12 +159,13 @@ namespace Flowdock.ViewModels {
 		public string FlowId { get; set; }
 		public string FlowName { get; set; }
 
-		public FlowViewModel(IAppSettings settings, IFlowdockContext context, IProgressService progressService, INavigationManager navigationManager, IFlowStreamingConnection streamingConnection) {
+		public FlowViewModel(IAppSettings settings, IFlowdockContext context, IProgressService progressService, INavigationManager navigationManager, IFlowStreamingConnection streamingConnection, IMessageService messageService) {
 			_settings = settings.ThrowIfNull("settings");
 			_context = context.ThrowIfNull("context");
 			_progressService = progressService.ThrowIfNull("progressService");
 			_navigationManager = navigationManager.ThrowIfNull("navigationManager");
             _streamingConnection = streamingConnection.ThrowIfNull("streamingConnection");
+            _messageService = messageService.ThrowIfNull("messageService");
 		}
 
         public bool IsNetworkError {

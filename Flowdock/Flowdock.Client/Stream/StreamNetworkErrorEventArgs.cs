@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Flowdock.Client.Stream {
 	public class StreamNetworkErrorEventArgs : EventArgs {
-		public string ErrorMessage { get; set; }
+		public Exception Exception { get; set; }
 
-		public StreamNetworkErrorEventArgs(string errorMessage) {
-            ErrorMessage = errorMessage ?? "";
+		public StreamNetworkErrorEventArgs(Exception exception) {
+            Exception = exception;
 		}
 	}
 }

@@ -19,7 +19,7 @@ namespace Flowdock.Client.Stream {
 
         private void HandleError(Exception e) {
             if(NetworkError != null) {
-                NetworkError(this, new StreamNetworkErrorEventArgs(e.Message));
+                NetworkError(this, new StreamNetworkErrorEventArgs(e));
             }
         }
 
