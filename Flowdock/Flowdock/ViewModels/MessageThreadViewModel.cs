@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Message = Flowdock.Client.Domain.Message;
 
 using Flowdock.Extensions;
+using Flowdock.Client.Domain;
 
 namespace Flowdock.ViewModels {
     public class MessageThreadViewModel : PropertyChangedBase, IActivate {
@@ -18,6 +19,7 @@ namespace Flowdock.ViewModels {
         private IProgressService _progressService;
         private INavigationManager _navigationManager;
 
+        private string _flowName;
         private ObservableCollection<MessageViewModel> _messages;
 
         public MessageThreadViewModel(IFlowdockContext context, INavigationManager navigationManager, IProgressService progressService) {
@@ -30,6 +32,9 @@ namespace Flowdock.ViewModels {
             _progressService.Show("");
 
             try {
+                Flow flow = await _context.GetFlow(FlowId);
+                FlowName = flow.Name;
+                
                 IEnumerable<Message> messages = await _context.GetMessagesForThread(FlowId, ThreadId);
 
                 if (messages != null) {
@@ -44,6 +49,16 @@ namespace Flowdock.ViewModels {
 
         public string FlowId { get; set; }
         public int ThreadId { get; set; }
+        
+        public string FlowName {
+            get {
+                return _flowName;
+            }
+            set {
+                _flowName = value;
+                NotifyOfPropertyChange(() => FlowName);
+            }
+        }
 
         public ObservableCollection<MessageViewModel> Messages {
             get {
