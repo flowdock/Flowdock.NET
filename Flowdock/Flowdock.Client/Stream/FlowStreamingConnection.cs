@@ -3,7 +3,7 @@ using System;
 using System.Net;
 
 namespace Flowdock.Client.Stream {
-	public class FlowStreamingConnection : IFlowStreamingConnection {
+	public class FlowStreamingConnection : IFlowStreamingConnection, IDisposable {
 		private const string StreamUrl = "https://stream.flowdock.com";
 
 		private HttpWebRequest _request;
@@ -12,6 +12,8 @@ namespace Flowdock.Client.Stream {
 
 		private byte[] _buffer = new byte[1024*4];
 		private bool _stopped = false;
+
+		private bool _disposed;
 
 
 		private string BuildUrl(string flowId) {
@@ -46,6 +48,21 @@ namespace Flowdock.Client.Stream {
 			Read();
 		}
 
+		protected virtual void Dispose(bool disposing) {
+			if (!_disposed) {
+				if (disposing) {
+					if (_response != null) {
+						_response.Dispose();
+					}
+					_disposed = true;
+				}
+			}
+		}
+
+		~FlowStreamingConnection() {
+			Dispose(false);
+		}
+
 		public void Start(string username, string password, string flowId, Action<Message> callback) {
 			_messageParser = new MessageParser(callback);
 
@@ -57,9 +74,15 @@ namespace Flowdock.Client.Stream {
 
 		public void Stop() {
 			if (_response != null) {
-				_response.Close();
+				_response.Dispose();
+				_response = null;
 			}
 			_stopped = true;
+		}
+
+		public void Dispose() {
+			Dispose(true);
+			GC.SuppressFinalize(this);
 		}
 	}
 }

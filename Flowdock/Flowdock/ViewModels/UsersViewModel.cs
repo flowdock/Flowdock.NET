@@ -63,6 +63,10 @@ namespace Flowdock.ViewModels {
 				OnlineUsers = new ObservableCollection<User>(flow.Users.OrderBy((u) => u.Nick)); // TODO: separate online and offline users
 			} finally {
 				_progressService.Hide();
+
+				if (Activated != null) {
+					Activated(this, new ActivationEventArgs { WasInitialized = true });
+				}
 			}
 		}
 
