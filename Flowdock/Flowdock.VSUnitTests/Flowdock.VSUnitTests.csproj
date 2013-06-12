@@ -81,6 +81,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\LoginCommandTest.cs" />
+    <Compile Include="Mocks\MessageServiceMoqaLate.cs" />
     <Compile Include="ViewModels\FlowViewModelTest.cs" />
     <Compile Include="ViewModels\LoginViewModelTest.cs" />
     <Compile Include="ViewModels\MessageViewModelTest.cs" />

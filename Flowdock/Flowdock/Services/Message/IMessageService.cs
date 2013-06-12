@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Flowdock.Services.Message {
-    public interface IMessageService {
+    public interface IMessageService
+    {
         void ShowError(Exception e);
     }
 }

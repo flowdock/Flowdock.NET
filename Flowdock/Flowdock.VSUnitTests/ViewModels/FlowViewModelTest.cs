@@ -54,7 +54,16 @@ namespace Flowdock.VSUnitTests.ViewModels {
 
         [TestInitialize]
         public void BeforeEach() {
-            _flowViewModel = new FlowViewModel(new AppSettingsMoqaLate(), _mockFlowdockContext, new ProgressServiceMoqaLate(), new NavigationManagerMoqaLate(), new FlowStreamingConnectionMoqaLate());
+            _flowViewModel = new FlowViewModel(
+                new AppSettingsMoqaLate(), 
+                _mockFlowdockContext, 
+                new ProgressServiceMoqaLate(), 
+                new NavigationManagerMoqaLate(), 
+                new FlowStreamingConnectionMoqaLate(), 
+                new MessageServiceMoqaLate()
+            );
+
+            _flowViewModel.FlowId = "some:flow";
         }
         
         [TestMethod]

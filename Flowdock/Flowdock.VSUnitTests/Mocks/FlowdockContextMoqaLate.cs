@@ -231,5 +231,10 @@ message.Equals(SendMessageParameter_message_LastCalledWith) );
 
             SendMessageParameter_flowId_LastCalledWith = flowId;SendMessageParameter_message_LastCalledWith = message;
         }
+
+
+        public Task<IEnumerable<Message>> GetMessagesForThread(string flowId, int threadId) {
+            throw new System.NotImplementedException();
+        }
 }
 }
