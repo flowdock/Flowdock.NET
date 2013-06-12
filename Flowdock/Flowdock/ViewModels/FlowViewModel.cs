@@ -23,7 +23,7 @@ namespace Flowdock.ViewModels {
 
 		private static readonly Random rand = new Random();
 
-		private const int MessageLimit = 20;
+		public const int MessageLimit = 20;
 
 		private IFlowdockContext _context;
 		private IAppSettings _settings;
@@ -109,7 +109,7 @@ namespace Flowdock.ViewModels {
 					var viewModel = new MessageViewModel(msg, FlowId, GetThreadColor(msg), _navigationManager);
 					FindAvatar(viewModel);
 					Messages.Add(viewModel);
-					TrimMessages();
+					
 
 					// TODO: this is very inefficient
 					AssignThreadStartersTheirColor();
@@ -159,7 +159,13 @@ namespace Flowdock.ViewModels {
 		public string FlowId { get; set; }
 		public string FlowName { get; set; }
 
-		public FlowViewModel(IAppSettings settings, IFlowdockContext context, IProgressService progressService, INavigationManager navigationManager, IFlowStreamingConnection streamingConnection, IMessageService messageService) {
+		public FlowViewModel(IAppSettings settings, 
+            IFlowdockContext context, 
+            IProgressService progressService, 
+            INavigationManager navigationManager, 
+            IFlowStreamingConnection streamingConnection, 
+            IMessageService messageService) {
+
 			_settings = settings.ThrowIfNull("settings");
 			_context = context.ThrowIfNull("context");
 			_progressService = progressService.ThrowIfNull("progressService");
@@ -192,7 +198,6 @@ namespace Flowdock.ViewModels {
 			private set {
 				_users = value;
 				NotifyOfPropertyChange(() => Users);
-				NotifyOfPropertyChange(() => CanShowUsers);
 			}
 		}
 
@@ -202,6 +207,7 @@ namespace Flowdock.ViewModels {
 			}
 			private set {
 				_messages = value;
+                _messages.CollectionChanged += (o, e) => TrimMessages();
 				NotifyOfPropertyChange(() => Messages);
 				NotifyOfPropertyChange(() => FlowStatusMessage);
 			}
@@ -237,12 +243,6 @@ namespace Flowdock.ViewModels {
 
 		public void ShowUsers() {
 			_navigationManager.GoToUsers(FlowId);
-		}
-
-		public bool CanShowUsers {
-			get {
-				return Users != null;
-			}
 		}
 
 		public string FlowStatusMessage {
