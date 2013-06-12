@@ -22,9 +22,17 @@ namespace Flowdock.VSUnitTests.ViewModels {
         public override Task<IEnumerable<Message>> GetMessagesForFlow(string id) {
             return Task.FromResult<IEnumerable<Message>>(ExpectedMessages);
         }
+
+        public override void SendMessage(string flowId, string message) {
+            SendMessageFlowId = flowId;
+            SendMessageMessage = message;
+        }
         
         public IEnumerable<Message> ExpectedMessages { get; set; }
         public List<User> ExpectedUsers { get; set; }
+
+        public string SendMessageFlowId { get; private set; }
+        public string SendMessageMessage { get; private set; }
     }
 
     [TestClass]
@@ -83,6 +91,33 @@ namespace Flowdock.VSUnitTests.ViewModels {
             for (var i = 0; i < _expectedUsers.Count; i++) {
                 Assert.AreEqual(_expectedUsers[i].Avatar, _flowViewModel.Messages[i].Avatar);
             }
+        }
+
+        [TestMethod]
+        public void CanSendMessageToFlow_returns_false_if_there_is_no_new_message() {
+            _flowViewModel.NewMessage = null;
+            Assert.IsFalse(_flowViewModel.CanSendMessageToFlow);
+        }
+
+        [TestMethod]
+        public void CanSendMessageToFlow_returns_true_if_there_is_a_new_message() {
+            _flowViewModel.NewMessage = null;
+            Assert.IsFalse(_flowViewModel.CanSendMessageToFlow);
+
+            _flowViewModel.NewMessage = "my new message";
+            Assert.IsTrue(_flowViewModel.CanSendMessageToFlow);
+        }
+
+        [TestMethod]
+        public void SendMessageToFlow_sends_the_new_message_to_the_correct_flow() {
+            string newMessage = "the new message";
+
+            _flowViewModel.NewMessage = newMessage;
+
+            _flowViewModel.SendMessageToFlow();
+
+            Assert.AreEqual(newMessage, _mockFlowdockContext.SendMessageMessage);
+            Assert.AreEqual(_flowViewModel.FlowId, _mockFlowdockContext.SendMessageFlowId);
         }
     }
 }

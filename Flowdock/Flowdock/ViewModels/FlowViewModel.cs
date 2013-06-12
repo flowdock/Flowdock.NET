@@ -220,6 +220,7 @@ namespace Flowdock.ViewModels {
 			set {
 				_newMessage = value;
 				NotifyOfPropertyChange(() => NewMessage);
+                NotifyOfPropertyChange(() => CanSendMessageToFlow);
 			}
 		}
 
@@ -230,7 +231,7 @@ namespace Flowdock.ViewModels {
 
 		public bool CanSendMessageToFlow {
 			get {
-				return !_progressService.IsVisible;
+                return !_progressService.IsVisible && !string.IsNullOrWhiteSpace(NewMessage);
 			}
 		}
 

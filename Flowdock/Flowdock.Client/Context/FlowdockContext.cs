@@ -79,7 +79,7 @@ namespace Flowdock.Client.Context {
 			return tcs.Task;		
 		}
 
-		public void SendMessage(string flowId, string message) {
+		public virtual void SendMessage(string flowId, string message) {
 			//POST /flows/:organization/:flow/messages
 			//{
 			//  "event": "message",
